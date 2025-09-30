@@ -7,7 +7,9 @@ import { Footer } from './components/Footer/Footer';
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
 import { CookieBanner } from './components/CookieBanner/CookieBanner';
 import { AppLoader } from './components/AppLoader';
+import { TranslationLoader } from './components/TranslationLoader';
 import { useAppLoading } from './hooks/useAppLoading';
+import { useTranslations } from './hooks/useTranslations';
 import { Home } from './routes/Home';
 import { Enalo } from './routes/Enalo';
 import { Escualano } from './routes/Escualano';
@@ -33,30 +35,37 @@ const MainContent = styled.main`
 
 function App() {
   const { isLoading } = useAppLoading();
+  const { isReady: translationsReady } = useTranslations();
+
+  // Mostrar loader si la app está cargando o las traducciones no están listas
+  const showLoader = isLoading || !translationsReady;
 
   return (
     <Router>
       <GlobalStyle />
       <AppLoader isVisible={isLoading} />
+      <TranslationLoader isVisible={!translationsReady} />
       <ScrollToTop />
-      <AppContainer>
-        <Header />
-        <MainContent>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/scualane" element={<Scualane />} />
-            <Route path="/enalo" element={<Enalo />} />
-            <Route path="/scualane-100" element={<Escualano />} />
-            <Route path="/body-oil" element={<BodyOil />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/privacidad" element={<Privacy />} />
-            <Route path="/terminos" element={<Terms />} />
-            <Route path="/cookies" element={<Cookies />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </MainContent>
-        <Footer />
-      </AppContainer>
+      {!showLoader && (
+        <AppContainer>
+          <Header />
+          <MainContent>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/scualane" element={<Scualane />} />
+              <Route path="/enalo" element={<Enalo />} />
+              <Route path="/scualane-100" element={<Escualano />} />
+              <Route path="/body-oil" element={<BodyOil />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/privacidad" element={<Privacy />} />
+              <Route path="/terminos" element={<Terms />} />
+              <Route path="/cookies" element={<Cookies />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </MainContent>
+          <Footer />
+        </AppContainer>
+      )}
       <CookieBanner />
     </Router>
   );

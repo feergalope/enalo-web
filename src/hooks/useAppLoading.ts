@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useTranslations } from './useTranslations';
 
 export const useAppLoading = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const { isReady: translationsReady } = useTranslations();
 
   useEffect(() => {
     // Check if fonts are loaded
@@ -49,6 +51,18 @@ export const useAppLoading = () => {
       window.removeEventListener('load', checkDOMReady);
     };
   }, []);
+
+  // Asegurar que las traducciones estén listas antes de mostrar el contenido
+  useEffect(() => {
+    if (translationsReady && !isLoading) {
+      // Pequeño delay para asegurar que todo esté renderizado
+      const finalCheck = setTimeout(() => {
+        setIsLoading(false);
+      }, 100);
+      
+      return () => clearTimeout(finalCheck);
+    }
+  }, [translationsReady, isLoading]);
 
   return { isLoading };
 };
