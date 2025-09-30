@@ -47,9 +47,7 @@ jobs:
           echo "----"
           find dist -maxdepth 2 -type f | sed 's/^/dist: /' || true
 
-          echo "Opening FTP session and listing common locations…"
-
-            - name: Debug secrets & connectivity (no apt-get)
+      - name: Debug secrets & connectivity (no apt-get)
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
