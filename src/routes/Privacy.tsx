@@ -71,7 +71,7 @@ export const Privacy: React.FC = () => {
           <LegalContainer>
             <h1>Política de Privacidad</h1>
             
-            <p><strong>Última actualización:</strong> 15 de septiembre de 2024</p>
+            <p><strong>Última actualización:</strong> 15 de septiembre de 2025</p>
             
             <h2>1. Información que Recopilamos</h2>
             <p>Recopilamos información que nos proporcionas directamente, como cuando te registras, realizas una compra o nos contactas.</p>

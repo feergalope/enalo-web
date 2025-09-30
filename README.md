@@ -75,4 +75,4 @@ npm run preview
 
 ## Licencia
 
-© 2024 macarenalorenzo
+© 2025 macarenalorenzo

@@ -71,7 +71,7 @@ export const Cookies: React.FC = () => {
           <LegalContainer>
             <h1>Política de Cookies</h1>
             
-            <p><strong>Última actualización:</strong> 15 de septiembre de 2024</p>
+            <p><strong>Última actualización:</strong> 15 de septiembre de 2025</p>
             
             <h2>1. ¿Qué son las Cookies?</h2>
             <p>Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas nuestro sitio web.</p>

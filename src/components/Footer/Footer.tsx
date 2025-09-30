@@ -89,7 +89,7 @@ export const Footer: React.FC = () => {
         </FooterTop>
         
         <FooterBottom>
-          <Copyright>{t('footer.copyright')} 2024</Copyright>
+          <Copyright>{t('footer.copyright')} 2025</Copyright>
         </FooterBottom>
       </FooterContent>
     </FooterContainer>

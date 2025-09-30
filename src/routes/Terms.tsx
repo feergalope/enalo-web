@@ -71,7 +71,7 @@ export const Terms: React.FC = () => {
           <LegalContainer>
             <h1>Términos y Condiciones</h1>
             
-            <p><strong>Última actualización:</strong> 15 de septiembre de 2024</p>
+            <p><strong>Última actualización:</strong> 15 de septiembre de 2025</p>
             
             <h2>1. Información General</h2>
             <p>Estos términos y condiciones regulan el uso del sitio web de macarenalorenzo y la compra de productos de la línea Enaló.</p>
