@@ -5,63 +5,76 @@ import { theme } from '../../styles/theme';
 import { container } from '../../styles/mixins';
 
 const FooterContainer = styled.footer`
-  background: ${theme.colors.warmBeige};
+  background: ${theme.colors.textPrimary};
   border-top: 1px solid ${theme.colors.mutedLine};
-  padding: ${theme.space.xxxxl} 0 ${theme.space.xl};
+  padding: ${theme.space.xl} 0;
 `;
 
 const FooterContent = styled.div`
   ${container}
-`;
-
-const FooterTop = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${theme.space.xxxl};
-  margin-bottom: ${theme.space.xxxl};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: ${theme.space.lg};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    gap: ${theme.space.xl};
+    flex-direction: column;
     text-align: center;
+    gap: ${theme.space.md};
   }
 `;
 
-const FooterSection = styled.div`
-  h3 {
-    font-size: ${theme.fonts.sizes.lg};
-    font-weight: ${theme.fonts.weights.semibold};
-    color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.lg};
-  }
+const FooterLeft = styled.div`
+  flex: 1;
+  min-width: 200px;
+`;
+
+const FooterRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: ${theme.space.sm};
   
-  p {
-    color: ${theme.colors.textSecondary};
-    font-size: ${theme.fonts.sizes.sm};
-    line-height: 1.6;
-    margin-bottom: ${theme.space.md};
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    align-items: center;
   }
 `;
 
-const FooterBottom = styled.div`
-  border-top: 1px solid ${theme.colors.mutedLine};
-  padding-top: ${theme.space.xl};
-  text-align: center;
+const BrandName = styled.h3`
+  font-size: ${theme.fonts.sizes.lg};
+  font-weight: ${theme.fonts.weights.semibold};
+  color: ${theme.colors.white};
+  margin-bottom: ${theme.space.sm};
 `;
 
-const Copyright = styled.p`
+const BrandDescription = styled.p`
   color: ${theme.colors.textMuted};
   font-size: ${theme.fonts.sizes.sm};
+  line-height: 1.5;
   margin: 0;
 `;
 
 const ContactInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.space.xs};
+  
   p {
-    margin-bottom: ${theme.space.xs};
+    color: ${theme.colors.textMuted};
+    font-size: ${theme.fonts.sizes.sm};
+    margin: 0;
     display: flex;
     align-items: center;
     gap: ${theme.space.sm};
   }
+`;
+
+const Copyright = styled.p`
+  color: ${theme.colors.textMuted};
+  font-size: ${theme.fonts.sizes.xs};
+  margin: 0;
+  opacity: 0.8;
 `;
 
 export const Footer: React.FC = () => {
@@ -70,26 +83,20 @@ export const Footer: React.FC = () => {
   return (
     <FooterContainer>
       <FooterContent>
-        <FooterTop>
-          <FooterSection>
-            <h3>macarenalorenzo</h3>
-            <p>
-              {t('footer.description')}
-            </p>
-          </FooterSection>
-          
-          <FooterSection>
-            <h3>Información de Contacto</h3>
-            <ContactInfo>
-              <p>📧 info@macarenalorenzo.com</p>
-              <p>📍 Puente Genil, Córdoba</p>
-            </ContactInfo>
-          </FooterSection>
-        </FooterTop>
+        <FooterLeft>
+          <BrandName>macarenalorenzo</BrandName>
+          <BrandDescription>
+            {t('footer.description')}
+          </BrandDescription>
+        </FooterLeft>
         
-        <FooterBottom>
+        <FooterRight>
+          <ContactInfo>
+            <p>📧 direccion@macarenalorenzo.es</p>
+            <p>📍 Puente Genil, Córdoba</p>
+          </ContactInfo>
           <Copyright>{t('footer.copyright')} 2025</Copyright>
-        </FooterBottom>
+        </FooterRight>
       </FooterContent>
     </FooterContainer>
   );
