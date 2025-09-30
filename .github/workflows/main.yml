@@ -1,0 +1,77 @@
+name: Build & Deploy React (Vite) to Hostinger
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps (npm ci)
+        run: npm ci
+
+      # Si usas variables VITE_* desde secrets, rellena .env.production
+      - name: Create .env.production from example + secrets
+        run: |
+          if [ -f .env.example ]; then cp .env.example .env.production; fi
+          # Añade aquí las sustituciones que necesites (ejemplos):
+          if [ -n "${{ secrets.VITE_API_URL }}" ]; then
+            grep -q '^VITE_API_URL=' .env.production && sed -i 's|^VITE_API_URL=.*$|VITE_API_URL=${{ secrets.VITE_API_URL }}|' .env.production || echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
+          fi
+          if [ -n "${{ secrets.VITE_ANALYTICS_ID }}" ]; then
+            grep -q '^VITE_ANALYTICS_ID=' .env.production && sed -i 's|^VITE_ANALYTICS_ID=.*$|VITE_ANALYTICS_ID=${{ secrets.VITE_ANALYTICS_ID }}|' .env.production || echo "VITE_ANALYTICS_ID=${{ secrets.VITE_ANALYTICS_ID }}" >> .env.production
+          fi
+
+      - name: Build
+        run: npm run build
+
+      # Añade .htaccess para SPA en Apache (Hostinger)
+      - name: Add SPA .htaccess into dist
+        run: |
+          cat > dist/.htaccess <<'HTACCESS'
+# --- React + Vite SPA on Apache (Hostinger) ---
+RewriteEngine On
+RewriteBase /
+# Si no es archivo/dir real, sirve index.html (SPA fallback)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# Compresión (si está disponible)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Cache estáticos
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+</IfModule>
+HTACCESS
+
+      - name: Deploy via rsync over SSH
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: dist/
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          remote_port: ${{ secrets.SSH_PORT || '22' }}
