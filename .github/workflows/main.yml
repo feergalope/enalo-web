@@ -1,0 +1,78 @@
+name: Build & Deploy React (Vite) to Hostinger via FTPS
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps (npm ci)
+        run: npm ci
+
+      # Opcional: crea .env.production desde .env.example y sobreescribe con secrets VITE_*
+      - name: Create .env.production from example + secrets
+        run: |
+          if [ -f .env.example ]; then cp .env.example .env.production; fi
+          # Añade aquí tus sustituciones si usas variables VITE_* como secrets:
+          # if [ -n "${{ secrets.VITE_API_URL }}" ]; then
+          #   grep -q '^VITE_API_URL=' .env.production \
+          #     && sed -i 's|^VITE_API_URL=.*$|VITE_API_URL=${{ secrets.VITE_API_URL }}|' .env.production \
+          #     || echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
+          # fi
+
+      - name: Build (Vite)
+        run: npm run build
+
+      # Asegura SPA fallback y algunas mejoras de estáticos en Apache de Hostinger
+      - name: Add SPA .htaccess into dist
+        run: |
+          cat > dist/.htaccess <<'HTACCESS'
+# --- React + Vite SPA on Apache (Hostinger) ---
+RewriteEngine On
+RewriteBase /
+# SPA fallback: si no es archivo/dir real, sirve index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# Compresión (si está disponible)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Cache de estáticos
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+</IfModule>
+HTACCESS
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Borra del servidor lo que ya no existe en dist (útil para “sync” real)
+          dangerous-clean-slate: true
