@@ -6,7 +6,7 @@ import { useTranslations } from '../hooks/useTranslations';
 import { SEO } from '../components/SEO/SEO';
 import { Section } from '../components/Section/Section';
 import { OptimizedImage } from '../components/OptimizedImage';
-import { productImages } from '../assets/images/products';
+import { productImages } from '../constants/images';
 import { theme } from '../styles/theme';
 import { buttonPrimary, focusRing } from '../styles/mixins';
 import { trackPageView } from '../lib/analytics';

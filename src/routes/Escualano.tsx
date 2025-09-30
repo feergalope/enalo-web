@@ -9,7 +9,7 @@ import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { buttonSecondary } from '../styles/mixins';
 import { trackPageView } from '../lib/analytics';
-import { productImages } from '../assets/images/products';
+import { productImages } from '../constants/images';
 
 const ProductContainer = styled.div`
   display: grid;

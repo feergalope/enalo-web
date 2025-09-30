@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useTranslations } from '../../hooks/useTranslations';
 import { OptimizedImage } from '../OptimizedImage';
 import { container, buttonPrimary, buttonSecondary } from '../../styles/mixins';
-import pipetaImage from '../../assets/images/hero/pipeta-aceite.png';
+const pipetaImage = '/images/hero/pipeta-aceite.png';
 import { theme } from '../../styles/theme';
 
 const HeroContainer = styled.section`
