@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useTranslations } from '../hooks/useTranslations';
 import { SEO } from '../components/SEO/SEO';
 import { Section } from '../components/Section/Section';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
-import { buttonSecondary } from '../styles/mixins';
 import { trackPageView } from '../lib/analytics';
-
 
 const ProductContainer = styled.div`
   display: grid;
@@ -45,6 +42,36 @@ const ProductInfo = styled.div`
     line-height: 1.7;
     margin-bottom: ${theme.space.lg};
   }
+  
+  .usage-section {
+    margin-bottom: ${theme.space.xl};
+    
+    h3 {
+      font-size: ${theme.fonts.sizes.lg};
+      font-weight: ${theme.fonts.weights.semibold};
+      color: ${theme.colors.textPrimary};
+      margin-bottom: ${theme.space.md};
+      display: flex;
+      align-items: center;
+      gap: ${theme.space.sm};
+    }
+    
+    p {
+      margin-bottom: ${theme.space.md};
+    }
+    
+    ul {
+      margin-left: ${theme.space.lg};
+      margin-bottom: ${theme.space.md};
+      
+      li {
+        color: ${theme.colors.textSecondary};
+        font-size: ${theme.fonts.sizes.md};
+        line-height: 1.7;
+        margin-bottom: ${theme.space.sm};
+      }
+    }
+  }
 `;
 
 const ProductImage = styled.div`
@@ -54,12 +81,6 @@ const ProductImage = styled.div`
   border-radius: ${theme.radius.lg};
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-`;
-
-const CTAButton = styled(Link)`
-  ${buttonSecondary}
-  display: inline-block;
-  margin-top: ${theme.space.lg};
 `;
 
 export const Escualano: React.FC = () => {
@@ -72,8 +93,8 @@ export const Escualano: React.FC = () => {
   return (
     <>
       <SEO 
-        title={t('scualane.seo.title')}
-        description={t('scualane.seo.description')}
+        title="Escualano de Oliva - Cómo utilizar - Enalo"
+        description="Aprende cómo utilizar el Escualano de Oliva en rostro, cuello, escote, cuerpo y cabello para obtener los mejores resultados."
       />
       
       <Section>
@@ -84,38 +105,75 @@ export const Escualano: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {t('scualane.title')}
+              Escualano de Oliva
             </motion.h1>
             
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              dangerouslySetInnerHTML={{ __html: t('scualane.subtitle') }}
-            />
+            >
+              Cómo utilizar el Escualano de Oliva
+            </motion.h2>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              dangerouslySetInnerHTML={{ __html: t('scualane.description') }}
-            />
+              className="usage-section"
+            >
+              <h3>✨ Rostro</h3>
+              <p>
+                Aplica 2–3 gotas sobre la piel limpia antes de tu crema habitual. Gracias a su afinidad natural, potencia la absorción de los principios activos y proporciona hidratación inmediata sin dejar residuo graso.
+              </p>
+            </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              className="usage-section"
             >
-              <CTAButton to="/products">
-                {t('scualane.cta')}
-              </CTAButton>
+              <h3>🎗️ Cuello y escote</h3>
+              <p>
+                Extiende 3–4 gotas a diario, con un suave masaje ascendente desde el centro hacia los laterales. Esta zona es especialmente delicada: el uso regular ayuda a mantener su firmeza, elasticidad y suavidad.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="usage-section"
+            >
+              <h3>💧 Cuerpo</h3>
+              <p>
+                Después de la ducha, con la piel húmeda, masajea 6–10 gotas por zona hasta su total absorción. El resultado es una piel hidratada, flexible y luminosa, sin sensación grasa.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="usage-section"
+            >
+              <h3>🌿 Cabello</h3>
+              <ul>
+                <li><strong>Como sérum:</strong> 1–3 gotas en medios y puntas, en seco o húmedo.</li>
+                <li><strong>Como tratamiento pre-lavado:</strong> 4–6 gotas, dejar 15–20 minutos y enjuagar.</li>
+                <li><strong>Como protección ligera:</strong> 1–2 gotas antes de usar secador o plancha.</li>
+              </ul>
+              <p>
+                Nutre la fibra capilar, controla el encrespamiento y aporta brillo sin apelmazar.
+              </p>
             </motion.div>
           </ProductInfo>
           
           <ProductImage>
             <OptimizedImage
               src="/images/products/squalane-100.png"
-              alt={t('scualane.title')}
+              alt="Escualano de Oliva"
             />
           </ProductImage>
         </ProductContainer>

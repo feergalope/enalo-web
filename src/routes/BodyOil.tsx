@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useTranslations } from '../hooks/useTranslations';
 import { SEO } from '../components/SEO/SEO';
 import { Section } from '../components/Section/Section';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
-import { buttonSecondary } from '../styles/mixins';
 import { trackPageView } from '../lib/analytics';
-
 
 const ProductContainer = styled.div`
   display: grid;
@@ -56,12 +53,6 @@ const ProductImage = styled.div`
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 `;
 
-const CTAButton = styled(Link)`
-  ${buttonSecondary}
-  display: inline-block;
-  margin-top: ${theme.space.lg};
-`;
-
 export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
 
@@ -100,16 +91,6 @@ export const BodyOil: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               dangerouslySetInnerHTML={{ __html: t('bodyOil.description1') }}
             />
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <CTAButton to="/products">
-                {t('bodyOil.cta')}
-              </CTAButton>
-            </motion.div>
           </ProductInfo>
           
           <ProductImage>
