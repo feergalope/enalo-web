@@ -35,35 +35,10 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
-      - name: Add SPA .htaccess into dist (no heredoc)
-        shell: bash
+      - name: Copy .htaccess into dist
         run: |
           mkdir -p dist
-          printf '%s\n' \
-            '# --- React + Vite SPA on Apache (Hostinger) ---' \
-            'RewriteEngine On' \
-            'RewriteBase /' \
-            '# SPA fallback: si no es archivo/dir real, sirve index.html' \
-            'RewriteCond %{REQUEST_FILENAME} !-f' \
-            'RewriteCond %{REQUEST_FILENAME} !-d' \
-            'RewriteRule . /index.html [L]' \
-            '' \
-            '# Compresión (si está disponible)' \
-            '<IfModule mod_deflate.c>' \
-            '  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml' \
-            '</IfModule>' \
-            '' \
-            '# Cache de estáticos' \
-            '<IfModule mod_expires.c>' \
-            '  ExpiresActive On' \
-            '  ExpiresByType text/css "access plus 7 days"' \
-            '  ExpiresByType application/javascript "access plus 7 days"' \
-            '  ExpiresByType image/svg+xml "access plus 30 days"' \
-            '  ExpiresByType image/jpeg "access plus 30 days"' \
-            '  ExpiresByType image/png "access plus 30 days"' \
-            '  ExpiresByType image/webp "access plus 30 days"' \
-            '</IfModule>' \
-            > dist/.htaccess
+          cp public/.htaccess dist/.htaccess
 
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
