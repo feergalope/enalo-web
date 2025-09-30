@@ -48,15 +48,15 @@ jobs:
           find dist -maxdepth 2 -type f | sed 's/^/dist: /' || true
 
       - name: Deploy via FTP (diagnóstico)
-          uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-          with:
-            server: ${{ secrets.FTP_HOST }}          # 213.130.145.92 (sin ftp://)
-            username: ${{ secrets.FTP_USERNAME }}    # u385896031
-            password: ${{ secrets.FTP_PASSWORD }}
-            protocol: ftp
-            port: 21
-            local-dir: dist/
-            server-dir: ${{ secrets.FTP_SERVER_DIR }}  # veremos variantes abajo
-            log-level: verbose
-            timeout: 180000
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}          # 213.130.145.92 (sin ftp://)
+          username: ${{ secrets.FTP_USERNAME }}    # u385896031
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}  # veremos variantes abajo
+          log-level: verbose
+          timeout: 180000
 
