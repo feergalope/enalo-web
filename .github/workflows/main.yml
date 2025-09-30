@@ -40,6 +40,13 @@ jobs:
           mkdir -p dist
           cp public/.htaccess dist/.htaccess
 
+      - name: Inspect dist contents
+        run: |
+          echo "Listing dist/"
+          ls -la dist || true
+          echo "----"
+          find dist -maxdepth 2 -type f | sed 's/^/dist: /' || true
+
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
