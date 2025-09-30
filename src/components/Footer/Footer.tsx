@@ -82,8 +82,7 @@ export const Footer: React.FC = () => {
             <h3>Información de Contacto</h3>
             <ContactInfo>
               <p>📧 info@macarenalorenzo.com</p>
-              <p>📱 +34 123 456 789</p>
-              <p>📍 Madrid, España</p>
+              <p>📍 Puente Genil, Córdoba</p>
             </ContactInfo>
           </FooterSection>
         </FooterTop>
