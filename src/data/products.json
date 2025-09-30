@@ -1,0 +1,74 @@
+{
+  "products": [
+    {
+      "id": "squalane-100",
+      "slug": "scualane-100",
+      "name": {
+        "es": "Escualano 100%",
+        "en": "Squalane 100%"
+      },
+      "description": {
+        "es": "Escualano puro de oliva para máxima bioafinidad y absorción rápida",
+        "en": "Pure olive squalane for maximum bioaffinity and fast absorption"
+      },
+      "benefits": {
+        "es": [
+          "Hidratación ligera y no grasa",
+          "Alta bioafinidad con la piel",
+          "Absorción rápida",
+          "Apto para todo tipo de piel"
+        ],
+        "en": [
+          "Lightweight, non-greasy hydration",
+          "High bioaffinity with skin",
+          "Fast absorption",
+          "Suitable for all skin types"
+        ]
+      },
+      "ingredients": {
+        "es": "Escualano de oliva 100%",
+        "en": "100% Olive Squalane"
+      },
+      "usage": {
+        "es": "Aplicar 2-3 gotas en rostro, cuello y escote. Masajear suavemente hasta absorción completa.",
+        "en": "Apply 2-3 drops to face, neck and décolleté. Massage gently until fully absorbed."
+      },
+      "image": "/images/products/squalane-100.png"
+    },
+    {
+      "id": "body-oil",
+      "slug": "body-oil",
+      "name": {
+        "es": "Aceite corporal",
+        "en": "Mediterranean Body Oil"
+      },
+      "description": {
+        "es": "Aceite corporal ligero con escualano de oliva y siete aceites vegetales para hidratación profunda",
+        "en": "Light body oil with olive squalane and seven vegetable oils for deep hydration"
+      },
+      "benefits": {
+        "es": [
+          "Hidratación inmediata sin sensación grasa",
+          "Mejora la elasticidad y firmeza",
+          "Aroma cítrico mediterráneo",
+          "Absorción rápida"
+        ],
+        "en": [
+          "Immediate hydration without greasy sensation",
+          "Improves elasticity and firmness",
+          "Mediterranean citrus aroma",
+          "Fast absorption"
+        ]
+      },
+      "ingredients": {
+        "es": "Escualano de oliva, aceite de macadamia, aguacate, sésamo, arroz, pepita de uva, cártamo y almendras dulces",
+        "en": "Olive squalane, macadamia, avocado, sesame, rice, grape seed, safflower and sweet almond oils"
+      },
+      "usage": {
+        "es": "Aplicar sobre piel limpia y húmeda tras la ducha. Masajear con movimientos circulares ascendentes.",
+        "en": "Apply to clean, damp skin after showering. Massage with upward circular movements."
+      },
+      "image": "/images/products/body-oil.png"
+    }
+  ]
+}
