@@ -1,8 +1,9 @@
-name: Build & Deploy React (Vite) to Hostinger
+name: Build & Deploy React (Vite) to Hostinger via FTPS
 
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -21,29 +22,28 @@ jobs:
       - name: Install deps (npm ci)
         run: npm ci
 
-      # Si usas variables VITE_* desde secrets, rellena .env.production
+      # Opcional: crea .env.production desde .env.example y sobreescribe con secrets VITE_*
       - name: Create .env.production from example + secrets
         run: |
           if [ -f .env.example ]; then cp .env.example .env.production; fi
-          # Añade aquí las sustituciones que necesites (ejemplos):
-          if [ -n "${{ secrets.VITE_API_URL }}" ]; then
-            grep -q '^VITE_API_URL=' .env.production && sed -i 's|^VITE_API_URL=.*$|VITE_API_URL=${{ secrets.VITE_API_URL }}|' .env.production || echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
-          fi
-          if [ -n "${{ secrets.VITE_ANALYTICS_ID }}" ]; then
-            grep -q '^VITE_ANALYTICS_ID=' .env.production && sed -i 's|^VITE_ANALYTICS_ID=.*$|VITE_ANALYTICS_ID=${{ secrets.VITE_ANALYTICS_ID }}|' .env.production || echo "VITE_ANALYTICS_ID=${{ secrets.VITE_ANALYTICS_ID }}" >> .env.production
-          fi
+          # Añade aquí tus sustituciones si usas variables VITE_* como secrets:
+          # if [ -n "${{ secrets.VITE_API_URL }}" ]; then
+          #   grep -q '^VITE_API_URL=' .env.production \
+          #     && sed -i 's|^VITE_API_URL=.*$|VITE_API_URL=${{ secrets.VITE_API_URL }}|' .env.production \
+          #     || echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
+          # fi
 
-      - name: Build
+      - name: Build (Vite)
         run: npm run build
 
-      # Añade .htaccess para SPA en Apache (Hostinger)
+      # Asegura SPA fallback y algunas mejoras de estáticos en Apache de Hostinger
       - name: Add SPA .htaccess into dist
         run: |
           cat > dist/.htaccess <<'HTACCESS'
 # --- React + Vite SPA on Apache (Hostinger) ---
 RewriteEngine On
 RewriteBase /
-# Si no es archivo/dir real, sirve index.html (SPA fallback)
+# SPA fallback: si no es archivo/dir real, sirve index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
@@ -53,7 +53,7 @@ RewriteRule . /index.html [L]
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
 </IfModule>
 
-# Cache estáticos
+# Cache de estáticos
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css "access plus 7 days"
@@ -65,13 +65,14 @@ RewriteRule . /index.html [L]
 </IfModule>
 HTACCESS
 
-      - name: Deploy via rsync over SSH
-        uses: burnett01/rsync-deployments@7.0.1
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          switches: -avzr --delete
-          path: dist/
-          remote_path: ${{ secrets.DEPLOY_PATH }}
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          remote_port: ${{ secrets.SSH_PORT || '22' }}
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Borra del servidor lo que ya no existe en dist (útil para “sync” real)
+          dangerous-clean-slate: true
