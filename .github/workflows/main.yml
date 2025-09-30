@@ -35,36 +35,35 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
-      # 👇 OJO: este bloque debe ir exactamente bajo `run: |` (con 8 espacios de indentación)
-      - name: Add SPA .htaccess into dist
+      - name: Add SPA .htaccess into dist (no heredoc)
         shell: bash
         run: |
           mkdir -p dist
-          cat > dist/.htaccess <<'HTACCESS'
-# --- React + Vite SPA on Apache (Hostinger) ---
-RewriteEngine On
-RewriteBase /
-# SPA fallback: si no es archivo/dir real, sirve index.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
-
-# Compresión (si está disponible)
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
-</IfModule>
-
-# Cache de estáticos
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType text/css "access plus 7 days"
-  ExpiresByType application/javascript "access plus 7 days"
-  ExpiresByType image/svg+xml "access plus 30 days"
-  ExpiresByType image/jpeg "access plus 30 days"
-  ExpiresByType image/png "access plus 30 days"
-  ExpiresByType image/webp "access plus 30 days"
-</IfModule>
-HTACCESS
+          printf '%s\n' \
+            '# --- React + Vite SPA on Apache (Hostinger) ---' \
+            'RewriteEngine On' \
+            'RewriteBase /' \
+            '# SPA fallback: si no es archivo/dir real, sirve index.html' \
+            'RewriteCond %{REQUEST_FILENAME} !-f' \
+            'RewriteCond %{REQUEST_FILENAME} !-d' \
+            'RewriteRule . /index.html [L]' \
+            '' \
+            '# Compresión (si está disponible)' \
+            '<IfModule mod_deflate.c>' \
+            '  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml' \
+            '</IfModule>' \
+            '' \
+            '# Cache de estáticos' \
+            '<IfModule mod_expires.c>' \
+            '  ExpiresActive On' \
+            '  ExpiresByType text/css "access plus 7 days"' \
+            '  ExpiresByType application/javascript "access plus 7 days"' \
+            '  ExpiresByType image/svg+xml "access plus 30 days"' \
+            '  ExpiresByType image/jpeg "access plus 30 days"' \
+            '  ExpiresByType image/png "access plus 30 days"' \
+            '  ExpiresByType image/webp "access plus 30 days"' \
+            '</IfModule>' \
+            > dist/.htaccess
 
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
