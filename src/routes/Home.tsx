@@ -8,7 +8,6 @@ import { Section } from '../components/Section/Section';
 import { FeatureCards } from '../components/FeatureCards/FeatureCards';
 import { ProductCard } from '../components/ProductCard/ProductCard';
 import { FAQ } from '../components/FAQ/FAQ';
-import { CTA } from '../components/CTA/CTA';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
 import productsData from '../data/products.json';
@@ -172,10 +171,6 @@ export const Home: React.FC = () => {
           <h2>{t('faq.title')}</h2>
           <FAQ />
         </motion.div>
-      </Section>
-      
-      <Section>
-        <CTA />
       </Section>
     </>
   );
