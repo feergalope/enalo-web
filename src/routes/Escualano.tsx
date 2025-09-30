@@ -9,7 +9,7 @@ import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { buttonSecondary } from '../styles/mixins';
 import { trackPageView } from '../lib/analytics';
-import { productImages } from '../constants/images';
+
 
 const ProductContainer = styled.div`
   display: grid;
@@ -114,7 +114,7 @@ export const Escualano: React.FC = () => {
           
           <ProductImage>
             <OptimizedImage
-              src={productImages['squalane-100']}
+              src="/images/products/squalane-100.png"
               alt={t('scualane.title')}
             />
           </ProductImage>

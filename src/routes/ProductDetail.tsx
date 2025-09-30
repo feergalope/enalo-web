@@ -6,7 +6,7 @@ import { useTranslations } from '../hooks/useTranslations';
 import { SEO } from '../components/SEO/SEO';
 import { Section } from '../components/Section/Section';
 import { OptimizedImage } from '../components/OptimizedImage';
-import { productImages } from '../constants/images';
+
 import { theme } from '../styles/theme';
 import { buttonPrimary, focusRing } from '../styles/mixins';
 import { trackPageView } from '../lib/analytics';
@@ -131,7 +131,7 @@ export const ProductDetail: React.FC = () => {
         >
           <ProductContainer>
             <ProductImage>
-                            <OptimizedImage src={productImages[product.id as keyof typeof productImages] || product.image} alt={product.name[language]} />
+              <OptimizedImage src={product.image} alt={product.name[language]} />
             </ProductImage>
             
             <ProductInfo>
