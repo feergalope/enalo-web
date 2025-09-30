@@ -1,8 +1,12 @@
-# Enaló - macarenalorenzo
+# Macarena Lorenzo - Enaló
 
-Landing page minimalista para la línea de productos Enaló basada en escualano de oliva.
+Landing page minimalista para la línea de productos Enaló basada en escualano de oliva, desarrollada por Macarena Lorenzo.
 
-## Características
+## 🌿 Sobre el proyecto
+
+Enaló es una marca de productos de belleza naturales basados en escualano de oliva, con un enfoque en la sostenibilidad y la calidad premium. Esta web presenta los productos de forma elegante y minimalista, reflejando los valores de la marca.
+
+## ✨ Características
 
 - **Diseño minimalista**: Estilo cálido y premium con colores inspirados en el olivo
 - **Multilenguaje**: Soporte para español (ES) e inglés (EN)
@@ -11,8 +15,9 @@ Landing page minimalista para la línea de productos Enaló basada en escualano 
 - **SEO optimizado**: Meta tags y estructura semántica
 - **Analytics**: Sistema de tracking con consentimiento de cookies
 - **Accesibilidad**: Cumple estándares WCAG AA
+- **Performance**: Optimizado para velocidad de carga
 
-## Tecnologías
+## 🛠️ Tecnologías
 
 - **React 19** con TypeScript
 - **Vite** para desarrollo y build
@@ -20,12 +25,13 @@ Landing page minimalista para la línea de productos Enaló basada en escualano 
 - **Framer Motion** para animaciones
 - **React Router** para navegación
 - **React Helmet Async** para SEO
+- **ESLint** para calidad de código
 
-## Estructura del proyecto
+## 📁 Estructura del proyecto
 
 ```
 src/
-├── components/          # Componentes reutilizables
+├── components
 ├── routes/             # Páginas de la aplicación
 ├── styles/             # Tema y estilos globales
 ├── i18n/               # Archivos de traducción
