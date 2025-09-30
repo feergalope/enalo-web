@@ -47,6 +47,52 @@ jobs:
           echo "----"
           find dist -maxdepth 2 -type f | sed 's/^/dist: /' || true
 
+      - name: Debug FTP connection & locate correct server-dir
+        run: |
+          sudo apt-get update -y >/dev/null 2>&1
+          sudo apt-get install -y lftp >/dev/null 2>&1
+
+          echo "Creating local probe file…"
+          echo "PROBE from GitHub Actions: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" > PROBE_FROM_ACTIONS.txt
+
+          echo "Opening FTP session and listing common locations…"
+          lftp -u "${{ secrets.FTP_USERNAME }}","${{ secrets.FTP_PASSWORD }}" -p 21 "${{ secrets.FTP_HOST }}" -e "
+            set net:max-retries 1;
+            set net:timeout 20;
+            set ftp:passive-mode on;
+            set ftp:ssl-allow false;  # cambia a true si vas a usar FTPS
+
+            echo '';
+            echo '--- PWD at login ---';
+            pwd; 
+            echo '--- LS at login ---';
+            ls -la;
+
+            echo '';
+            echo '--- Try / ---';
+            cd / || true; pwd; ls -la || true;
+
+            echo '';
+            echo '--- Try /public_html ---';
+            cd /public_html || true; pwd; ls -la || true;
+
+            echo '';
+            echo '--- Try /domains ---';
+            cd /domains || true; pwd; ls -la || true;
+
+            echo '';
+            echo '--- Try your configured FTP_SERVER_DIR ---';
+            cd '${{ secrets.FTP_SERVER_DIR }}' || true; pwd; ls -la || true;
+
+            echo '';
+            echo '--- Upload PROBE file into configured FTP_SERVER_DIR ---';
+            cd '${{ secrets.FTP_SERVER_DIR }}' || true;
+            put -O '${{ secrets.FTP_SERVER_DIR }}' PROBE_FROM_ACTIONS.txt || true;
+
+            bye;
+          "
+
+
       - name: Deploy via FTP (diagnóstico)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
