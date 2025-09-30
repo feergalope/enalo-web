@@ -1,5 +1,6 @@
-// import React from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 import { GlobalStyle } from './styles/global';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
@@ -18,6 +19,18 @@ import { Terms } from './routes/Terms';
 import { Cookies } from './routes/Cookies';
 import { NotFound } from './routes/NotFound';
 
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const MainContent = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
 function App() {
   const { isLoading } = useAppLoading();
 
@@ -26,20 +39,24 @@ function App() {
       <GlobalStyle />
       <AppLoader isVisible={isLoading} />
       <ScrollToTop />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/scualane" element={<Scualane />} />
-        <Route path="/enalo" element={<Enalo />} />
-        <Route path="/scualane-100" element={<Escualano />} />
-        <Route path="/body-oil" element={<BodyOil />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/privacidad" element={<Privacy />} />
-        <Route path="/terminos" element={<Terms />} />
-        <Route path="/cookies" element={<Cookies />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
+      <AppContainer>
+        <Header />
+        <MainContent>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/scualane" element={<Scualane />} />
+            <Route path="/enalo" element={<Enalo />} />
+            <Route path="/scualane-100" element={<Escualano />} />
+            <Route path="/body-oil" element={<BodyOil />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/privacidad" element={<Privacy />} />
+            <Route path="/terminos" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </MainContent>
+        <Footer />
+      </AppContainer>
       <CookieBanner />
     </Router>
   );
