@@ -42,7 +42,7 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'styled-components', 'framer-motion', '@emailjs/browser'],
+    include: ['react', 'react-dom', 'react-router-dom', 'styled-components', 'framer-motion'],
     // Forzar pre-bundling de dependencias críticas
     force: true
   },
