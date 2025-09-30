@@ -47,11 +47,6 @@ jobs:
           echo "----"
           find dist -maxdepth 2 -type f | sed 's/^/dist: /' || true
 
-      - name: Echo deploy target
-        run: |
-          echo "Voy a desplegar la carpeta local: dist/"
-          echo "Destino remoto (FTP_SERVER_DIR): ${{ secrets.FTP_SERVER_DIR }}"
-
       - name: Deploy via FTP (diagnóstico)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -64,4 +59,8 @@ jobs:
           server-dir: ${{ secrets.FTP_SERVER_DIR }}  # veremos variantes abajo
           log-level: verbose
           timeout: 180000
+      - name: Create probe file
+        run: |
+          echo "Este archivo sirve para localizar la ruta remota" > dist/PROBE_FROM_ACTIONS.txt
+
 
