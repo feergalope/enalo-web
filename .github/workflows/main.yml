@@ -22,11 +22,10 @@ jobs:
       - name: Install deps (npm ci)
         run: npm ci
 
-      # Opcional: crea .env.production desde .env.example y sobreescribe con secrets VITE_*
       - name: Create .env.production from example + secrets
         run: |
           if [ -f .env.example ]; then cp .env.example .env.production; fi
-          # Añade aquí tus sustituciones si usas variables VITE_* como secrets:
+          # Añade aquí sustituciones VITE_* si las usas (opcional)
           # if [ -n "${{ secrets.VITE_API_URL }}" ]; then
           #   grep -q '^VITE_API_URL=' .env.production \
           #     && sed -i 's|^VITE_API_URL=.*$|VITE_API_URL=${{ secrets.VITE_API_URL }}|' .env.production \
@@ -36,9 +35,11 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
-      # Asegura SPA fallback y algunas mejoras de estáticos en Apache de Hostinger
+      # 👇 OJO: este bloque debe ir exactamente bajo `run: |` (con 8 espacios de indentación)
       - name: Add SPA .htaccess into dist
+        shell: bash
         run: |
+          mkdir -p dist
           cat > dist/.htaccess <<'HTACCESS'
 # --- React + Vite SPA on Apache (Hostinger) ---
 RewriteEngine On
@@ -74,5 +75,4 @@ HTACCESS
           protocol: ftps
           local-dir: dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          # Borra del servidor lo que ya no existe en dist (útil para “sync” real)
           dangerous-clean-slate: true
