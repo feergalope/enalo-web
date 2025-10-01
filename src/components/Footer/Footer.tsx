@@ -53,6 +53,7 @@ const BrandDescription = styled.p`
   font-size: ${theme.fonts.sizes.sm};
   line-height: 1.5;
   margin: 0;
+  margin-bottom: ${theme.space.sm};
 `;
 
 const ContactInfo = styled.div`
@@ -67,6 +68,19 @@ const ContactInfo = styled.div`
     display: flex;
     align-items: center;
     gap: ${theme.space.sm};
+  }
+  
+  a {
+    color: ${theme.colors.textMuted};
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: ${theme.space.sm};
+    transition: color ${theme.transitions.normal};
+    
+    &:hover {
+      color: ${theme.colors.white};
+    }
   }
 `;
 
@@ -88,14 +102,14 @@ export const Footer: React.FC = () => {
           <BrandDescription>
             {t('footer.description')}
           </BrandDescription>
+          <Copyright>{t('footer.copyright')} 2025</Copyright>
         </FooterLeft>
         
         <FooterRight>
           <ContactInfo>
-            <p>📧 direccion@macarenalorenzo.es</p>
+            <a href="mailto:direccion@macarenalorenzo.es">📧 direccion@macarenalorenzo.es</a>
             <p>📍 Puente Genil, Córdoba</p>
           </ContactInfo>
-          <Copyright>{t('footer.copyright')} 2025</Copyright>
         </FooterRight>
       </FooterContent>
     </FooterContainer>
