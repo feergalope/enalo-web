@@ -110,26 +110,42 @@ const UsageCard = styled.div<{ $active: boolean }>`
   }
 `;
 
-const BenefitsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: ${theme.space.lg} 0;
+const BenefitsCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.space.lg};
+  margin: ${theme.space.xl} 0;
+`;
+
+const BenefitCard = styled.div<{ $active: boolean }>`
+  background: ${props => props.$active ? theme.colors.warmBeige : theme.colors.white};
+  border: 1px solid ${props => props.$active ? theme.colors.olive : theme.colors.mutedLine};
+  border-radius: ${theme.radius.lg};
+  padding: ${theme.space.lg};
+  cursor: pointer;
+  transition: all ${theme.transitions.normal};
+  transform: ${props => props.$active ? 'scale(1.02)' : 'scale(1)'};
   
-  li {
+  &:hover {
+    border-color: ${theme.colors.olive};
+    transform: scale(1.01);
+  }
+  
+  h3 {
+    font-size: ${theme.fonts.sizes.lg};
+    font-weight: ${theme.fonts.weights.semibold};
+    color: ${theme.colors.textPrimary};
+    margin-bottom: ${theme.space.sm};
+    display: flex;
+    align-items: center;
+    gap: ${theme.space.sm};
+  }
+  
+  p {
     font-size: ${theme.fonts.sizes.md};
     color: ${theme.colors.textSecondary};
     line-height: 1.6;
-    margin-bottom: ${theme.space.sm};
-    padding-left: ${theme.space.lg};
-    position: relative;
-    
-    &::before {
-      content: '✓';
-      color: ${theme.colors.olive};
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
+    margin: 0;
   }
 `;
 
@@ -147,7 +163,8 @@ const ProductImage = styled.div`
 
 export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [activeUsageCard, setActiveUsageCard] = useState<number | null>(null);
+  const [activeBenefitCard, setActiveBenefitCard] = useState<number | null>(null);
 
   useEffect(() => {
     trackPageView('/body-oil');
@@ -188,12 +205,27 @@ export const BodyOil: React.FC = () => {
     }
   ];
 
-  const benefits = [
-    t('bodyOil.benefits.hydration'),
-    t('bodyOil.benefits.barrier'),
-    t('bodyOil.benefits.elasticity'),
-    t('bodyOil.benefits.texture'),
-    t('bodyOil.benefits.aroma')
+  const benefitCards = [
+    {
+      title: '🌿 Hidratación',
+      description: t('bodyOil.benefits.hydration')
+    },
+    {
+      title: '💎 Barrera cutánea',
+      description: t('bodyOil.benefits.barrier')
+    },
+    {
+      title: '✨ Elasticidad',
+      description: t('bodyOil.benefits.elasticity')
+    },
+    {
+      title: '🧴 Textura',
+      description: t('bodyOil.benefits.texture')
+    },
+    {
+      title: '🍊 Aroma',
+      description: t('bodyOil.benefits.aroma')
+    }
   ];
 
   return (
@@ -241,8 +273,8 @@ export const BodyOil: React.FC = () => {
                   {usageCards.map((card, index) => (
                     <UsageCard
                       key={index}
-                      $active={activeCard === index}
-                      onClick={() => setActiveCard(activeCard === index ? null : index)}
+                      $active={activeUsageCard === index}
+                      onClick={() => setActiveUsageCard(activeUsageCard === index ? null : index)}
                     >
                       <h3>{card.title}</h3>
                       <p dangerouslySetInnerHTML={{ __html: card.description }} />
@@ -259,11 +291,18 @@ export const BodyOil: React.FC = () => {
             >
               <ContentSection id="benefits">
                 <h2>{t('bodyOil.benefits.title')}</h2>
-                <BenefitsList>
-                  {benefits.map((benefit, index) => (
-                    <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
+                <BenefitsCards>
+                  {benefitCards.map((card, index) => (
+                    <BenefitCard
+                      key={index}
+                      $active={activeBenefitCard === index}
+                      onClick={() => setActiveBenefitCard(activeBenefitCard === index ? null : index)}
+                    >
+                      <h3>{card.title}</h3>
+                      <p dangerouslySetInnerHTML={{ __html: card.description }} />
+                    </BenefitCard>
                   ))}
-                </BenefitsList>
+                </BenefitsCards>
               </ContentSection>
             </motion.div>
           </ProductContent>
