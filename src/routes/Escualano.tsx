@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -8,68 +8,109 @@ import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
 
-const ProductContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${theme.space.xxxl};
-  align-items: start;
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr;
-    gap: ${theme.space.xl};
-  }
+const ScualaneContainer = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
-const ProductInfo = styled.div`
+const HeroSection = styled.div`
+  text-align: center;
+  margin-bottom: ${theme.space.xxxl};
+  
   h1 {
-    font-size: ${theme.fonts.sizes.xxxxl};
+    font-size: ${theme.fonts.sizes.xxxl};
     font-weight: ${theme.fonts.weights.semibold};
     color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.lg};
-    line-height: 1.2;
-  }
-  
-  h2 {
-    font-size: ${theme.fonts.sizes.xl};
-    font-weight: ${theme.fonts.weights.semibold};
-    color: ${theme.colors.olive};
     margin-bottom: ${theme.space.lg};
   }
   
   p {
+    font-size: ${theme.fonts.sizes.lg};
     color: ${theme.colors.textSecondary};
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+`;
+
+const ContentSection = styled.div`
+  margin-bottom: ${theme.space.xxxl};
+  
+  h2 {
+    font-size: ${theme.fonts.sizes.xxl};
+    font-weight: ${theme.fonts.weights.semibold};
+    color: ${theme.colors.textPrimary};
+    margin-bottom: ${theme.space.lg};
+  }
+  
+  p {
     font-size: ${theme.fonts.sizes.md};
+    color: ${theme.colors.textSecondary};
     line-height: 1.7;
     margin-bottom: ${theme.space.lg};
   }
   
-  .usage-section {
-    margin-bottom: ${theme.space.xl};
+  strong {
+    color: ${theme.colors.textPrimary};
+    font-weight: ${theme.fonts.weights.semibold};
+  }
+`;
+
+const UsageCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.space.lg};
+  margin: ${theme.space.xl} 0;
+`;
+
+const UsageCard = styled.div<{ $active: boolean }>`
+  background: ${props => props.$active ? theme.colors.warmBeige : theme.colors.white};
+  border: 1px solid ${props => props.$active ? theme.colors.olive : theme.colors.mutedLine};
+  border-radius: ${theme.radius.lg};
+  padding: ${theme.space.lg};
+  cursor: pointer;
+  transition: all ${theme.transitions.normal};
+  transform: ${props => props.$active ? 'scale(1.02)' : 'scale(1)'};
+  
+  &:hover {
+    border-color: ${theme.colors.olive};
+    transform: scale(1.01);
+  }
+  
+  h3 {
+    font-size: ${theme.fonts.sizes.lg};
+    font-weight: ${theme.fonts.weights.semibold};
+    color: ${theme.colors.textPrimary};
+    margin-bottom: ${theme.space.sm};
+  }
+  
+  p {
+    font-size: ${theme.fonts.sizes.md};
+    color: ${theme.colors.textSecondary};
+    line-height: 1.6;
+    margin: 0;
+  }
+`;
+
+const BenefitsList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: ${theme.space.lg} 0;
+  
+  li {
+    font-size: ${theme.fonts.sizes.md};
+    color: ${theme.colors.textSecondary};
+    line-height: 1.6;
+    margin-bottom: ${theme.space.sm};
+    padding-left: ${theme.space.lg};
+    position: relative;
     
-    h3 {
-      font-size: ${theme.fonts.sizes.lg};
-      font-weight: ${theme.fonts.weights.semibold};
-      color: ${theme.colors.textPrimary};
-      margin-bottom: ${theme.space.md};
-      display: flex;
-      align-items: center;
-      gap: ${theme.space.sm};
-    }
-    
-    p {
-      margin-bottom: ${theme.space.md};
-    }
-    
-    ul {
-      margin-left: ${theme.space.lg};
-      margin-bottom: ${theme.space.md};
-      
-      li {
-        color: ${theme.colors.textSecondary};
-        font-size: ${theme.fonts.sizes.md};
-        line-height: 1.7;
-        margin-bottom: ${theme.space.sm};
-      }
+    &::before {
+      content: '✓';
+      color: ${theme.colors.olive};
+      font-weight: bold;
+      position: absolute;
+      left: 0;
     }
   }
 `;
@@ -85,99 +126,133 @@ const ProductImage = styled.div`
 
 export const Escualano: React.FC = () => {
   const { t } = useTranslations();
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   useEffect(() => {
     trackPageView('/escualano');
+    
+    // Scroll to section if hash is present
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Scroll to top if no hash
+      window.scrollTo(0, 0);
+    }
   }, []);
 
+  const usageCards = [
+    {
+      title: t('scualane-100.usage.face.title'),
+      description: t('scualane-100.usage.face.description')
+    },
+    {
+      title: t('scualane-100.usage.neck.title'),
+      description: t('scualane-100.usage.neck.description')
+    },
+    {
+      title: t('scualane-100.usage.body.title'),
+      description: t('scualane-100.usage.body.description')
+    },
+    {
+      title: t('scualane-100.usage.hair.title'),
+      description: t('scualane-100.usage.hair.description')
+    }
+  ];
+
+  const benefits = [
+    t('scualane-100.keyBenefits.benefits.0'),
+    t('scualane-100.keyBenefits.benefits.1'),
+    t('scualane-100.keyBenefits.benefits.2'),
+    t('scualane-100.keyBenefits.benefits.3'),
+    t('scualane-100.keyBenefits.benefits.4')
+  ];
+
   return (
-    <>
+    <ScualaneContainer>
       <SEO 
-        title="Escualano de Oliva - Cómo utilizar - Enalo"
-        description="Aprende cómo utilizar el Escualano de Oliva en rostro, cuello, escote, cuerpo y cabello para obtener los mejores resultados."
+        title={t('scualane-100.seo.title')}
+        description={t('scualane-100.seo.description')}
       />
       
       <Section>
-        <ProductContainer>
-          <ProductInfo>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              Escualano de Oliva
-            </motion.h1>
-            
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              Cómo utilizar el Escualano de Oliva
-            </motion.h2>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="usage-section"
-            >
-              <h3>✨ Rostro</h3>
-              <p>
-                Aplica 2–3 gotas sobre la piel limpia antes de tu crema habitual. Gracias a su afinidad natural, potencia la absorción de los principios activos y proporciona hidratación inmediata sin dejar residuo graso.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="usage-section"
-            >
-              <h3>🎗️ Cuello y escote</h3>
-              <p>
-                Extiende 3–4 gotas a diario, con un suave masaje ascendente desde el centro hacia los laterales. Esta zona es especialmente delicada: el uso regular ayuda a mantener su firmeza, elasticidad y suavidad.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="usage-section"
-            >
-              <h3>💧 Cuerpo</h3>
-              <p>
-                Después de la ducha, con la piel húmeda, masajea 6–10 gotas por zona hasta su total absorción. El resultado es una piel hidratada, flexible y luminosa, sin sensación grasa.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="usage-section"
-            >
-              <h3>🌿 Cabello</h3>
-              <ul>
-                <li><strong>Como sérum:</strong> 1–3 gotas en medios y puntas, en seco o húmedo.</li>
-                <li><strong>Como tratamiento pre-lavado:</strong> 4–6 gotas, dejar 15–20 minutos y enjuagar.</li>
-                <li><strong>Como protección ligera:</strong> 1–2 gotas antes de usar secador o plancha.</li>
-              </ul>
-              <p>
-                Nutre la fibra capilar, controla el encrespamiento y aporta brillo sin apelmazar.
-              </p>
-            </motion.div>
-          </ProductInfo>
-          
-          <ProductImage>
-            <OptimizedImage
-              src="/images/products/squalane-100.png"
-              alt="Escualano de Oliva"
-            />
-          </ProductImage>
-        </ProductContainer>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <HeroSection>
+            <h1>{t('scualane-100.title')}</h1>
+            <p dangerouslySetInnerHTML={{ __html: t('scualane-100.subtitle') }} />
+          </HeroSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <ContentSection id="description">
+            <h2>Descripción</h2>
+            <p dangerouslySetInnerHTML={{ __html: t('scualane-100.description') }} />
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <ContentSection id="how-to-use">
+            <h2>{t('scualane-100.usage.title')}</h2>
+            <UsageCards>
+              {usageCards.map((card, index) => (
+                <UsageCard
+                  key={index}
+                  $active={activeCard === index}
+                  onClick={() => setActiveCard(activeCard === index ? null : index)}
+                >
+                  <h3>{card.title}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: card.description }} />
+                </UsageCard>
+              ))}
+            </UsageCards>
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <ContentSection id="benefits">
+            <h2>{t('scualane-100.keyBenefits.title')}</h2>
+            <BenefitsList>
+              {benefits.map((benefit, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
+              ))}
+            </BenefitsList>
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <div style={{ textAlign: 'center' }}>
+            <ProductImage>
+              <OptimizedImage
+                src="/images/products/squalane-100.png"
+                alt="Escualano de Oliva"
+              />
+            </ProductImage>
+          </div>
+        </motion.div>
       </Section>
-    </>
+    </ScualaneContainer>
   );
 };

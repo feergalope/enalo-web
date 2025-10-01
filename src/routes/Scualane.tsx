@@ -114,3 +114,120 @@ const BenefitsList = styled.ul`
   }
 `;
 
+export const Scualane: React.FC = () => {
+  const { t } = useTranslations();
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
+  useEffect(() => {
+    trackPageView('/scualane');
+    
+    // Scroll to section if hash is present
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Scroll to top if no hash
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
+  const usageCards = [
+    {
+      title: t('scualane.usage.face.title'),
+      description: t('scualane.usage.face.description')
+    },
+    {
+      title: t('scualane.usage.neck.title'),
+      description: t('scualane.usage.neck.description')
+    },
+    {
+      title: t('scualane.usage.body.title'),
+      description: t('scualane.usage.body.description')
+    },
+    {
+      title: t('scualane.usage.hair.title'),
+      description: t('scualane.usage.hair.description')
+    }
+  ];
+
+  const benefits = [
+    t('scualane.keyBenefits.benefits.0'),
+    t('scualane.keyBenefits.benefits.1'),
+    t('scualane.keyBenefits.benefits.2'),
+    t('scualane.keyBenefits.benefits.3'),
+    t('scualane.keyBenefits.benefits.4')
+  ];
+
+  return (
+    <ScualaneContainer>
+      <SEO 
+        title={t('scualane.seo.title')}
+        description={t('scualane.seo.description')}
+      />
+      
+      <Section>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <HeroSection>
+            <h1>{t('scualane.title')}</h1>
+            <p dangerouslySetInnerHTML={{ __html: t('scualane.subtitle') }} />
+          </HeroSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <ContentSection id="description">
+            <h2>Descripción</h2>
+            <p dangerouslySetInnerHTML={{ __html: t('scualane.description') }} />
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <ContentSection id="how-to-use">
+            <h2>{t('scualane.usage.title')}</h2>
+            <UsageCards>
+              {usageCards.map((card, index) => (
+                <UsageCard
+                  key={index}
+                  $active={activeCard === index}
+                  onClick={() => setActiveCard(activeCard === index ? null : index)}
+                >
+                  <h3>{card.title}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: card.description }} />
+                </UsageCard>
+              ))}
+            </UsageCards>
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <ContentSection id="benefits">
+            <h2>{t('scualane.keyBenefits.title')}</h2>
+            <BenefitsList>
+              {benefits.map((benefit, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
+              ))}
+            </BenefitsList>
+          </ContentSection>
+        </motion.div>
+      </Section>
+    </ScualaneContainer>
+  );
+};

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -8,39 +8,110 @@ import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
 
-const ProductContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${theme.space.xxxl};
-  align-items: start;
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr;
-    gap: ${theme.space.xl};
-  }
+const ScualaneContainer = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
-const ProductInfo = styled.div`
+const HeroSection = styled.div`
+  text-align: center;
+  margin-bottom: ${theme.space.xxxl};
+  
   h1 {
-    font-size: ${theme.fonts.sizes.xxxxl};
+    font-size: ${theme.fonts.sizes.xxxl};
     font-weight: ${theme.fonts.weights.semibold};
     color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.lg};
-    line-height: 1.2;
-  }
-  
-  h2 {
-    font-size: ${theme.fonts.sizes.xl};
-    font-weight: ${theme.fonts.weights.semibold};
-    color: ${theme.colors.olive};
     margin-bottom: ${theme.space.lg};
   }
   
   p {
+    font-size: ${theme.fonts.sizes.lg};
     color: ${theme.colors.textSecondary};
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+`;
+
+const ContentSection = styled.div`
+  margin-bottom: ${theme.space.xxxl};
+  
+  h2 {
+    font-size: ${theme.fonts.sizes.xxl};
+    font-weight: ${theme.fonts.weights.semibold};
+    color: ${theme.colors.textPrimary};
+    margin-bottom: ${theme.space.lg};
+  }
+  
+  p {
     font-size: ${theme.fonts.sizes.md};
+    color: ${theme.colors.textSecondary};
     line-height: 1.7;
     margin-bottom: ${theme.space.lg};
+  }
+  
+  strong {
+    color: ${theme.colors.textPrimary};
+    font-weight: ${theme.fonts.weights.semibold};
+  }
+`;
+
+const UsageCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.space.lg};
+  margin: ${theme.space.xl} 0;
+`;
+
+const UsageCard = styled.div<{ $active: boolean }>`
+  background: ${props => props.$active ? theme.colors.warmBeige : theme.colors.white};
+  border: 1px solid ${props => props.$active ? theme.colors.olive : theme.colors.mutedLine};
+  border-radius: ${theme.radius.lg};
+  padding: ${theme.space.lg};
+  cursor: pointer;
+  transition: all ${theme.transitions.normal};
+  transform: ${props => props.$active ? 'scale(1.02)' : 'scale(1)'};
+  
+  &:hover {
+    border-color: ${theme.colors.olive};
+    transform: scale(1.01);
+  }
+  
+  h3 {
+    font-size: ${theme.fonts.sizes.lg};
+    font-weight: ${theme.fonts.weights.semibold};
+    color: ${theme.colors.textPrimary};
+    margin-bottom: ${theme.space.sm};
+  }
+  
+  p {
+    font-size: ${theme.fonts.sizes.md};
+    color: ${theme.colors.textSecondary};
+    line-height: 1.6;
+    margin: 0;
+  }
+`;
+
+const BenefitsList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: ${theme.space.lg} 0;
+  
+  li {
+    font-size: ${theme.fonts.sizes.md};
+    color: ${theme.colors.textSecondary};
+    line-height: 1.6;
+    margin-bottom: ${theme.space.sm};
+    padding-left: ${theme.space.lg};
+    position: relative;
+    
+    &::before {
+      content: '✓';
+      color: ${theme.colors.olive};
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
   }
 `;
 
@@ -55,52 +126,139 @@ const ProductImage = styled.div`
 
 export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   useEffect(() => {
     trackPageView('/body-oil');
+    
+    // Scroll to section if hash is present
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Scroll to top if no hash
+      window.scrollTo(0, 0);
+    }
   }, []);
 
+  const usageCards = [
+    {
+      title: t('bodyOil.usage.step1.title'),
+      description: t('bodyOil.usage.step1.description')
+    },
+    {
+      title: t('bodyOil.usage.step2.title'),
+      description: t('bodyOil.usage.step2.description')
+    },
+    {
+      title: t('bodyOil.usage.step3.title'),
+      description: t('bodyOil.usage.step3.description')
+    },
+    {
+      title: t('bodyOil.usage.step4.title'),
+      description: t('bodyOil.usage.step4.description')
+    },
+    {
+      title: t('bodyOil.usage.step5.title'),
+      description: t('bodyOil.usage.step5.description')
+    }
+  ];
+
+  const benefits = [
+    t('bodyOil.benefits.hydration'),
+    t('bodyOil.benefits.barrier'),
+    t('bodyOil.benefits.elasticity'),
+    t('bodyOil.benefits.texture'),
+    t('bodyOil.benefits.aroma')
+  ];
+
   return (
-    <>
+    <ScualaneContainer>
       <SEO 
         title={t('bodyOil.seo.title')}
         description={t('bodyOil.seo.description')}
       />
       
       <Section>
-        <ProductContainer>
-          <ProductInfo>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              {t('bodyOil.title')}
-            </motion.h1>
-            
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              dangerouslySetInnerHTML={{ __html: t('bodyOil.subtitle') }}
-            />
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              dangerouslySetInnerHTML={{ __html: t('bodyOil.description1') }}
-            />
-          </ProductInfo>
-          
-          <ProductImage>
-            <OptimizedImage
-              src="/images/products/body-oil.png"
-              alt={t('bodyOil.title')}
-            />
-          </ProductImage>
-        </ProductContainer>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <HeroSection>
+            <h1>{t('bodyOil.title')}</h1>
+            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.subtitle') }} />
+          </HeroSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <ContentSection id="description">
+            <h2>Descripción</h2>
+            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description1') }} />
+            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description2') }} />
+            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description3') }} />
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <ContentSection id="how-to-use">
+            <h2>{t('bodyOil.usage.title')}</h2>
+            <UsageCards>
+              {usageCards.map((card, index) => (
+                <UsageCard
+                  key={index}
+                  $active={activeCard === index}
+                  onClick={() => setActiveCard(activeCard === index ? null : index)}
+                >
+                  <h3>{card.title}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: card.description }} />
+                </UsageCard>
+              ))}
+            </UsageCards>
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <ContentSection id="benefits">
+            <h2>{t('bodyOil.benefits.title')}</h2>
+            <BenefitsList>
+              {benefits.map((benefit, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
+              ))}
+            </BenefitsList>
+          </ContentSection>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <div style={{ textAlign: 'center' }}>
+            <ProductImage>
+              <OptimizedImage
+                src="/images/products/body-oil.png"
+                alt={t('bodyOil.title')}
+              />
+            </ProductImage>
+          </div>
+        </motion.div>
       </Section>
-    </>
+    </ScualaneContainer>
   );
 };
