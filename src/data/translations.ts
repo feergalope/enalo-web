@@ -394,42 +394,36 @@ const spanishTranslations: Translations = {
     }
   },
   "scualane-100": {
-    title: "Escualano de oliva",
-    subtitle: "Extraído del fruto del olivo, el <strong>escualano de oliva</strong> es uno de los activos más preciados de la cosmética mediterránea.",
-    description: "Su valor añadido reside en su <strong>extraordinaria afinidad con los lípidos naturales de la piel</strong>, lo que lo convierte en un ingrediente capaz de integrarse de manera inmediata y profunda.<br><br>Gracias a esta bioafinidad, el escualano aporta una hidratación duradera sin sensación grasa, refuerza la barrera cutánea y ayuda a mantener la elasticidad y suavidad de la piel. En el cabello, actúa como un aliado invisible que nutre, suaviza y aporta brillo natural, protegiendo la fibra capilar frente a la sequedad y el daño ambiental.<br><br>Con su ligereza única y su alta compatibilidad, el escualano de oliva se convierte en un <strong>aliado de bienestar y belleza</strong>, reflejo de la pureza y la innovación mediterránea.",
+    title: "Escualano de oliva 100%",
+    subtitle: "",
+    description: "",
     usage: {
-      title: "Cómo usarlo",
+      title: "Cómo utilizar el Escualano de Oliva",
       face: {
         title: "✨ Rostro",
-        description: "2–3 gotas antes de tu crema. Potencia la absorción y aporta hidratación inmediata."
+        description: "Aplica 2–3 gotas sobre la piel limpia antes de tu crema habitual. Gracias a su afinidad natural, potencia la absorción de los principios activos y proporciona hidratación inmediata sin dejar residuo graso."
       },
       neck: {
         title: "🎗️ Cuello y escote",
-        description: "Uso diario con masaje ascendente. Ayuda a mantener firmeza y elasticidad."
+        description: "Extiende 3–4 gotas a diario, con un suave masaje ascendente desde el centro hacia los laterales. Esta zona es especialmente delicada: el uso regular ayuda a mantener su firmeza, elasticidad y suavidad."
       },
       body: {
-        title: "🛁 Cuerpo",
-        description: "Tras la ducha, sobre piel húmeda. Deja la piel suave, luminosa y sin grasa."
+        title: "💧 Cuerpo",
+        description: "Después de la ducha, con la piel húmeda, masajea 6–10 gotas por zona hasta su total absorción. El resultado es una piel hidratada, flexible y luminosa, sin sensación grasa."
       },
       hair: {
-        title: "💇‍♀️ Cabello",
-        description: "En medios y puntas. Nutre, controla el frizz y aporta brillo natural."
+        title: "🌿 Cabello",
+        description: "<strong>Como sérum:</strong> 1–3 gotas en medios y puntas, en seco o húmedo.<br><strong>Como tratamiento pre-lavado:</strong> 4–6 gotas, dejar 15–20 minutos y enjuagar.<br><strong>Como protección ligera:</strong> 1–2 gotas antes de usar secador o plancha.<br><br>Nutre la fibra capilar, controla el encrespamiento y aporta brillo sin apelmazar."
       }
     },
     keyBenefits: {
       title: "Beneficios clave",
-      benefits: [
-        "🌿 <strong>Hidrata en profundidad</strong> sin dejar sensación grasa",
-        "💎 <strong>Refuerza la barrera cutánea</strong> y mejora la elasticidad",
-        "✨ <strong>Suaviza y aporta luminosidad</strong> a la piel",
-        "💇‍♀️ <strong>Nutre y protege el cabello</strong>, reduciendo el encrespamiento",
-        "🌞 <strong>Ligero, puro y de origen vegetal mediterráneo</strong>"
-      ]
+      benefits: []
     },
     cta: "Ver productos",
     seo: {
-      title: "Escualano de oliva - Enaló",
-      description: "Descubre los beneficios del escualano de oliva para tu piel y cabello."
+      title: "Escualano de oliva 100% - Enaló",
+      description: "Descubre cómo utilizar el escualano de oliva 100% para tu piel y cabello."
     }
   },
   bodyOil: {
@@ -684,42 +678,36 @@ const englishTranslations: Translations = {
     }
   },
   "scualane-100": {
-    title: "Olive squalane",
-    subtitle: "Extracted from the olive fruit, <strong>olive squalane</strong> is one of the most precious assets in Mediterranean cosmetics.",
-    description: "Its added value lies in its <strong>extraordinary affinity with the skin's natural lipids</strong>, making it an ingredient capable of integrating immediately and deeply.<br><br>Thanks to this bioaffinity, squalane provides long-lasting hydration without greasy sensation, strengthens the skin barrier and helps maintain skin elasticity and softness. In hair, it acts as an invisible ally that nourishes, softens and adds natural shine, protecting the hair fiber from dryness and environmental damage.<br><br>With its unique lightness and high compatibility, olive squalane becomes a <strong>wellness and beauty ally</strong>, reflecting Mediterranean purity and innovation.",
+    title: "100% Olive squalane",
+    subtitle: "",
+    description: "",
     usage: {
-      title: "How to use it",
+      title: "How to use Olive Squalane",
       face: {
         title: "✨ Face",
-        description: "2–3 drops before your cream. Enhances absorption and provides immediate hydration."
+        description: "Apply 2–3 drops on clean skin before your usual cream. Thanks to its natural affinity, it enhances the absorption of active ingredients and provides immediate hydration without greasy residue."
       },
       neck: {
         title: "🎗️ Neck and décolleté",
-        description: "Daily use with upward massage. Helps maintain firmness and elasticity."
+        description: "Spread 3–4 drops daily, with a gentle upward massage from center to sides. This area is especially delicate: regular use helps maintain its firmness, elasticity and softness."
       },
       body: {
-        title: "🛁 Body",
-        description: "After shower, on damp skin. Leaves skin soft, luminous and non-greasy."
+        title: "💧 Body",
+        description: "After shower, on damp skin, massage 6–10 drops per area until fully absorbed. The result is hydrated, flexible and luminous skin, without greasy sensation."
       },
       hair: {
-        title: "💇‍♀️ Hair",
-        description: "On mid-lengths and ends. Nourishes, controls frizz and adds natural shine."
+        title: "🌿 Hair",
+        description: "<strong>As serum:</strong> 1–3 drops on mid-lengths and ends, on dry or wet hair.<br><strong>As pre-wash treatment:</strong> 4–6 drops, leave 15–20 minutes and rinse.<br><strong>As light protection:</strong> 1–2 drops before using blow dryer or straightener.<br><br>Nourishes hair fiber, controls frizz and adds shine without weighing down."
       }
     },
     keyBenefits: {
       title: "Key benefits",
-      benefits: [
-        "🌿 <strong>Deep hydration</strong> without greasy sensation",
-        "💎 <strong>Strengthens the skin barrier</strong> and improves elasticity",
-        "✨ <strong>Softens and adds luminosity</strong> to the skin",
-        "💇‍♀️ <strong>Nourishes and protects hair</strong>, reducing frizz",
-        "🌞 <strong>Light, pure and of Mediterranean vegetable origin</strong>"
-      ]
+      benefits: []
     },
     cta: "View products",
     seo: {
-      title: "Olive squalane - Enaló",
-      description: "Discover the benefits of olive squalane for your skin and hair."
+      title: "100% Olive squalane - Enaló",
+      description: "Discover how to use 100% olive squalane for your skin and hair."
     }
   },
   bodyOil: {

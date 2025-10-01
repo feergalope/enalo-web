@@ -110,29 +110,6 @@ const UsageCard = styled.div<{ $active: boolean }>`
   }
 `;
 
-const BenefitsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: ${theme.space.lg} 0;
-  
-  li {
-    font-size: ${theme.fonts.sizes.md};
-    color: ${theme.colors.textSecondary};
-    line-height: 1.6;
-    margin-bottom: ${theme.space.sm};
-    padding-left: ${theme.space.lg};
-    position: relative;
-    
-    &::before {
-      content: '✓';
-      color: ${theme.colors.olive};
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
-  }
-`;
-
 const ProductImage = styled.div`
   width: 100%;
   border-radius: ${theme.radius.lg};
@@ -184,14 +161,6 @@ export const Escualano: React.FC = () => {
     }
   ];
 
-  const benefits = [
-    t('scualane-100.keyBenefits.benefits.0'),
-    t('scualane-100.keyBenefits.benefits.1'),
-    t('scualane-100.keyBenefits.benefits.2'),
-    t('scualane-100.keyBenefits.benefits.3'),
-    t('scualane-100.keyBenefits.benefits.4')
-  ];
-
   return (
     <>
       <SEO 
@@ -209,7 +178,6 @@ export const Escualano: React.FC = () => {
             >
               <HeroSection>
                 <h1>{t('scualane-100.title')}</h1>
-                <p dangerouslySetInnerHTML={{ __html: t('scualane-100.subtitle') }} />
               </HeroSection>
             </motion.div>
 
@@ -217,17 +185,6 @@ export const Escualano: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <ContentSection id="description">
-                <h2>Descripción</h2>
-                <p dangerouslySetInnerHTML={{ __html: t('scualane-100.description') }} />
-              </ContentSection>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
             >
               <ContentSection id="how-to-use">
                 <h2>{t('scualane-100.usage.title')}</h2>
@@ -243,21 +200,6 @@ export const Escualano: React.FC = () => {
                     </UsageCard>
                   ))}
                 </UsageCards>
-              </ContentSection>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <ContentSection id="benefits">
-                <h2>{t('scualane-100.keyBenefits.title')}</h2>
-                <BenefitsList>
-                  {benefits.map((benefit, index) => (
-                    <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
-                  ))}
-                </BenefitsList>
               </ContentSection>
             </motion.div>
           </ProductContent>
