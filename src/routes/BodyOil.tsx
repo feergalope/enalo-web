@@ -9,12 +9,32 @@ import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
 
 const ScualaneContainer = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: ${theme.space.xxxl};
+  align-items: start;
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.space.xl};
+  }
+`;
+
+const ProductContent = styled.div`
+  /* Contenido del producto - 2/3 */
+`;
+
+const ProductImageContainer = styled.div`
+  position: sticky;
+  top: ${theme.space.xl};
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    position: relative;
+    top: 0;
+  }
 `;
 
 const HeroSection = styled.div`
-  text-align: center;
   margin-bottom: ${theme.space.xxxl};
   
   h1 {
@@ -28,8 +48,6 @@ const HeroSection = styled.div`
     font-size: ${theme.fonts.sizes.lg};
     color: ${theme.colors.textSecondary};
     line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto;
   }
 `;
 
@@ -117,11 +135,14 @@ const BenefitsList = styled.ul`
 
 const ProductImage = styled.div`
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto ${theme.space.xxxl};
   border-radius: ${theme.radius.lg};
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const BodyOil: React.FC = () => {
@@ -176,89 +197,93 @@ export const BodyOil: React.FC = () => {
   ];
 
   return (
-    <ScualaneContainer>
+    <>
       <SEO 
         title={t('bodyOil.seo.title')}
         description={t('bodyOil.seo.description')}
       />
       
       <Section>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <HeroSection>
-            <h1>{t('bodyOil.title')}</h1>
-            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.subtitle') }} />
-          </HeroSection>
-        </motion.div>
+        <ScualaneContainer>
+          <ProductContent>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <HeroSection>
+                <h1>{t('bodyOil.title')}</h1>
+                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.subtitle') }} />
+              </HeroSection>
+            </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <ContentSection id="description">
-            <h2>Descripción</h2>
-            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description1') }} />
-            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description2') }} />
-            <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description3') }} />
-          </ContentSection>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <ContentSection id="description">
+                <h2>Descripción</h2>
+                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description1') }} />
+                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description2') }} />
+                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description3') }} />
+              </ContentSection>
+            </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <ContentSection id="how-to-use">
-            <h2>{t('bodyOil.usage.title')}</h2>
-            <UsageCards>
-              {usageCards.map((card, index) => (
-                <UsageCard
-                  key={index}
-                  $active={activeCard === index}
-                  onClick={() => setActiveCard(activeCard === index ? null : index)}
-                >
-                  <h3>{card.title}</h3>
-                  <p dangerouslySetInnerHTML={{ __html: card.description }} />
-                </UsageCard>
-              ))}
-            </UsageCards>
-          </ContentSection>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <ContentSection id="how-to-use">
+                <h2>{t('bodyOil.usage.title')}</h2>
+                <UsageCards>
+                  {usageCards.map((card, index) => (
+                    <UsageCard
+                      key={index}
+                      $active={activeCard === index}
+                      onClick={() => setActiveCard(activeCard === index ? null : index)}
+                    >
+                      <h3>{card.title}</h3>
+                      <p dangerouslySetInnerHTML={{ __html: card.description }} />
+                    </UsageCard>
+                  ))}
+                </UsageCards>
+              </ContentSection>
+            </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <ContentSection id="benefits">
-            <h2>{t('bodyOil.benefits.title')}</h2>
-            <BenefitsList>
-              {benefits.map((benefit, index) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
-              ))}
-            </BenefitsList>
-          </ContentSection>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <ContentSection id="benefits">
+                <h2>{t('bodyOil.benefits.title')}</h2>
+                <BenefitsList>
+                  {benefits.map((benefit, index) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
+                  ))}
+                </BenefitsList>
+              </ContentSection>
+            </motion.div>
+          </ProductContent>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <div style={{ textAlign: 'center' }}>
-            <ProductImage>
-              <OptimizedImage
-                src="/images/products/body-oil.png"
-                alt={t('bodyOil.title')}
-              />
-            </ProductImage>
-          </div>
-        </motion.div>
+          <ProductImageContainer>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <ProductImage>
+                <OptimizedImage
+                  src="/images/products/body-oil.png"
+                  alt={t('bodyOil.title')}
+                />
+              </ProductImage>
+            </motion.div>
+          </ProductImageContainer>
+        </ScualaneContainer>
       </Section>
-    </ScualaneContainer>
+    </>
   );
 };

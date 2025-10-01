@@ -14,7 +14,7 @@ import productsData from '../data/products.json';
 
 const ProductContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: ${theme.space.xxxl};
   align-items: start;
   
@@ -130,10 +130,6 @@ export const ProductDetail: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <ProductContainer>
-            <ProductImage>
-              <OptimizedImage src={product.image} alt={product.name[language]} />
-            </ProductImage>
-            
             <ProductInfo>
               <h1>{product.name[language]}</h1>
               <p className="subtitle">{product.description[language]}</p>
@@ -155,6 +151,10 @@ export const ProductDetail: React.FC = () => {
                 </BackButton>
               </ButtonGroup>
             </ProductInfo>
+            
+            <ProductImage>
+              <OptimizedImage src={product.image} alt={product.name[language]} />
+            </ProductImage>
           </ProductContainer>
         </motion.div>
       </Section>
