@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { GlobalStyle } from './styles/global';
@@ -35,7 +34,7 @@ const MainContent = styled.main`
 
 function App() {
   const { isLoading } = useAppLoading();
-  const { isReady: translationsReady } = useTranslations();
+  const { isReady: translationsReady, language } = useTranslations();
 
   // Mostrar loader si la app está cargando o las traducciones no están listas
   const showLoader = isLoading || !translationsReady;
@@ -47,7 +46,7 @@ function App() {
       <TranslationLoader isVisible={!translationsReady} />
       <ScrollToTop />
       {!showLoader && (
-        <AppContainer>
+        <AppContainer key={language}>
           <Header />
           <MainContent>
             <Routes>
