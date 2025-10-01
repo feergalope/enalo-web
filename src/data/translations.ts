@@ -286,7 +286,7 @@ const spanishTranslations: Translations = {
     about: "Sobre nosotros"
   },
   hero: {
-    title: "Enaló — Escualano de oliva",
+    title: "Escualano de oliva",
     subtitle: "La esencia mediterránea que combina pureza, bioafinidad y nutrición profunda en una línea minimalista y eficaz.",
     ctaPrimary: "Conocer Enaló",
     ctaSecondary: "Saber más"
@@ -576,7 +576,7 @@ const englishTranslations: Translations = {
     about: "About us"
   },
   hero: {
-    title: "Enaló — Olive squalane",
+    title: "Olive squalane",
     subtitle: "The Mediterranean essence that combines purity, bioaffinity and deep nutrition in a minimalist and effective line.",
     ctaPrimary: "Discover Enaló",
     ctaSecondary: "Learn more"
