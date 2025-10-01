@@ -270,7 +270,7 @@ export const Scualane: React.FC = () => {
             >
               <ProductImage>
                 <OptimizedImage
-                  src="/images/products/squalane-100.png"
+                  src="/images/squalane.png"
                   alt={t('scualane.title')}
                 />
               </ProductImage>
