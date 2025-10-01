@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslations } from '../../hooks/useTranslations';
 import { OptimizedImage } from '../OptimizedImage';
-import { container, buttonPrimary, buttonSecondary } from '../../styles/mixins';
+import { container, buttonPrimary } from '../../styles/mixins';
 const pipetaImage = '/images/hero/pipeta-aceite.png';
 import { theme } from '../../styles/theme';
 
@@ -49,22 +49,12 @@ const HeroText = styled.div`
   }
 `;
 
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: ${theme.space.lg};
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
 const PrimaryButton = styled(Link)`
   ${buttonPrimary}
-`;
-
-const SecondaryButton = styled(Link)`
-  ${buttonSecondary}
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    display: inline-block;
+  }
 `;
 
 const HeroImage = styled.div`
@@ -109,14 +99,9 @@ export const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <ButtonGroup>
-              <PrimaryButton to="/products">
-                {t('hero.ctaPrimary')}
-              </PrimaryButton>
-              <SecondaryButton to="/about">
-                {t('hero.ctaSecondary')}
-              </SecondaryButton>
-            </ButtonGroup>
+            <PrimaryButton to="/scualane">
+              Saber más
+            </PrimaryButton>
           </motion.div>
         </HeroText>
         
