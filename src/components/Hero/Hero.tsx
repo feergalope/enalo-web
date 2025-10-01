@@ -9,42 +9,58 @@ const pipetaImage = '/images/hero/pipeta-aceite.png';
 import { theme } from '../../styles/theme';
 
 const HeroContainer = styled.section`
-  background: linear-gradient(135deg, ${theme.colors.softBeige} 0%, ${theme.colors.warmBeige} 100%);
-  padding: ${theme.space.xxxxl} 0;
-  min-height: 80vh;
+  background-image: url('/images/hero/background.png');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  min-height: 95vh;
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
+  padding: ${theme.space.xxxl} 0;
 `;
 
 const HeroContent = styled.div`
   ${container}
+  max-width: 1000px;
+  padding-right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: ${theme.radius.lg};
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${theme.space.xxxl};
-  align-items: center;
+  grid-template-columns: 1fr 400px;
+  gap: 0;
+  align-items: stretch;
+  overflow: hidden;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
     gap: ${theme.space.xl};
     text-align: center;
+    padding-right: ${theme.space.lg};
   }
 `;
 
 const HeroText = styled.div`
+  padding: ${theme.space.xxl} ${theme.space.xxxl};
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    padding: ${theme.space.xl};
+  }
+  
   h1 {
-    font-size: ${theme.fonts.sizes.xxxxl};
+    font-size: ${theme.fonts.sizes.xxxl};
     font-weight: ${theme.fonts.weights.semibold};
     color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.lg};
+    margin-bottom: ${theme.space.md};
     line-height: 1.2;
   }
   
   p {
-    font-size: ${theme.fonts.sizes.lg};
+    font-size: ${theme.fonts.sizes.md};
     color: ${theme.colors.textSecondary};
-    margin-bottom: ${theme.space.xxxl};
+    margin-bottom: ${theme.space.xl};
     line-height: 1.6;
   }
 `;
@@ -59,15 +75,26 @@ const PrimaryButton = styled(Link)`
 
 const HeroImage = styled.div`
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   
   img {
-    max-width: 100%;
-    height: auto;
-    border-radius: ${theme.radius.lg};
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    display: block;
+  }
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    padding: ${theme.space.xl};
+    
+    img {
+      height: auto;
+      width: 100%;
+      object-fit: contain;
+    }
   }
 `;
 
@@ -114,8 +141,6 @@ export const Hero: React.FC = () => {
             <OptimizedImage
               src={pipetaImage}
               alt={t('hero.title')}
-              // width={500}
-              // height={500}
             />
           </motion.div>
         </HeroImage>
