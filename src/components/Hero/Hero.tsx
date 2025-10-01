@@ -85,6 +85,7 @@ const HeroImage = styled.div`
     object-fit: cover;
     object-position: left center;
     display: block;
+    border-radius: 0;
   }
   
   @media (max-width: ${theme.breakpoints.tablet}) {
@@ -94,6 +95,7 @@ const HeroImage = styled.div`
       height: auto;
       width: 100%;
       object-fit: contain;
+      border-radius: 0;
     }
   }
 `;
