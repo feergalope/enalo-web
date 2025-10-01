@@ -313,7 +313,7 @@ const spanishTranslations: Translations = {
   aboutUs: {
     title: "Sobre nosotros",
     subtitle: "Conoce la historia detrás de Enaló",
-    description: "Enaló nace de la pasión por la cosmética mediterránea y el compromiso con ingredientes naturales de la más alta calidad. Nuestro escualano de oliva se extrae siguiendo procesos sostenibles y respetuosos con el medio ambiente.<br><br>Creemos en la belleza natural, en la eficacia de los ingredientes puros y en el poder transformador de la tradición mediterránea aplicada a la cosmética moderna.",
+    description: "Nuestra marca nace con un propósito claro: revalorizar el Mediterráneo a través de un ingrediente único, el <strong>escualano de oliva</strong>. Reconocido por su alta bioafinidad con la piel, ofrece una hidratación profunda, elasticidad y luminosidad con una ligereza incomparable. Una cosmética minimalista y eficaz que refleja la pureza y la innovación mediterránea.",
     seo: {
       title: "Sobre nosotros - Enaló",
       description: "Conoce la historia y valores detrás de Enaló, la línea de cosmética mediterránea basada en escualano de oliva."
@@ -597,7 +597,7 @@ const englishTranslations: Translations = {
   aboutUs: {
     title: "About us",
     subtitle: "Discover the story behind Enaló",
-    description: "Enaló was born from a passion for Mediterranean cosmetics and a commitment to natural ingredients of the highest quality. Our olive squalane is extracted following sustainable and environmentally respectful processes.<br><br>We believe in natural beauty, in the effectiveness of pure ingredients, and in the transformative power of Mediterranean tradition applied to modern cosmetics.",
+    description: "Our brand was born with a clear purpose: to revalue the Mediterranean through a unique ingredient, <strong>olive squalane</strong>. Recognized for its high bioaffinity with the skin, it offers deep hydration, elasticity and luminosity with incomparable lightness. A minimalist and effective cosmetics that reflects Mediterranean purity and innovation.",
     seo: {
       title: "About us - Enaló",
       description: "Discover the story and values behind Enaló, the Mediterranean cosmetics line based on olive squalane."
