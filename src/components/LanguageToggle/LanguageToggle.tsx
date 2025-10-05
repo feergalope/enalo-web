@@ -32,27 +32,28 @@ const ToggleButton = styled.button<{ $active: boolean }>`
 export const LanguageToggle: React.FC = () => {
   const { language, changeLanguage } = useTranslations();
 
-  const handleLanguageChange = (newLanguage: 'es' | 'en') => {
+  const handleLanguageToggle = () => {
+    const newLanguage = language === 'es' ? 'en' : 'es';
     changeLanguage(newLanguage);
   };
+
+  // Mostrar solo el idioma que no está activo
+  const displayLanguage = language === 'es' ? 'en' : 'es';
+  const displayLabel = displayLanguage === 'es' ? 'ES' : 'EN';
+  const ariaLabel = displayLanguage === 'es' 
+    ? 'Cambiar a español' 
+    : 'Switch to English';
+  const title = displayLanguage === 'es' ? 'Español' : 'English';
 
   return (
     <ToggleContainer>
       <ToggleButton
-        $active={language === 'es'}
-        onClick={() => handleLanguageChange('es')}
-        aria-label="Cambiar a español"
-        title="Español"
+        $active={false}
+        onClick={handleLanguageToggle}
+        aria-label={ariaLabel}
+        title={title}
       >
-        ES
-      </ToggleButton>
-      <ToggleButton
-        $active={language === 'en'}
-        onClick={() => handleLanguageChange('en')}
-        aria-label="Switch to English"
-        title="English"
-      >
-        EN
+        {displayLabel}
       </ToggleButton>
     </ToggleContainer>
   );
