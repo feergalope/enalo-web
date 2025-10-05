@@ -8,51 +8,51 @@ import { card, buttonSecondary, focusRing } from '../../styles/mixins';
 
 const CardsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: ${theme.space.xl};
-  margin-top: ${theme.space.xxxl};
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: ${theme.space.lg};
+  margin-top: ${theme.space.xl};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
-    gap: ${theme.space.lg};
+    gap: ${theme.space.md};
   }
 `;
 
 const FeatureCard = styled(motion.div)`
   ${card}
   text-align: center;
-  padding: ${theme.space.xxxl} ${theme.space.xl};
+  padding: ${theme.space.xl} ${theme.space.lg};
 `;
 
 const IconContainer = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto ${theme.space.lg};
-  font-size: ${theme.fonts.sizes.xxxl};
+  margin: 0 auto ${theme.space.md};
+  font-size: ${theme.fonts.sizes.xxl};
   color: ${theme.colors.olive};
 `;
 
 const CardTitle = styled.h3`
-  font-size: ${theme.fonts.sizes.xl};
+  font-size: ${theme.fonts.sizes.lg};
   font-weight: ${theme.fonts.weights.semibold};
   color: ${theme.colors.textPrimary};
-  margin-bottom: ${theme.space.md};
+  margin-bottom: ${theme.space.sm};
 `;
 
 const CardDescription = styled.p`
   color: ${theme.colors.textSecondary};
-  font-size: ${theme.fonts.sizes.md};
-  line-height: 1.6;
-  margin: 0 0 ${theme.space.xl} 0;
+  font-size: ${theme.fonts.sizes.sm};
+  line-height: 1.5;
+  margin: 0 0 ${theme.space.lg} 0;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${theme.space.xxxl};
+  margin-top: ${theme.space.xl};
 `;
 
 const CTAButton = styled(Link)`
