@@ -16,9 +16,10 @@ const HeroContainer = styled.section`
   min-height: 95vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: ${theme.space.xxxl} 0;
+  padding: ${theme.space.xl} 0;
 `;
 
 const HeroContent = styled.div`
@@ -43,24 +44,30 @@ const HeroContent = styled.div`
 `;
 
 const HeroText = styled.div`
-  padding: ${theme.space.xl} ${theme.space.xl};
+  padding: ${theme.space.xl};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     padding: ${theme.space.lg};
+    height: auto;
+    min-height: 300px;
   }
   
   h1 {
     font-size: ${theme.fonts.sizes.xxl};
     font-weight: ${theme.fonts.weights.semibold};
     color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.sm};
+    margin-bottom: ${theme.space.md};
     line-height: 1.2;
   }
   
   p {
     font-size: ${theme.fonts.sizes.sm};
     color: ${theme.colors.textSecondary};
-    margin-bottom: ${theme.space.lg};
+    margin-bottom: ${theme.space.xl};
     line-height: 1.6;
   }
 `;
