@@ -23,13 +23,13 @@ const HeroContainer = styled.section`
 
 const HeroContent = styled.div`
   ${container}
-  max-width: 1000px;
+  max-width: 800px;
   padding-right: 0;
   background: rgba(255, 255, 255, 0.95);
   border-radius: ${theme.radius.lg};
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr 300px;
   gap: 0;
   align-items: stretch;
   overflow: hidden;
@@ -43,24 +43,24 @@ const HeroContent = styled.div`
 `;
 
 const HeroText = styled.div`
-  padding: ${theme.space.xxl} ${theme.space.xxxl};
+  padding: ${theme.space.xl} ${theme.space.xl};
   
   @media (max-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.space.xl};
+    padding: ${theme.space.lg};
   }
   
   h1 {
-    font-size: ${theme.fonts.sizes.xxxl};
+    font-size: ${theme.fonts.sizes.xxl};
     font-weight: ${theme.fonts.weights.semibold};
     color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.md};
+    margin-bottom: ${theme.space.sm};
     line-height: 1.2;
   }
   
   p {
-    font-size: ${theme.fonts.sizes.md};
+    font-size: ${theme.fonts.sizes.sm};
     color: ${theme.colors.textSecondary};
-    margin-bottom: ${theme.space.xl};
+    margin-bottom: ${theme.space.lg};
     line-height: 1.6;
   }
 `;
