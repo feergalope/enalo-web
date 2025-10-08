@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -47,6 +47,20 @@ const CTAButton = styled(Link)`
 
 export const CTA: React.FC = () => {
   const { t } = useTranslations();
+  const [translations, setTranslations] = useState({
+    title: '',
+    subtitle: '',
+    button: ''
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      title: t('cta.title'),
+      subtitle: t('cta.subtitle'),
+      button: t('cta.button')
+    });
+  }, [t]);
 
   return (
     <CTAContainer>
@@ -57,15 +71,15 @@ export const CTA: React.FC = () => {
         transition={{ duration: 0.6 }}
       >
         <CTATitle>
-          {t('cta.title')}
+          {translations.title}
         </CTATitle>
         
         <CTASubtitle>
-          {t('cta.subtitle')}
+          {translations.subtitle}
         </CTASubtitle>
         
         <CTAButton to="/contacto">
-          {t('cta.button')}
+          {translations.button}
         </CTAButton>
       </motion.div>
     </CTAContainer>

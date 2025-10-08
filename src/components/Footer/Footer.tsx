@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useTranslations } from '../../hooks/useTranslations';
 import { theme } from '../../styles/theme';
@@ -93,6 +93,18 @@ const Copyright = styled.p`
 
 export const Footer: React.FC = () => {
   const { t } = useTranslations();
+  const [translations, setTranslations] = useState({
+    description: '',
+    copyright: ''
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      description: t('footer.description'),
+      copyright: t('footer.copyright')
+    });
+  }, [t]);
 
   return (
     <FooterContainer>
@@ -100,9 +112,9 @@ export const Footer: React.FC = () => {
         <FooterLeft>
           <BrandName>macarenalorenzo</BrandName>
           <BrandDescription>
-            {t('footer.description')}
+            {translations.description}
           </BrandDescription>
-          <Copyright>{t('footer.copyright')} 2025</Copyright>
+          <Copyright>{translations.copyright} 2025</Copyright>
         </FooterLeft>
         
         <FooterRight>

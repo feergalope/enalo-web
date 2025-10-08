@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from '../../hooks/useTranslations';
@@ -66,6 +66,48 @@ const AnswerText = styled.p`
 export const FAQ: React.FC = () => {
   const { t } = useTranslations();
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+  const [translations, setTranslations] = useState({
+    questions: {
+      greasy: { question: '', answer: '' },
+      sensitive: { question: '', answer: '' },
+      actives: { question: '', answer: '' },
+      hair: { question: '', answer: '' },
+      comedogenic: { question: '', answer: '' },
+      origin: { question: '', answer: '' }
+    }
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      questions: {
+        greasy: {
+          question: t('faq.questions.greasy.question'),
+          answer: t('faq.questions.greasy.answer')
+        },
+        sensitive: {
+          question: t('faq.questions.sensitive.question'),
+          answer: t('faq.questions.sensitive.answer')
+        },
+        actives: {
+          question: t('faq.questions.actives.question'),
+          answer: t('faq.questions.actives.answer')
+        },
+        hair: {
+          question: t('faq.questions.hair.question'),
+          answer: t('faq.questions.hair.answer')
+        },
+        comedogenic: {
+          question: t('faq.questions.comedogenic.question'),
+          answer: t('faq.questions.comedogenic.answer')
+        },
+        origin: {
+          question: t('faq.questions.origin.question'),
+          answer: t('faq.questions.origin.answer')
+        }
+      }
+    });
+  }, [t]);
 
   const toggleItem = (key: string) => {
     const newOpenItems = new Set(openItems);
@@ -99,7 +141,7 @@ export const FAQ: React.FC = () => {
               aria-expanded={isOpen}
             >
               <QuestionText>
-                {t(`faq.questions.${key}.question`)}
+                {translations.questions[key as keyof typeof translations.questions].question}
               </QuestionText>
               <ToggleIcon
                 animate={{ rotate: isOpen ? 180 : 0 }}
@@ -118,7 +160,7 @@ export const FAQ: React.FC = () => {
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
                 >
                   <AnswerText>
-                    {t(`faq.questions.${key}.answer`)}
+                    {translations.questions[key as keyof typeof translations.questions].answer}
                   </AnswerText>
                 </AnswerContainer>
               )}

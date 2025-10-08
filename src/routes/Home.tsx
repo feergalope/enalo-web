@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -80,10 +80,50 @@ const Badge = styled.span`
 
 export const Home: React.FC = () => {
   const { t } = useTranslations();
+  const [translations, setTranslations] = useState({
+    aboutTitle: '',
+    aboutSubtitle: '',
+    productsTitle: '',
+    productsSubtitle: '',
+    brandTitle: '',
+    brandSubtitle: '',
+    faqTitle: '',
+    brandValues: {
+      mediterranean: '',
+      minimal: '',
+      clean: ''
+    },
+    badges: {
+      spain: '',
+      eur: '',
+      responsible: ''
+    }
+  });
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      aboutTitle: t('about.title'),
+      aboutSubtitle: t('about.subtitle'),
+      productsTitle: t('products.title'),
+      productsSubtitle: t('products.subtitle'),
+      brandTitle: t('brand.title'),
+      brandSubtitle: t('brand.subtitle'),
+      faqTitle: t('faq.title'),
+      brandValues: {
+        mediterranean: t('brand.values.mediterranean'),
+        minimal: t('brand.values.minimal'),
+        clean: t('brand.values.clean')
+      },
+      badges: {
+        spain: t('brand.badges.spain'),
+        eur: t('brand.badges.eur'),
+        responsible: t('brand.badges.responsible')
+      }
+    });
+
     trackPageView('/');
-  }, []);
+  }, [t]);
 
   const brandValues = [
     { key: 'mediterranean', icon: '🌊' },
@@ -103,8 +143,8 @@ export const Home: React.FC = () => {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2>{t('about.title')}</h2>
-          <p>{t('about.subtitle')}</p>
+          <h2>{translations.aboutTitle}</h2>
+          <p>{translations.aboutSubtitle}</p>
           <FeatureCards />
         </motion.div>
       </Section>
@@ -116,8 +156,8 @@ export const Home: React.FC = () => {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2>{t('products.title')}</h2>
-          <p>{t('products.subtitle')}</p>
+          <h2>{translations.productsTitle}</h2>
+          <p>{translations.productsSubtitle}</p>
           <ProductsGrid>
             {productsData.products.map((product, index) => (
               <ProductCard
@@ -137,8 +177,8 @@ export const Home: React.FC = () => {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2>{t('brand.title')}</h2>
-          <p>{t('brand.subtitle')}</p>
+          <h2>{translations.brandTitle}</h2>
+          <p>{translations.brandSubtitle}</p>
           <BrandValues>
             {brandValues.map((value, index) => (
               <BrandValue
@@ -149,14 +189,14 @@ export const Home: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <ValueIcon>{value.icon}</ValueIcon>
-                <ValueText>{t(`brand.values.${value.key}`)}</ValueText>
+                <ValueText>{translations.brandValues[value.key as keyof typeof translations.brandValues]}</ValueText>
               </BrandValue>
             ))}
           </BrandValues>
           <BadgesContainer>
-            <Badge>{t('brand.badges.spain')}</Badge>
-            <Badge>{t('brand.badges.eur')}</Badge>
-            <Badge>{t('brand.badges.responsible')}</Badge>
+            <Badge>{translations.badges.spain}</Badge>
+            <Badge>{translations.badges.eur}</Badge>
+            <Badge>{translations.badges.responsible}</Badge>
           </BadgesContainer>
         </motion.div>
       </Section>
@@ -168,7 +208,7 @@ export const Home: React.FC = () => {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2>{t('faq.title')}</h2>
+          <h2>{translations.faqTitle}</h2>
           <FAQ />
         </motion.div>
       </Section>

@@ -165,8 +165,90 @@ export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
   const [activeUsageCard, setActiveUsageCard] = useState<number | null>(null);
   const [activeBenefitCard, setActiveBenefitCard] = useState<number | null>(null);
+  const [translations, setTranslations] = useState({
+    seoTitle: '',
+    seoDescription: '',
+    title: '',
+    subtitle: '',
+    description1: '',
+    description2: '',
+    description3: '',
+    usageTitle: '',
+    benefitsTitle: '',
+    usageCards: [
+      { title: '', description: '' },
+      { title: '', description: '' },
+      { title: '', description: '' },
+      { title: '', description: '' },
+      { title: '', description: '' }
+    ],
+    benefitCards: [
+      { title: '🌿 Hidratación', description: '' },
+      { title: '💎 Barrera cutánea', description: '' },
+      { title: '✨ Elasticidad', description: '' },
+      { title: '🧴 Textura', description: '' },
+      { title: '🍊 Aroma', description: '' }
+    ]
+  });
 
   useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      seoTitle: t('bodyOil.seo.title'),
+      seoDescription: t('bodyOil.seo.description'),
+      title: t('bodyOil.title'),
+      subtitle: t('bodyOil.subtitle'),
+      description1: t('bodyOil.description1'),
+      description2: t('bodyOil.description2'),
+      description3: t('bodyOil.description3'),
+      usageTitle: t('bodyOil.usage.title'),
+      benefitsTitle: t('bodyOil.benefits.title'),
+      usageCards: [
+        {
+          title: t('bodyOil.usage.step1.title'),
+          description: t('bodyOil.usage.step1.description')
+        },
+        {
+          title: t('bodyOil.usage.step2.title'),
+          description: t('bodyOil.usage.step2.description')
+        },
+        {
+          title: t('bodyOil.usage.step3.title'),
+          description: t('bodyOil.usage.step3.description')
+        },
+        {
+          title: t('bodyOil.usage.step4.title'),
+          description: t('bodyOil.usage.step4.description')
+        },
+        {
+          title: t('bodyOil.usage.step5.title'),
+          description: t('bodyOil.usage.step5.description')
+        }
+      ],
+      benefitCards: [
+        {
+          title: '🌿 Hidratación',
+          description: t('bodyOil.benefits.hydration')
+        },
+        {
+          title: '💎 Barrera cutánea',
+          description: t('bodyOil.benefits.barrier')
+        },
+        {
+          title: '✨ Elasticidad',
+          description: t('bodyOil.benefits.elasticity')
+        },
+        {
+          title: '🧴 Textura',
+          description: t('bodyOil.benefits.texture')
+        },
+        {
+          title: '🍊 Aroma',
+          description: t('bodyOil.benefits.aroma')
+        }
+      ]
+    });
+
     trackPageView('/body-oil');
     
     // Scroll to section if hash is present
@@ -180,59 +262,13 @@ export const BodyOil: React.FC = () => {
       // Scroll to top if no hash
       window.scrollTo(0, 0);
     }
-  }, []);
-
-  const usageCards = [
-    {
-      title: t('bodyOil.usage.step1.title'),
-      description: t('bodyOil.usage.step1.description')
-    },
-    {
-      title: t('bodyOil.usage.step2.title'),
-      description: t('bodyOil.usage.step2.description')
-    },
-    {
-      title: t('bodyOil.usage.step3.title'),
-      description: t('bodyOil.usage.step3.description')
-    },
-    {
-      title: t('bodyOil.usage.step4.title'),
-      description: t('bodyOil.usage.step4.description')
-    },
-    {
-      title: t('bodyOil.usage.step5.title'),
-      description: t('bodyOil.usage.step5.description')
-    }
-  ];
-
-  const benefitCards = [
-    {
-      title: '🌿 Hidratación',
-      description: t('bodyOil.benefits.hydration')
-    },
-    {
-      title: '💎 Barrera cutánea',
-      description: t('bodyOil.benefits.barrier')
-    },
-    {
-      title: '✨ Elasticidad',
-      description: t('bodyOil.benefits.elasticity')
-    },
-    {
-      title: '🧴 Textura',
-      description: t('bodyOil.benefits.texture')
-    },
-    {
-      title: '🍊 Aroma',
-      description: t('bodyOil.benefits.aroma')
-    }
-  ];
+  }, [t]);
 
   return (
     <>
       <SEO 
-        title={t('bodyOil.seo.title')}
-        description={t('bodyOil.seo.description')}
+        title={translations.seoTitle}
+        description={translations.seoDescription}
       />
       
       <Section>
@@ -244,8 +280,8 @@ export const BodyOil: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <HeroSection>
-                <h1>{t('bodyOil.title')}</h1>
-                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.subtitle') }} />
+                <h1>{translations.title}</h1>
+                <p dangerouslySetInnerHTML={{ __html: translations.subtitle }} />
               </HeroSection>
             </motion.div>
 
@@ -256,9 +292,9 @@ export const BodyOil: React.FC = () => {
             >
               <ContentSection id="description">
                 <h2>Descripción</h2>
-                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description1') }} />
-                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description2') }} />
-                <p dangerouslySetInnerHTML={{ __html: t('bodyOil.description3') }} />
+                <p dangerouslySetInnerHTML={{ __html: translations.description1 }} />
+                <p dangerouslySetInnerHTML={{ __html: translations.description2 }} />
+                <p dangerouslySetInnerHTML={{ __html: translations.description3 }} />
               </ContentSection>
             </motion.div>
 
@@ -268,9 +304,9 @@ export const BodyOil: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <ContentSection id="how-to-use">
-                <h2>{t('bodyOil.usage.title')}</h2>
+                <h2>{translations.usageTitle}</h2>
                 <UsageCards>
-                  {usageCards.map((card, index) => (
+                  {translations.usageCards.map((card, index) => (
                     <UsageCard
                       key={index}
                       $active={activeUsageCard === index}
@@ -290,9 +326,9 @@ export const BodyOil: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <ContentSection id="benefits">
-                <h2>{t('bodyOil.benefits.title')}</h2>
+                <h2>{translations.benefitsTitle}</h2>
                 <BenefitsCards>
-                  {benefitCards.map((card, index) => (
+                  {translations.benefitCards.map((card, index) => (
                     <BenefitCard
                       key={index}
                       $active={activeBenefitCard === index}
@@ -316,7 +352,7 @@ export const BodyOil: React.FC = () => {
               <ProductImage>
                 <OptimizedImage
                   src="/images/products/body-oil.png"
-                  alt={t('bodyOil.title')}
+                  alt={translations.title}
                 />
               </ProductImage>
             </motion.div>

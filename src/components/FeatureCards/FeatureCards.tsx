@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -64,6 +64,35 @@ const CTAButton = styled(Link)`
 
 export const FeatureCards: React.FC = () => {
   const { t } = useTranslations();
+  const [translations, setTranslations] = useState({
+    cta: '',
+    benefits: {
+      bioaffinity: { title: '', description: '' },
+      repair: { title: '', description: '' },
+      authenticity: { title: '', description: '' }
+    }
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      cta: t('about.cta'),
+      benefits: {
+        bioaffinity: {
+          title: t('about.benefits.bioaffinity.title'),
+          description: t('about.benefits.bioaffinity.description')
+        },
+        repair: {
+          title: t('about.benefits.repair.title'),
+          description: t('about.benefits.repair.description')
+        },
+        authenticity: {
+          title: t('about.benefits.authenticity.title'),
+          description: t('about.benefits.authenticity.description')
+        }
+      }
+    });
+  }, [t]);
 
   const benefits = [
     {
@@ -95,10 +124,10 @@ export const FeatureCards: React.FC = () => {
               {benefit.icon}
             </IconContainer>
             <CardTitle>
-              {t(`about.benefits.${benefit.key}.title`)}
+              {translations.benefits[benefit.key as keyof typeof translations.benefits].title}
             </CardTitle>
             <CardDescription>
-              {t(`about.benefits.${benefit.key}.description`)}
+              {translations.benefits[benefit.key as keyof typeof translations.benefits].description}
             </CardDescription>
           </FeatureCard>
         ))}
@@ -106,7 +135,7 @@ export const FeatureCards: React.FC = () => {
       
       <ButtonContainer>
         <CTAButton to="/scualane-100">
-          {t('about.cta')}
+          {translations.cta}
         </CTAButton>
       </ButtonContainer>
     </>

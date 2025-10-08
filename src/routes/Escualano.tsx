@@ -125,8 +125,46 @@ const ProductImage = styled.div`
 export const Escualano: React.FC = () => {
   const { t } = useTranslations();
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [translations, setTranslations] = useState({
+    seoTitle: '',
+    seoDescription: '',
+    title: '',
+    usageTitle: '',
+    usageCards: [
+      { title: '', description: '' },
+      { title: '', description: '' },
+      { title: '', description: '' },
+      { title: '', description: '' }
+    ]
+  });
 
   useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      seoTitle: t('scualane-100.seo.title'),
+      seoDescription: t('scualane-100.seo.description'),
+      title: t('scualane-100.title'),
+      usageTitle: t('scualane-100.usage.title'),
+      usageCards: [
+        {
+          title: t('scualane-100.usage.face.title'),
+          description: t('scualane-100.usage.face.description')
+        },
+        {
+          title: t('scualane-100.usage.neck.title'),
+          description: t('scualane-100.usage.neck.description')
+        },
+        {
+          title: t('scualane-100.usage.body.title'),
+          description: t('scualane-100.usage.body.description')
+        },
+        {
+          title: t('scualane-100.usage.hair.title'),
+          description: t('scualane-100.usage.hair.description')
+        }
+      ]
+    });
+
     trackPageView('/escualano');
     
     // Scroll to section if hash is present
@@ -140,32 +178,13 @@ export const Escualano: React.FC = () => {
       // Scroll to top if no hash
       window.scrollTo(0, 0);
     }
-  }, []);
-
-  const usageCards = [
-    {
-      title: t('scualane-100.usage.face.title'),
-      description: t('scualane-100.usage.face.description')
-    },
-    {
-      title: t('scualane-100.usage.neck.title'),
-      description: t('scualane-100.usage.neck.description')
-    },
-    {
-      title: t('scualane-100.usage.body.title'),
-      description: t('scualane-100.usage.body.description')
-    },
-    {
-      title: t('scualane-100.usage.hair.title'),
-      description: t('scualane-100.usage.hair.description')
-    }
-  ];
+  }, [t]);
 
   return (
     <>
       <SEO 
-        title={t('scualane-100.seo.title')}
-        description={t('scualane-100.seo.description')}
+        title={translations.seoTitle}
+        description={translations.seoDescription}
       />
       
       <Section>
@@ -177,7 +196,7 @@ export const Escualano: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <HeroSection>
-                <h1>{t('scualane-100.title')}</h1>
+                <h1>{translations.title}</h1>
               </HeroSection>
             </motion.div>
 
@@ -187,9 +206,9 @@ export const Escualano: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <ContentSection id="how-to-use">
-                <h2>{t('scualane-100.usage.title')}</h2>
+                <h2>{translations.usageTitle}</h2>
                 <UsageCards>
-                  {usageCards.map((card, index) => (
+                  {translations.usageCards.map((card, index) => (
                     <UsageCard
                       key={index}
                       $active={activeCard === index}

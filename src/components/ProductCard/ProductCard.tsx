@@ -104,12 +104,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { t, language } = useTranslations();
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [translations, setTranslations] = useState({
+    learnMore: ''
+  });
 
   // Reset image state when product changes
   useEffect(() => {
     setImageError(false);
     setImageLoaded(false);
   }, [product.id]);
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      learnMore: t('products.learnMore')
+    });
+  }, [t]);
 
   // Determinar la ruta del botón basándose en el slug del producto
   const getButtonRoute = () => {
@@ -181,7 +191,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       </ProductDescription>
       
       <LearnMoreButton to={getButtonRoute()}>
-        {t('products.learnMore')}
+        {translations.learnMore}
       </LearnMoreButton>
     </CardContainer>
   );

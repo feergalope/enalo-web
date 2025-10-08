@@ -12,9 +12,10 @@ const HeaderContainer = styled(motion.header)<{ $scrolled: boolean }>`
   top: 0;
   left: 0;
   right: 0;
-  background: ${props => props.$scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'};
-  backdrop-filter: ${props => props.$scrolled ? 'blur(10px)' : 'none'};
-  border-bottom: ${props => props.$scrolled ? `1px solid ${theme.colors.mutedLine}` : 'none'};
+  height: 80px;
+  background: ${props => props.$scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.9)'};
+  backdrop-filter: ${props => props.$scrolled ? 'blur(10px)' : 'blur(5px)'};
+  border-bottom: ${props => props.$scrolled ? `1px solid ${theme.colors.mutedLine}` : '1px solid rgba(231, 227, 220, 0.3)'};
   z-index: 1000;
   transition: all ${theme.transitions.normal};
 `;
@@ -209,6 +210,20 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [translations, setTranslations] = useState({
+    escualano: '',
+    products: '',
+    about: ''
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      escualano: t('nav.escualano'),
+      products: t('nav.products'),
+      about: t('nav.about')
+    });
+  }, [t]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -232,9 +247,9 @@ export const Header: React.FC = () => {
   }, [mobileMenuOpen]);
 
   const navItems = [
-    { key: 'escualano', path: '/scualane' },
-    { key: 'products', path: '/enalo' },
-    { key: 'about', path: '/about' },
+    { key: 'escualano' as const, path: '/scualane' },
+    { key: 'products' as const, path: '/enalo' },
+    { key: 'about' as const, path: '/about' },
   ];
 
   const toggleMobileMenu = () => {
@@ -273,7 +288,7 @@ export const Header: React.FC = () => {
                 to={item.path}
                 $active={location.pathname === item.path}
               >
-                {t(`nav.${item.key}`)}
+                {translations[item.key]}
               </NavLink>
             ))}
           </Nav>
@@ -318,7 +333,7 @@ export const Header: React.FC = () => {
                     $active={location.pathname === item.path}
                     onClick={closeMobileMenu}
                   >
-                    {t(`nav.${item.key}`)}
+                    {translations[item.key]}
                   </MobileNavLink>
                 ))}
               </MobileNav>

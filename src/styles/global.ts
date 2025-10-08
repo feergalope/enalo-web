@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${theme.colors.white};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding-top: 80px;
+    padding-top: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

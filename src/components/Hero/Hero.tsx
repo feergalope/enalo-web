@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslations } from '../../hooks/useTranslations';
 import { OptimizedImage } from '../OptimizedImage';
 import { container, buttonPrimary } from '../../styles/mixins';
-const pipetaImage = '/images/hero/pipeta-aceite.png';
+const pipetaImage = `${import.meta.env.BASE_URL}images/hero/pipeta-aceite.png`;
 import { theme } from '../../styles/theme';
 
 const HeroContainer = styled.section`
-  background-image: url('/images/hero/background.png');
+  background-image: url('${import.meta.env.BASE_URL}images/hero/background.png');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-  min-height: 95vh;
+  min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
   padding: ${theme.space.xl} 0;
+  margin-top: 80px;
 `;
 
 const HeroContent = styled.div`
@@ -57,7 +58,7 @@ const HeroText = styled.div`
   }
   
   h1 {
-    font-size: ${theme.fonts.sizes.xxl};
+    font-size: ${theme.fonts.sizes.xxxl};
     font-weight: ${theme.fonts.weights.semibold};
     color: ${theme.colors.textPrimary};
     margin-bottom: ${theme.space.md};
@@ -65,7 +66,7 @@ const HeroText = styled.div`
   }
   
   p {
-    font-size: ${theme.fonts.sizes.sm};
+    font-size: ${theme.fonts.sizes.md};
     color: ${theme.colors.textSecondary};
     margin-bottom: ${theme.space.xl};
     line-height: 1.6;
@@ -109,6 +110,18 @@ const HeroImage = styled.div`
 
 export const Hero: React.FC = () => {
   const { t } = useTranslations();
+  const [translations, setTranslations] = useState({
+    title: '',
+    subtitle: ''
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      title: t('hero.title'),
+      subtitle: t('hero.subtitle')
+    });
+  }, [t]);
 
   return (
     <HeroContainer>
@@ -119,7 +132,7 @@ export const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {t('hero.title')}
+            {translations.title}
           </motion.h1>
           
           <motion.p
@@ -127,7 +140,7 @@ export const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {t('hero.subtitle')}
+            {translations.subtitle}
           </motion.p>
           
           <motion.div
@@ -149,7 +162,7 @@ export const Hero: React.FC = () => {
           >
             <OptimizedImage
               src={pipetaImage}
-              alt={t('hero.title')}
+              alt={translations.title}
             />
           </motion.div>
         </HeroImage>

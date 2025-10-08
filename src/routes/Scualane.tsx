@@ -148,8 +148,60 @@ const ProductImage = styled.div`
 export const Scualane: React.FC = () => {
   const { t } = useTranslations();
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [translations, setTranslations] = useState({
+    seoTitle: '',
+    seoDescription: '',
+    title: '',
+    subtitle: '',
+    description: '',
+    usageTitle: '',
+    keyBenefitsTitle: '',
+    usageCards: [
+      { title: '', description: '' },
+      { title: '', description: '' },
+      { title: '', description: '' },
+      { title: '', description: '' }
+    ],
+    benefits: ['', '', '', '', '']
+  });
 
   useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      seoTitle: t('scualane.seo.title'),
+      seoDescription: t('scualane.seo.description'),
+      title: t('scualane.title'),
+      subtitle: t('scualane.subtitle'),
+      description: t('scualane.description'),
+      usageTitle: t('scualane.usage.title'),
+      keyBenefitsTitle: t('scualane.keyBenefits.title'),
+      usageCards: [
+        {
+          title: t('scualane.usage.face.title'),
+          description: t('scualane.usage.face.description')
+        },
+        {
+          title: t('scualane.usage.neck.title'),
+          description: t('scualane.usage.neck.description')
+        },
+        {
+          title: t('scualane.usage.body.title'),
+          description: t('scualane.usage.body.description')
+        },
+        {
+          title: t('scualane.usage.hair.title'),
+          description: t('scualane.usage.hair.description')
+        }
+      ],
+      benefits: [
+        t('scualane.keyBenefits.benefits.0'),
+        t('scualane.keyBenefits.benefits.1'),
+        t('scualane.keyBenefits.benefits.2'),
+        t('scualane.keyBenefits.benefits.3'),
+        t('scualane.keyBenefits.benefits.4')
+      ]
+    });
+
     trackPageView('/scualane');
     
     // Scroll to section if hash is present
@@ -163,40 +215,13 @@ export const Scualane: React.FC = () => {
       // Scroll to top if no hash
       window.scrollTo(0, 0);
     }
-  }, []);
-
-  const usageCards = [
-    {
-      title: t('scualane.usage.face.title'),
-      description: t('scualane.usage.face.description')
-    },
-    {
-      title: t('scualane.usage.neck.title'),
-      description: t('scualane.usage.neck.description')
-    },
-    {
-      title: t('scualane.usage.body.title'),
-      description: t('scualane.usage.body.description')
-    },
-    {
-      title: t('scualane.usage.hair.title'),
-      description: t('scualane.usage.hair.description')
-    }
-  ];
-
-  const benefits = [
-    t('scualane.keyBenefits.benefits.0'),
-    t('scualane.keyBenefits.benefits.1'),
-    t('scualane.keyBenefits.benefits.2'),
-    t('scualane.keyBenefits.benefits.3'),
-    t('scualane.keyBenefits.benefits.4')
-  ];
+  }, [t]);
 
   return (
     <>
       <SEO 
-        title={t('scualane.seo.title')}
-        description={t('scualane.seo.description')}
+        title={translations.seoTitle}
+        description={translations.seoDescription}
       />
       
       <Section>
@@ -208,8 +233,8 @@ export const Scualane: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <HeroSection>
-                <h1>{t('scualane.title')}</h1>
-                <p dangerouslySetInnerHTML={{ __html: t('scualane.subtitle') }} />
+                <h1>{translations.title}</h1>
+                <p dangerouslySetInnerHTML={{ __html: translations.subtitle }} />
               </HeroSection>
             </motion.div>
 
@@ -220,7 +245,7 @@ export const Scualane: React.FC = () => {
             >
               <ContentSection id="description">
                 <h2>Descripción</h2>
-                <p dangerouslySetInnerHTML={{ __html: t('scualane.description') }} />
+                <p dangerouslySetInnerHTML={{ __html: translations.description }} />
               </ContentSection>
             </motion.div>
 
@@ -230,9 +255,9 @@ export const Scualane: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <ContentSection id="how-to-use">
-                <h2>{t('scualane.usage.title')}</h2>
+                <h2>{translations.usageTitle}</h2>
                 <UsageCards>
-                  {usageCards.map((card, index) => (
+                  {translations.usageCards.map((card, index) => (
                     <UsageCard
                       key={index}
                       $active={activeCard === index}
@@ -252,9 +277,9 @@ export const Scualane: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <ContentSection id="benefits">
-                <h2>{t('scualane.keyBenefits.title')}</h2>
+                <h2>{translations.keyBenefitsTitle}</h2>
                 <BenefitsList>
-                  {benefits.map((benefit, index) => (
+                  {translations.benefits.map((benefit, index) => (
                     <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
                   ))}
                 </BenefitsList>
@@ -271,7 +296,7 @@ export const Scualane: React.FC = () => {
               <ProductImage>
                 <OptimizedImage
                   src="/images/squalane.png"
-                  alt={t('scualane.title')}
+                  alt={translations.title}
                 />
               </ProductImage>
             </motion.div>

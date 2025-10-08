@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -43,16 +43,30 @@ const ContentSection = styled.div`
 
 export const About: React.FC = () => {
   const { t } = useTranslations();
+  const [translations, setTranslations] = useState({
+    seoTitle: '',
+    seoDescription: '',
+    title: '',
+    description: ''
+  });
 
   useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      seoTitle: t('aboutUs.seo.title'),
+      seoDescription: t('aboutUs.seo.description'),
+      title: t('aboutUs.title'),
+      description: t('aboutUs.description')
+    });
+
     trackPageView('/about');
-  }, []);
+  }, [t]);
 
   return (
     <AboutContainer>
       <SEO 
-        title={t('aboutUs.seo.title')}
-        description={t('aboutUs.seo.description')}
+        title={translations.seoTitle}
+        description={translations.seoDescription}
       />
       
       <Section>
@@ -62,7 +76,7 @@ export const About: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <HeroSection>
-            <h1>{t('aboutUs.title')}</h1>
+            <h1>{translations.title}</h1>
           </HeroSection>
         </motion.div>
 
@@ -72,7 +86,7 @@ export const About: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <ContentSection>
-            <p dangerouslySetInnerHTML={{ __html: t('aboutUs.description') }} />
+            <p dangerouslySetInnerHTML={{ __html: translations.description }} />
           </ContentSection>
         </motion.div>
       </Section>

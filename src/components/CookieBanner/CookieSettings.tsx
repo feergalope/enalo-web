@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from '../../hooks/useTranslations';
@@ -259,6 +259,47 @@ export const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose 
     marketing: false,
   });
 
+  const [translations, setTranslations] = useState({
+    settingsTitle: '',
+    settingsDescription: '',
+    necessaryTitle: '',
+    necessaryDescription: '',
+    functionalTitle: '',
+    functionalDescription: '',
+    analyticsTitle: '',
+    analyticsDescription: '',
+    marketingTitle: '',
+    marketingDescription: '',
+    alwaysActive: '',
+    optional: '',
+    cancel: '',
+    reject: '',
+    savePreferences: '',
+    accept: ''
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      settingsTitle: t('cookies.settingsTitle'),
+      settingsDescription: t('cookies.settingsDescription'),
+      necessaryTitle: t('cookies.necessary.title'),
+      necessaryDescription: t('cookies.necessary.description'),
+      functionalTitle: t('cookies.functional.title'),
+      functionalDescription: t('cookies.functional.description'),
+      analyticsTitle: t('cookies.analytics.title'),
+      analyticsDescription: t('cookies.analytics.description'),
+      marketingTitle: t('cookies.marketing.title'),
+      marketingDescription: t('cookies.marketing.description'),
+      alwaysActive: t('cookies.marketing.alwaysActive'),
+      optional: t('cookies.marketing.optional'),
+      cancel: t('cookies.cancel'),
+      reject: t('cookies.reject'),
+      savePreferences: t('cookies.savePreferences'),
+      accept: t('cookies.accept')
+    });
+  }, [t]);
+
   const handleToggle = (category: keyof typeof preferences) => {
     if (category === 'necessary') return; // Can't disable necessary cookies
     
@@ -302,26 +343,26 @@ export const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose 
   const cookieCategories = [
     {
       key: 'necessary' as const,
-      title: t('cookies.necessary.title'),
-      description: t('cookies.necessary.description'),
+      title: translations.necessaryTitle,
+      description: translations.necessaryDescription,
       required: true,
     },
     {
       key: 'functional' as const,
-      title: t('cookies.functional.title'),
-      description: t('cookies.functional.description'),
+      title: translations.functionalTitle,
+      description: translations.functionalDescription,
       required: false,
     },
     {
       key: 'analytics' as const,
-      title: t('cookies.analytics.title'),
-      description: t('cookies.analytics.description'),
+      title: translations.analyticsTitle,
+      description: translations.analyticsDescription,
       required: false,
     },
     {
       key: 'marketing' as const,
-      title: t('cookies.marketing.title'),
-      description: t('cookies.marketing.description'),
+      title: translations.marketingTitle,
+      description: translations.marketingDescription,
       required: false,
     },
   ];
@@ -343,8 +384,8 @@ export const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose 
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             <Header>
-              <h2>{t('cookies.settingsTitle')}</h2>
-              <p>{t('cookies.settingsDescription')}</p>
+              <h2>{translations.settingsTitle}</h2>
+              <p>{translations.settingsDescription}</p>
             </Header>
 
             {cookieCategories.map((category) => (
@@ -352,7 +393,7 @@ export const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose 
                 <CategoryHeader>
                   <CategoryInfo>
                     <h3>{category.title}</h3>
-                    <p>{category.required ? t('cookies.marketing.alwaysActive') : t('cookies.marketing.optional')}</p>
+                    <p>{category.required ? translations.alwaysActive : translations.optional}</p>
                   </CategoryInfo>
                   <Toggle
                     $enabled={preferences[category.key]}
@@ -367,16 +408,16 @@ export const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose 
 
             <ButtonGroup>
               <CancelButton onClick={onClose}>
-                {t('cookies.cancel')}
+                {translations.cancel}
               </CancelButton>
               <CancelButton onClick={handleRejectAll}>
-                {t('cookies.reject')}
+                {translations.reject}
               </CancelButton>
               <SaveButton onClick={handleSave}>
-                {t('cookies.savePreferences')}
+                {translations.savePreferences}
               </SaveButton>
               <SaveButton onClick={handleAcceptAll}>
-                {t('cookies.accept')}
+                {translations.accept}
               </SaveButton>
             </ButtonGroup>
           </Modal>

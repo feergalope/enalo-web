@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from '../../hooks/useTranslations';
 
 interface SEOProps {
@@ -19,12 +19,21 @@ export const SEO: React.FC<SEOProps> = ({
   canonical,
 }) => {
   const { t, language } = useTranslations();
+  const [translations, setTranslations] = useState({
+    defaultTitle: '',
+    defaultDescription: ''
+  });
 
-  const defaultTitle = t('hero.title');
-  const defaultDescription = t('hero.subtitle');
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      defaultTitle: t('hero.title'),
+      defaultDescription: t('hero.subtitle')
+    });
+  }, [t]);
 
-  const fullTitle = title ? `${title} | macarenalorenzo` : `macarenalorenzo | ${defaultTitle}`;
-  const fullDescription = description || defaultDescription;
+  const fullTitle = title ? `${title} | macarenalorenzo` : `macarenalorenzo | ${translations.defaultTitle}`;
+  const fullDescription = description || translations.defaultDescription;
 
   useEffect(() => {
     // Actualizar el título de la página

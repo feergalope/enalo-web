@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from '../../hooks/useTranslations';
@@ -108,6 +108,24 @@ export const CookieBanner: React.FC = () => {
   const { t } = useTranslations();
   const { consent, acceptCookies, rejectCookies } = useCookieConsent();
   const [showSettings, setShowSettings] = useState(false);
+  const [translations, setTranslations] = useState({
+    title: '',
+    description: '',
+    accept: '',
+    reject: '',
+    configure: ''
+  });
+
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      title: t('cookies.title'),
+      description: t('cookies.description'),
+      accept: t('cookies.accept'),
+      reject: t('cookies.reject'),
+      configure: t('cookies.configure')
+    });
+  }, [t]);
 
   if (consent !== 'pending') {
     return null;
@@ -124,9 +142,9 @@ export const CookieBanner: React.FC = () => {
         >
           <BannerContent>
             <BannerText>
-              <h3>{t('cookies.title')}</h3>
+              <h3>{translations.title}</h3>
               <p>
-                {t('cookies.description')}
+                {translations.description}
                 <LearnMoreLink href="/legal/cookies" target="_blank">
                   Más información
                 </LearnMoreLink>
@@ -135,13 +153,13 @@ export const CookieBanner: React.FC = () => {
             
             <ButtonGroup>
               <AcceptButton onClick={() => acceptCookies()}>
-                {t('cookies.accept')}
+                {translations.accept}
               </AcceptButton>
               <RejectButton onClick={() => rejectCookies()}>
-                {t('cookies.reject')}
+                {translations.reject}
               </RejectButton>
               <ConfigureButton onClick={() => setShowSettings(true)}>
-                {t('cookies.configure')}
+                {translations.configure}
               </ConfigureButton>
             </ButtonGroup>
           </BannerContent>

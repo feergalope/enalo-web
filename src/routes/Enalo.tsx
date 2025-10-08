@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -45,16 +45,26 @@ const ProductsGrid = styled.div`
 
 export const Enalo: React.FC = () => {
   const { t } = useTranslations();
+  const [translations, setTranslations] = useState({
+    title: '',
+    subtitle: ''
+  });
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // Pre-cargar todas las traducciones
+    setTranslations({
+      title: t('products.title'),
+      subtitle: t('products.subtitle')
+    });
+
     trackPageView('/enalo');
-  }, []);
+  }, [t]);
 
   return (
     <>
       <SEO 
-        title={t('products.title')}
-        description={t('products.subtitle')}
+        title={translations.title}
+        description={translations.subtitle}
       />
       
       <HeroSection>
@@ -63,8 +73,8 @@ export const Enalo: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <HeroTitle>{t('products.title')}</HeroTitle>
-          <HeroSubtitle>{t('products.subtitle')}</HeroSubtitle>
+          <HeroTitle>{translations.title}</HeroTitle>
+          <HeroSubtitle>{translations.subtitle}</HeroSubtitle>
         </motion.div>
       </HeroSection>
       
