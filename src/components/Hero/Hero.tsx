@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslations } from '../../hooks/useTranslations';
 import { OptimizedImage } from '../OptimizedImage';
 import { container, buttonPrimary } from '../../styles/mixins';
-const pipetaImage = `${import.meta.env.BASE_URL}images/hero/pipeta-aceite.png`;
 import { theme } from '../../styles/theme';
 
-const HeroContainer = styled.section`
-  background-image: url('${import.meta.env.BASE_URL}images/hero/background.png');
+const HeroContainer = styled.section<{ $backgroundUrl: string }>`
+  background-image: url('${props => props.$backgroundUrl}');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -110,21 +109,20 @@ const HeroImage = styled.div`
 
 export const Hero: React.FC = () => {
   const { t } = useTranslations();
-  const [translations, setTranslations] = useState({
-    title: '',
-    subtitle: ''
-  });
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      title: t('hero.title'),
-      subtitle: t('hero.subtitle')
-    });
-  }, [t]);
+  
+  // Inicializar directamente con las traducciones e imágenes
+  const translations = {
+    title: t('hero.title'),
+    subtitle: t('hero.subtitle')
+  };
+  
+  const images = {
+    background: `${import.meta.env.BASE_URL}images/hero/background.png`,
+    pipeta: `${import.meta.env.BASE_URL}images/hero/pipeta-aceite.png`
+  };
 
   return (
-    <HeroContainer>
+    <HeroContainer $backgroundUrl={images.background}>
       <HeroContent>
         <HeroText>
           <motion.h1
@@ -161,7 +159,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <OptimizedImage
-              src={pipetaImage}
+              src={images.pipeta}
               alt={translations.title}
             />
           </motion.div>

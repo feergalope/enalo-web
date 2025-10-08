@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -56,27 +56,6 @@ const ProductImage = styled.img`
   }
 `;
 
-const ProductImagePlaceholder = styled.div<{ $show: boolean }>`
-  width: 100%;
-  height: 100%;
-  display: ${props => props.$show ? 'flex' : 'none'};
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: ${theme.fonts.sizes.xxxxl};
-  color: ${theme.colors.olive};
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const PlaceholderText = styled.span`
-  font-size: ${theme.fonts.sizes.sm};
-  color: ${theme.colors.textSecondary};
-  margin-top: ${theme.space.sm};
-  font-weight: ${theme.fonts.weights.medium};
-`;
-
 const ProductTitle = styled.h3`
   font-size: ${theme.fonts.sizes.xl};
   font-weight: ${theme.fonts.weights.semibold};
@@ -102,24 +81,9 @@ const LearnMoreButton = styled(Link)`
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { t, language } = useTranslations();
-  const [imageError, setImageError] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [translations, setTranslations] = useState({
-    learnMore: ''
-  });
-
-  // Reset image state when product changes
-  useEffect(() => {
-    setImageError(false);
-    setImageLoaded(false);
-  }, [product.id]);
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      learnMore: t('products.learnMore')
-    });
-  }, [t]);
+  
+  // Inicializar directamente con las traducciones
+  const learnMoreText = t('products.learnMore');
 
   // Determinar la ruta del botón basándose en el slug del producto
   const getButtonRoute = () => {
@@ -132,28 +96,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
     return '/enalo';
   };
 
-  // Función para manejar errores de carga de imagen
-  const handleImageError = () => {
-    setImageError(true);
-    setImageLoaded(false);
-  };
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-    setImageError(false);
-  };
-
-  // Función para obtener el emoji apropiado según el producto
-  const getProductEmoji = () => {
-    if (product.slug === 'scualane-100') {
-      return '🫒';
-    }
-    if (product.slug === 'body-oil') {
-      return '💧';
-    }
-    return '🫒';
-  };
-
   return (
     <CardContainer
       initial={{ opacity: 0, y: 30 }}
@@ -162,24 +104,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       transition={{ duration: 0.6, delay: index * 0.2 }}
     >
       <ProductImageContainer>
-        {!imageError && (
-          <ProductImage
-            src={product.image}
-            alt={product.name[language]}
-            onError={handleImageError}
-            onLoad={handleImageLoad}
-            style={{ 
-              opacity: imageLoaded ? 1 : 0,
-              transition: 'opacity 0.3s ease'
-            }}
-          />
-        )}
-        <ProductImagePlaceholder $show={imageError}>
-          {getProductEmoji()}
-          <PlaceholderText>
-            {product.slug === 'scualane-100' ? 'Escualano' : 'Aceite corporal'}
-          </PlaceholderText>
-        </ProductImagePlaceholder>
+        <ProductImage
+          src={product.image}
+          alt={product.name[language]}
+        />
       </ProductImageContainer>
       
       <ProductTitle>
@@ -191,7 +119,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       </ProductDescription>
       
       <LearnMoreButton to={getButtonRoute()}>
-        {translations.learnMore}
+        {learnMoreText}
       </LearnMoreButton>
     </CardContainer>
   );

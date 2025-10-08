@@ -210,20 +210,13 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [translations, setTranslations] = useState({
-    escualano: '',
-    products: '',
-    about: ''
-  });
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      escualano: t('nav.escualano'),
-      products: t('nav.products'),
-      about: t('nav.about')
-    });
-  }, [t]);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    escualano: t('nav.escualano'),
+    products: t('nav.products'),
+    about: t('nav.about')
+  };
 
   useEffect(() => {
     const handleScroll = () => {

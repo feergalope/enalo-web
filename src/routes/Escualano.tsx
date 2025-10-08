@@ -125,45 +125,38 @@ const ProductImage = styled.div`
 export const Escualano: React.FC = () => {
   const { t } = useTranslations();
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const [translations, setTranslations] = useState({
-    seoTitle: '',
-    seoDescription: '',
-    title: '',
-    usageTitle: '',
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    seoTitle: t('scualane-100.seo.title'),
+    seoDescription: t('scualane-100.seo.description'),
+    title: t('scualane-100.title'),
+    usageTitle: t('scualane-100.usage.title'),
     usageCards: [
-      { title: '', description: '' },
-      { title: '', description: '' },
-      { title: '', description: '' },
-      { title: '', description: '' }
+      {
+        title: t('scualane-100.usage.face.title'),
+        description: t('scualane-100.usage.face.description')
+      },
+      {
+        title: t('scualane-100.usage.neck.title'),
+        description: t('scualane-100.usage.neck.description')
+      },
+      {
+        title: t('scualane-100.usage.body.title'),
+        description: t('scualane-100.usage.body.description')
+      },
+      {
+        title: t('scualane-100.usage.hair.title'),
+        description: t('scualane-100.usage.hair.description')
+      }
     ]
-  });
+  };
+  
+  const imageUrl = '/images/products/squalane-100.png';
 
   useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      seoTitle: t('scualane-100.seo.title'),
-      seoDescription: t('scualane-100.seo.description'),
-      title: t('scualane-100.title'),
-      usageTitle: t('scualane-100.usage.title'),
-      usageCards: [
-        {
-          title: t('scualane-100.usage.face.title'),
-          description: t('scualane-100.usage.face.description')
-        },
-        {
-          title: t('scualane-100.usage.neck.title'),
-          description: t('scualane-100.usage.neck.description')
-        },
-        {
-          title: t('scualane-100.usage.body.title'),
-          description: t('scualane-100.usage.body.description')
-        },
-        {
-          title: t('scualane-100.usage.hair.title'),
-          description: t('scualane-100.usage.hair.description')
-        }
-      ]
-    });
+    setIsLoaded(true);
 
     trackPageView('/escualano');
     
@@ -179,6 +172,10 @@ export const Escualano: React.FC = () => {
       window.scrollTo(0, 0);
     }
   }, [t]);
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <>
@@ -231,7 +228,7 @@ export const Escualano: React.FC = () => {
             >
               <ProductImage>
                 <OptimizedImage
-                  src="/images/products/squalane-100.png"
+                  src={imageUrl}
                   alt="Escualano de Oliva"
                 />
               </ProductImage>

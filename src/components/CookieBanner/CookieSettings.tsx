@@ -259,46 +259,25 @@ export const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose 
     marketing: false,
   });
 
-  const [translations, setTranslations] = useState({
-    settingsTitle: '',
-    settingsDescription: '',
-    necessaryTitle: '',
-    necessaryDescription: '',
-    functionalTitle: '',
-    functionalDescription: '',
-    analyticsTitle: '',
-    analyticsDescription: '',
-    marketingTitle: '',
-    marketingDescription: '',
-    alwaysActive: '',
-    optional: '',
-    cancel: '',
-    reject: '',
-    savePreferences: '',
-    accept: ''
-  });
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      settingsTitle: t('cookies.settingsTitle'),
-      settingsDescription: t('cookies.settingsDescription'),
-      necessaryTitle: t('cookies.necessary.title'),
-      necessaryDescription: t('cookies.necessary.description'),
-      functionalTitle: t('cookies.functional.title'),
-      functionalDescription: t('cookies.functional.description'),
-      analyticsTitle: t('cookies.analytics.title'),
-      analyticsDescription: t('cookies.analytics.description'),
-      marketingTitle: t('cookies.marketing.title'),
-      marketingDescription: t('cookies.marketing.description'),
-      alwaysActive: t('cookies.marketing.alwaysActive'),
-      optional: t('cookies.marketing.optional'),
-      cancel: t('cookies.cancel'),
-      reject: t('cookies.reject'),
-      savePreferences: t('cookies.savePreferences'),
-      accept: t('cookies.accept')
-    });
-  }, [t]);
+  // Inicializar directamente con las traducciones
+  const translations = {
+    settingsTitle: t('cookies.settingsTitle'),
+    settingsDescription: t('cookies.settingsDescription'),
+    necessaryTitle: t('cookies.necessary.title'),
+    necessaryDescription: t('cookies.necessary.description'),
+    functionalTitle: t('cookies.functional.title'),
+    functionalDescription: t('cookies.functional.description'),
+    analyticsTitle: t('cookies.analytics.title'),
+    analyticsDescription: t('cookies.analytics.description'),
+    marketingTitle: t('cookies.marketing.title'),
+    marketingDescription: t('cookies.marketing.description'),
+    alwaysActive: t('cookies.marketing.alwaysActive'),
+    optional: t('cookies.marketing.optional'),
+    cancel: t('cookies.cancel'),
+    reject: t('cookies.reject'),
+    savePreferences: t('cookies.savePreferences'),
+    accept: t('cookies.accept')
+  };
 
   const handleToggle = (category: keyof typeof preferences) => {
     if (category === 'necessary') return; // Can't disable necessary cookies

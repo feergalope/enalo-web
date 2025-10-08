@@ -45,20 +45,22 @@ const ProductsGrid = styled.div`
 
 export const Enalo: React.FC = () => {
   const { t } = useTranslations();
-  const [translations, setTranslations] = useState({
-    title: '',
-    subtitle: ''
-  });
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    title: t('products.title'),
+    subtitle: t('products.subtitle')
+  };
 
   useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      title: t('products.title'),
-      subtitle: t('products.subtitle')
-    });
-
+    setIsLoaded(true);
     trackPageView('/enalo');
-  }, [t]);
+  }, []);
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <>

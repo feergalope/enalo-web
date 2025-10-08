@@ -80,56 +80,43 @@ const Badge = styled.span`
 
 export const Home: React.FC = () => {
   const { t } = useTranslations();
-  const [translations, setTranslations] = useState({
-    aboutTitle: '',
-    aboutSubtitle: '',
-    productsTitle: '',
-    productsSubtitle: '',
-    brandTitle: '',
-    brandSubtitle: '',
-    faqTitle: '',
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    aboutTitle: t('about.title'),
+    aboutSubtitle: t('about.subtitle'),
+    productsTitle: t('products.title'),
+    productsSubtitle: t('products.subtitle'),
+    brandTitle: t('brand.title'),
+    brandSubtitle: t('brand.subtitle'),
+    faqTitle: t('faq.title'),
     brandValues: {
-      mediterranean: '',
-      minimal: '',
-      clean: ''
+      mediterranean: t('brand.values.mediterranean'),
+      minimal: t('brand.values.minimal'),
+      clean: t('brand.values.clean')
     },
     badges: {
-      spain: '',
-      eur: '',
-      responsible: ''
+      spain: t('brand.badges.spain'),
+      eur: t('brand.badges.eur'),
+      responsible: t('brand.badges.responsible')
     }
-  });
+  };
 
   useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      aboutTitle: t('about.title'),
-      aboutSubtitle: t('about.subtitle'),
-      productsTitle: t('products.title'),
-      productsSubtitle: t('products.subtitle'),
-      brandTitle: t('brand.title'),
-      brandSubtitle: t('brand.subtitle'),
-      faqTitle: t('faq.title'),
-      brandValues: {
-        mediterranean: t('brand.values.mediterranean'),
-        minimal: t('brand.values.minimal'),
-        clean: t('brand.values.clean')
-      },
-      badges: {
-        spain: t('brand.badges.spain'),
-        eur: t('brand.badges.eur'),
-        responsible: t('brand.badges.responsible')
-      }
-    });
-
+    setIsLoaded(true);
     trackPageView('/');
-  }, [t]);
+  }, []);
 
   const brandValues = [
     { key: 'mediterranean', icon: '🌊' },
     { key: 'minimal', icon: '✨' },
     { key: 'clean', icon: '🧼' },
   ];
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <>

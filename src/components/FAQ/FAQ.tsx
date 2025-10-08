@@ -66,48 +66,36 @@ const AnswerText = styled.p`
 export const FAQ: React.FC = () => {
   const { t } = useTranslations();
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
-  const [translations, setTranslations] = useState({
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
     questions: {
-      greasy: { question: '', answer: '' },
-      sensitive: { question: '', answer: '' },
-      actives: { question: '', answer: '' },
-      hair: { question: '', answer: '' },
-      comedogenic: { question: '', answer: '' },
-      origin: { question: '', answer: '' }
-    }
-  });
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      questions: {
-        greasy: {
-          question: t('faq.questions.greasy.question'),
-          answer: t('faq.questions.greasy.answer')
-        },
-        sensitive: {
-          question: t('faq.questions.sensitive.question'),
-          answer: t('faq.questions.sensitive.answer')
-        },
-        actives: {
-          question: t('faq.questions.actives.question'),
-          answer: t('faq.questions.actives.answer')
-        },
-        hair: {
-          question: t('faq.questions.hair.question'),
-          answer: t('faq.questions.hair.answer')
-        },
-        comedogenic: {
-          question: t('faq.questions.comedogenic.question'),
-          answer: t('faq.questions.comedogenic.answer')
-        },
-        origin: {
-          question: t('faq.questions.origin.question'),
-          answer: t('faq.questions.origin.answer')
-        }
+      greasy: {
+        question: t('faq.questions.greasy.question'),
+        answer: t('faq.questions.greasy.answer')
+      },
+      sensitive: {
+        question: t('faq.questions.sensitive.question'),
+        answer: t('faq.questions.sensitive.answer')
+      },
+      actives: {
+        question: t('faq.questions.actives.question'),
+        answer: t('faq.questions.actives.answer')
+      },
+      hair: {
+        question: t('faq.questions.hair.question'),
+        answer: t('faq.questions.hair.answer')
+      },
+      comedogenic: {
+        question: t('faq.questions.comedogenic.question'),
+        answer: t('faq.questions.comedogenic.answer')
+      },
+      origin: {
+        question: t('faq.questions.origin.question'),
+        answer: t('faq.questions.origin.answer')
       }
-    });
-  }, [t]);
+    }
+  };
 
   const toggleItem = (key: string) => {
     const newOpenItems = new Set(openItems);

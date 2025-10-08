@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -64,35 +64,25 @@ const CTAButton = styled(Link)`
 
 export const FeatureCards: React.FC = () => {
   const { t } = useTranslations();
-  const [translations, setTranslations] = useState({
-    cta: '',
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    cta: t('about.cta'),
     benefits: {
-      bioaffinity: { title: '', description: '' },
-      repair: { title: '', description: '' },
-      authenticity: { title: '', description: '' }
-    }
-  });
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      cta: t('about.cta'),
-      benefits: {
-        bioaffinity: {
-          title: t('about.benefits.bioaffinity.title'),
-          description: t('about.benefits.bioaffinity.description')
-        },
-        repair: {
-          title: t('about.benefits.repair.title'),
-          description: t('about.benefits.repair.description')
-        },
-        authenticity: {
-          title: t('about.benefits.authenticity.title'),
-          description: t('about.benefits.authenticity.description')
-        }
+      bioaffinity: {
+        title: t('about.benefits.bioaffinity.title'),
+        description: t('about.benefits.bioaffinity.description')
+      },
+      repair: {
+        title: t('about.benefits.repair.title'),
+        description: t('about.benefits.repair.description')
+      },
+      authenticity: {
+        title: t('about.benefits.authenticity.title'),
+        description: t('about.benefits.authenticity.description')
       }
-    });
-  }, [t]);
+    }
+  };
 
   const benefits = [
     {

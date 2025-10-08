@@ -165,89 +165,69 @@ export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
   const [activeUsageCard, setActiveUsageCard] = useState<number | null>(null);
   const [activeBenefitCard, setActiveBenefitCard] = useState<number | null>(null);
-  const [translations, setTranslations] = useState({
-    seoTitle: '',
-    seoDescription: '',
-    title: '',
-    subtitle: '',
-    description1: '',
-    description2: '',
-    description3: '',
-    usageTitle: '',
-    benefitsTitle: '',
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    seoTitle: t('bodyOil.seo.title'),
+    seoDescription: t('bodyOil.seo.description'),
+    title: t('bodyOil.title'),
+    subtitle: t('bodyOil.subtitle'),
+    description1: t('bodyOil.description1'),
+    description2: t('bodyOil.description2'),
+    description3: t('bodyOil.description3'),
+    usageTitle: t('bodyOil.usage.title'),
+    benefitsTitle: t('bodyOil.benefits.title'),
     usageCards: [
-      { title: '', description: '' },
-      { title: '', description: '' },
-      { title: '', description: '' },
-      { title: '', description: '' },
-      { title: '', description: '' }
+      {
+        title: t('bodyOil.usage.step1.title'),
+        description: t('bodyOil.usage.step1.description')
+      },
+      {
+        title: t('bodyOil.usage.step2.title'),
+        description: t('bodyOil.usage.step2.description')
+      },
+      {
+        title: t('bodyOil.usage.step3.title'),
+        description: t('bodyOil.usage.step3.description')
+      },
+      {
+        title: t('bodyOil.usage.step4.title'),
+        description: t('bodyOil.usage.step4.description')
+      },
+      {
+        title: t('bodyOil.usage.step5.title'),
+        description: t('bodyOil.usage.step5.description')
+      }
     ],
     benefitCards: [
-      { title: '🌿 Hidratación', description: '' },
-      { title: '💎 Barrera cutánea', description: '' },
-      { title: '✨ Elasticidad', description: '' },
-      { title: '🧴 Textura', description: '' },
-      { title: '🍊 Aroma', description: '' }
+      {
+        title: '🌿 Hidratación',
+        description: t('bodyOil.benefits.hydration')
+      },
+      {
+        title: '💎 Barrera cutánea',
+        description: t('bodyOil.benefits.barrier')
+      },
+      {
+        title: '✨ Elasticidad',
+        description: t('bodyOil.benefits.elasticity')
+      },
+      {
+        title: '🧴 Textura',
+        description: t('bodyOil.benefits.texture')
+      },
+      {
+        title: '🍊 Aroma',
+        description: t('bodyOil.benefits.aroma')
+      }
     ]
-  });
+  };
+  
+  const imageUrl = '/images/products/body-oil.png';
 
   useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      seoTitle: t('bodyOil.seo.title'),
-      seoDescription: t('bodyOil.seo.description'),
-      title: t('bodyOil.title'),
-      subtitle: t('bodyOil.subtitle'),
-      description1: t('bodyOil.description1'),
-      description2: t('bodyOil.description2'),
-      description3: t('bodyOil.description3'),
-      usageTitle: t('bodyOil.usage.title'),
-      benefitsTitle: t('bodyOil.benefits.title'),
-      usageCards: [
-        {
-          title: t('bodyOil.usage.step1.title'),
-          description: t('bodyOil.usage.step1.description')
-        },
-        {
-          title: t('bodyOil.usage.step2.title'),
-          description: t('bodyOil.usage.step2.description')
-        },
-        {
-          title: t('bodyOil.usage.step3.title'),
-          description: t('bodyOil.usage.step3.description')
-        },
-        {
-          title: t('bodyOil.usage.step4.title'),
-          description: t('bodyOil.usage.step4.description')
-        },
-        {
-          title: t('bodyOil.usage.step5.title'),
-          description: t('bodyOil.usage.step5.description')
-        }
-      ],
-      benefitCards: [
-        {
-          title: '🌿 Hidratación',
-          description: t('bodyOil.benefits.hydration')
-        },
-        {
-          title: '💎 Barrera cutánea',
-          description: t('bodyOil.benefits.barrier')
-        },
-        {
-          title: '✨ Elasticidad',
-          description: t('bodyOil.benefits.elasticity')
-        },
-        {
-          title: '🧴 Textura',
-          description: t('bodyOil.benefits.texture')
-        },
-        {
-          title: '🍊 Aroma',
-          description: t('bodyOil.benefits.aroma')
-        }
-      ]
-    });
+    setIsLoaded(true);
 
     trackPageView('/body-oil');
     
@@ -263,6 +243,10 @@ export const BodyOil: React.FC = () => {
       window.scrollTo(0, 0);
     }
   }, [t]);
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <>
@@ -351,7 +335,7 @@ export const BodyOil: React.FC = () => {
             >
               <ProductImage>
                 <OptimizedImage
-                  src="/images/products/body-oil.png"
+                  src={imageUrl}
                   alt={translations.title}
                 />
               </ProductImage>

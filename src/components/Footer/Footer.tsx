@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useTranslations } from '../../hooks/useTranslations';
 import { theme } from '../../styles/theme';
@@ -93,18 +93,12 @@ const Copyright = styled.p`
 
 export const Footer: React.FC = () => {
   const { t } = useTranslations();
-  const [translations, setTranslations] = useState({
-    description: '',
-    copyright: ''
-  });
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      description: t('footer.description'),
-      copyright: t('footer.copyright')
-    });
-  }, [t]);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    description: t('footer.description'),
+    copyright: t('footer.copyright')
+  };
 
   return (
     <FooterContainer>

@@ -43,24 +43,24 @@ const ContentSection = styled.div`
 
 export const About: React.FC = () => {
   const { t } = useTranslations();
-  const [translations, setTranslations] = useState({
-    seoTitle: '',
-    seoDescription: '',
-    title: '',
-    description: ''
-  });
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    seoTitle: t('aboutUs.seo.title'),
+    seoDescription: t('aboutUs.seo.description'),
+    title: t('aboutUs.title'),
+    description: t('aboutUs.description')
+  };
 
   useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      seoTitle: t('aboutUs.seo.title'),
-      seoDescription: t('aboutUs.seo.description'),
-      title: t('aboutUs.title'),
-      description: t('aboutUs.description')
-    });
-
+    setIsLoaded(true);
     trackPageView('/about');
-  }, [t]);
+  }, []);
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <AboutContainer>

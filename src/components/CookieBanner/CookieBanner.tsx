@@ -108,24 +108,15 @@ export const CookieBanner: React.FC = () => {
   const { t } = useTranslations();
   const { consent, acceptCookies, rejectCookies } = useCookieConsent();
   const [showSettings, setShowSettings] = useState(false);
-  const [translations, setTranslations] = useState({
-    title: '',
-    description: '',
-    accept: '',
-    reject: '',
-    configure: ''
-  });
-
-  useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      title: t('cookies.title'),
-      description: t('cookies.description'),
-      accept: t('cookies.accept'),
-      reject: t('cookies.reject'),
-      configure: t('cookies.configure')
-    });
-  }, [t]);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    title: t('cookies.title'),
+    description: t('cookies.description'),
+    accept: t('cookies.accept'),
+    reject: t('cookies.reject'),
+    configure: t('cookies.configure')
+  };
 
   if (consent !== 'pending') {
     return null;

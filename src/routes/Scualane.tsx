@@ -148,59 +148,48 @@ const ProductImage = styled.div`
 export const Scualane: React.FC = () => {
   const { t } = useTranslations();
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const [translations, setTranslations] = useState({
-    seoTitle: '',
-    seoDescription: '',
-    title: '',
-    subtitle: '',
-    description: '',
-    usageTitle: '',
-    keyBenefitsTitle: '',
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Inicializar directamente con las traducciones
+  const translations = {
+    seoTitle: t('scualane.seo.title'),
+    seoDescription: t('scualane.seo.description'),
+    title: t('scualane.title'),
+    subtitle: t('scualane.subtitle'),
+    description: t('scualane.description'),
+    usageTitle: t('scualane.usage.title'),
+    keyBenefitsTitle: t('scualane.keyBenefits.title'),
     usageCards: [
-      { title: '', description: '' },
-      { title: '', description: '' },
-      { title: '', description: '' },
-      { title: '', description: '' }
+      {
+        title: t('scualane.usage.face.title'),
+        description: t('scualane.usage.face.description')
+      },
+      {
+        title: t('scualane.usage.neck.title'),
+        description: t('scualane.usage.neck.description')
+      },
+      {
+        title: t('scualane.usage.body.title'),
+        description: t('scualane.usage.body.description')
+      },
+      {
+        title: t('scualane.usage.hair.title'),
+        description: t('scualane.usage.hair.description')
+      }
     ],
-    benefits: ['', '', '', '', '']
-  });
+    benefits: [
+      t('scualane.keyBenefits.benefits.0'),
+      t('scualane.keyBenefits.benefits.1'),
+      t('scualane.keyBenefits.benefits.2'),
+      t('scualane.keyBenefits.benefits.3'),
+      t('scualane.keyBenefits.benefits.4')
+    ]
+  };
+  
+  const imageUrl = '/images/squalane.png';
 
   useEffect(() => {
-    // Pre-cargar todas las traducciones
-    setTranslations({
-      seoTitle: t('scualane.seo.title'),
-      seoDescription: t('scualane.seo.description'),
-      title: t('scualane.title'),
-      subtitle: t('scualane.subtitle'),
-      description: t('scualane.description'),
-      usageTitle: t('scualane.usage.title'),
-      keyBenefitsTitle: t('scualane.keyBenefits.title'),
-      usageCards: [
-        {
-          title: t('scualane.usage.face.title'),
-          description: t('scualane.usage.face.description')
-        },
-        {
-          title: t('scualane.usage.neck.title'),
-          description: t('scualane.usage.neck.description')
-        },
-        {
-          title: t('scualane.usage.body.title'),
-          description: t('scualane.usage.body.description')
-        },
-        {
-          title: t('scualane.usage.hair.title'),
-          description: t('scualane.usage.hair.description')
-        }
-      ],
-      benefits: [
-        t('scualane.keyBenefits.benefits.0'),
-        t('scualane.keyBenefits.benefits.1'),
-        t('scualane.keyBenefits.benefits.2'),
-        t('scualane.keyBenefits.benefits.3'),
-        t('scualane.keyBenefits.benefits.4')
-      ]
-    });
+    setIsLoaded(true);
 
     trackPageView('/scualane');
     
@@ -216,6 +205,10 @@ export const Scualane: React.FC = () => {
       window.scrollTo(0, 0);
     }
   }, [t]);
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <>
@@ -295,7 +288,7 @@ export const Scualane: React.FC = () => {
             >
               <ProductImage>
                 <OptimizedImage
-                  src="/images/squalane.png"
+                  src={imageUrl}
                   alt={translations.title}
                 />
               </ProductImage>
