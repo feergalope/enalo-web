@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslations } from '../../hooks/useTranslations';
 
 interface SEOProps {
