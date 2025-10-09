@@ -8,11 +8,12 @@ import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
 
-const ScualaneContainer = styled.div`
+const TwoColumnSection = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: ${theme.space.xxxl};
   align-items: start;
+  margin-bottom: ${theme.space.xxxl};
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
@@ -22,32 +23,63 @@ const ScualaneContainer = styled.div`
 
 const ProductContent = styled.div`
   /* Contenido del producto - 2/3 */
-`;
-
-const ProductImageContainer = styled.div`
-  position: sticky;
-  top: ${theme.space.xl};
   
   @media (max-width: ${theme.breakpoints.tablet}) {
-    position: relative;
-    top: 0;
+    order: 2;
   }
 `;
 
-const HeroSection = styled.div`
+const IntroText = styled.div`
+  padding-top: 80px;
   margin-bottom: ${theme.space.xxxl};
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    padding-top: 0;
+  }
   
   h1 {
     font-size: ${theme.fonts.sizes.xxxl};
     font-weight: ${theme.fonts.weights.semibold};
     color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.lg};
+    margin: 0 0 ${theme.space.lg} 0;
+  }
+  
+  h3 {
+    font-size: ${theme.fonts.sizes.xxl};
+    font-weight: ${theme.fonts.weights.semibold};
+    color: ${theme.colors.textPrimary};
+    margin: ${theme.space.xl} 0 ${theme.space.lg} 0;
   }
   
   p {
-    font-size: ${theme.fonts.sizes.lg};
+    font-size: ${theme.fonts.sizes.md};
     color: ${theme.colors.textSecondary};
-    line-height: 1.6;
+    line-height: 1.7;
+    margin: 0 0 ${theme.space.lg} 0;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    strong {
+      color: ${theme.colors.textPrimary};
+      font-weight: ${theme.fonts.weights.semibold};
+    }
+  }
+`;
+
+const ProductImageContainer = styled.div`
+  width: 100%;
+  padding-top: 80px;
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    position: relative;
+    top: 0;
+    order: 1;
+    padding-top: 0;
   }
 `;
 
@@ -74,32 +106,31 @@ const ContentSection = styled.div`
   }
 `;
 
-const UsageCards = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.space.lg};
+const BenefitsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: ${theme.space.xl};
   margin: ${theme.space.xl} 0;
-`;
-
-const UsageCard = styled.div<{ $active: boolean }>`
-  background: ${props => props.$active ? theme.colors.warmBeige : theme.colors.white};
-  border: 1px solid ${props => props.$active ? theme.colors.olive : theme.colors.mutedLine};
-  border-radius: ${theme.radius.lg};
-  padding: ${theme.space.lg};
-  cursor: pointer;
-  transition: all ${theme.transitions.normal};
-  transform: ${props => props.$active ? 'scale(1.02)' : 'scale(1)'};
   
-  &:hover {
-    border-color: ${theme.colors.olive};
-    transform: scale(1.01);
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${theme.space.lg};
   }
   
-  h3 {
-    font-size: ${theme.fonts.sizes.lg};
-    font-weight: ${theme.fonts.weights.semibold};
-    color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.sm};
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.space.md};
+  }
+`;
+
+const BenefitColumn = styled.div`
+  text-align: center;
+  
+  img {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto ${theme.space.md};
+    display: block;
   }
   
   p {
@@ -107,45 +138,58 @@ const UsageCard = styled.div<{ $active: boolean }>`
     color: ${theme.colors.textSecondary};
     line-height: 1.6;
     margin: 0;
+    font-weight: ${theme.fonts.weights.medium};
   }
 `;
 
-const BenefitsCards = styled.div`
+const IngredientsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: ${theme.space.xl};
+  margin: ${theme.space.xl} 0;
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${theme.space.lg};
+  }
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.space.md};
+  }
+`;
+
+const IngredientColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.space.lg};
-  margin: ${theme.space.xl} 0;
-`;
-
-const BenefitCard = styled.div<{ $active: boolean }>`
-  background: ${props => props.$active ? theme.colors.warmBeige : theme.colors.white};
-  border: 1px solid ${props => props.$active ? theme.colors.olive : theme.colors.mutedLine};
-  border-radius: ${theme.radius.lg};
-  padding: ${theme.space.lg};
-  cursor: pointer;
-  transition: all ${theme.transitions.normal};
-  transform: ${props => props.$active ? 'scale(1.02)' : 'scale(1)'};
+  gap: ${theme.space.sm};
   
-  &:hover {
-    border-color: ${theme.colors.olive};
-    transform: scale(1.01);
-  }
-  
-  h3 {
-    font-size: ${theme.fonts.sizes.lg};
-    font-weight: ${theme.fonts.weights.semibold};
-    color: ${theme.colors.textPrimary};
-    margin-bottom: ${theme.space.sm};
+  .ingredient-header {
     display: flex;
     align-items: center;
-    gap: ${theme.space.sm};
+    gap: ${theme.space.md};
+  }
+  
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  
+  h4 {
+    font-size: ${theme.fonts.sizes.md};
+    font-weight: ${theme.fonts.weights.semibold};
+    color: ${theme.colors.textPrimary};
+    margin: 0;
   }
   
   p {
-    font-size: ${theme.fonts.sizes.md};
+    font-size: ${theme.fonts.sizes.sm};
     color: ${theme.colors.textSecondary};
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0;
+    padding-left: 0;
   }
 `;
 
@@ -163,8 +207,6 @@ const ProductImage = styled.div`
 
 export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
-  const [activeUsageCard, setActiveUsageCard] = useState<number | null>(null);
-  const [activeBenefitCard, setActiveBenefitCard] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   
   // Inicializar directamente con las traducciones
@@ -172,57 +214,70 @@ export const BodyOil: React.FC = () => {
     seoTitle: t('bodyOil.seo.title'),
     seoDescription: t('bodyOil.seo.description'),
     title: t('bodyOil.title'),
-    subtitle: t('bodyOil.subtitle'),
-    description1: t('bodyOil.description1'),
-    description2: t('bodyOil.description2'),
-    description3: t('bodyOil.description3'),
-    usageTitle: t('bodyOil.usage.title'),
-    benefitsTitle: t('bodyOil.benefits.title'),
-    usageCards: [
-      {
-        title: t('bodyOil.usage.step1.title'),
-        description: t('bodyOil.usage.step1.description')
-      },
-      {
-        title: t('bodyOil.usage.step2.title'),
-        description: t('bodyOil.usage.step2.description')
-      },
-      {
-        title: t('bodyOil.usage.step3.title'),
-        description: t('bodyOil.usage.step3.description')
-      },
-      {
-        title: t('bodyOil.usage.step4.title'),
-        description: t('bodyOil.usage.step4.description')
-      },
-      {
-        title: t('bodyOil.usage.step5.title'),
-        description: t('bodyOil.usage.step5.description')
-      }
-    ],
-    benefitCards: [
-      {
-        title: '🌿 Hidratación',
-        description: t('bodyOil.benefits.hydration')
-      },
-      {
-        title: '💎 Barrera cutánea',
-        description: t('bodyOil.benefits.barrier')
-      },
-      {
-        title: '✨ Elasticidad',
-        description: t('bodyOil.benefits.elasticity')
-      },
-      {
-        title: '🧴 Textura',
-        description: t('bodyOil.benefits.texture')
-      },
-      {
-        title: '🍊 Aroma',
-        description: t('bodyOil.benefits.aroma')
-      }
-    ]
+    benefitsTitle: t('bodyOil.benefits.title')
   };
+  
+  const benefits = [
+    {
+      icon: '/images/icons/products/pipette.svg',
+      text: 'Refuerza la barrera cutánea frente a la sequedad'
+    },
+    {
+      icon: '/images/icons/products/drop.svg',
+      text: 'Hidratación inmediata y duradera'
+    },
+    {
+      icon: '/images/icons/products/sparkle.svg',
+      text: 'Tacto sedoso y luminoso'
+    },
+    {
+      icon: '/images/icons/products/leaf.svg',
+      text: 'Ingredientes orgánicos y naturales'
+    }
+  ];
+  
+  const ingredients = [
+    {
+      icon: '/images/products/ingredients/sesamo.svg',
+      title: 'Sésamo',
+      description: 'Potente antioxidante que protege los lípidos cutáneos y refuerza la barrera natural.'
+    },
+    {
+      icon: '/images/products/ingredients/arroz.svg',
+      title: 'Arroz',
+      description: 'Rico en orizanol, mejora la microcirculación y combate el envejecimiento cutáneo.'
+    },
+    {
+      icon: '/images/products/ingredients/uva.svg',
+      title: 'Pepita de uva',
+      description: 'Estimula la regeneración celular y mejora la firmeza gracias a su ácido linoleico.'
+    },
+    {
+      icon: '/images/products/ingredients/macadamia.svg',
+      title: 'Macadamia',
+      description: 'Aporta ácido palmitoleico, esencial para equilibrar los lípidos de la piel.'
+    },
+    {
+      icon: '/images/products/ingredients/aguacate.svg',
+      title: 'Aguacate',
+      description: 'Favorece la síntesis de colágeno y la reparación tisular.'
+    },
+    {
+      icon: '/images/products/ingredients/almendras_dulces.svg',
+      title: 'Almendras dulces',
+      description: 'Mantiene la integridad del manto hidrolipídico y mejora la elasticidad.'
+    },
+    {
+      icon: '/images/products/ingredients/cartamo.svg',
+      title: 'Aceite de cártamo',
+      description: 'Favorece la regeneración celular, mejora la elasticidad y ayuda a mantener la hidratación y luminosidad de la piel gracias a su alto contenido en omega-6.'
+    },
+    {
+      icon: '/images/products/ingredients/naranja.svg',
+      title: 'Aceite esencial de naranja',
+      description: 'Antioxidante y revitalizante, potencia la luminosidad cutánea.'
+    }
+  ];
   
   const imageUrl = '/images/products/body-oil.png';
 
@@ -256,17 +311,26 @@ export const BodyOil: React.FC = () => {
       />
       
       <Section>
-        <ScualaneContainer>
+        <TwoColumnSection>
           <ProductContent>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <HeroSection>
+              <IntroText>
                 <h1>{translations.title}</h1>
-                <p dangerouslySetInnerHTML={{ __html: translations.subtitle }} />
-              </HeroSection>
+                <p>
+                  Un aceite corporal ligero y de rápida absorción que combina <strong>escualano de oliva</strong> con siete aceites vegetales nutritivos para <strong>hidratar, nutritivo y revitalizar</strong> la piel dejándola envuelta en un delicado aroma cítrico-mediterráneo.
+                </p>
+                <p>
+                  Ideal después de la <strong>exposición al sol</strong>, ayuda a calmar, reparar y devolver la luminosidad natural.
+                </p>
+                <h3>Modo de uso</h3>
+                <p>
+                  Se aplica sobre la piel limpia y húmeda, preferiblemente tras la ducha, para potenciar la hidratación y mejorar la elasticidad.
+                </p>
+              </IntroText>
             </motion.div>
 
             <motion.div
@@ -274,55 +338,16 @@ export const BodyOil: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <ContentSection id="description">
-                <h2>Descripción</h2>
-                <p dangerouslySetInnerHTML={{ __html: translations.description1 }} />
-                <p dangerouslySetInnerHTML={{ __html: translations.description2 }} />
-                <p dangerouslySetInnerHTML={{ __html: translations.description3 }} />
-              </ContentSection>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <ContentSection id="how-to-use">
-                <h2>{translations.usageTitle}</h2>
-                <UsageCards>
-                  {translations.usageCards.map((card, index) => (
-                    <UsageCard
-                      key={index}
-                      $active={activeUsageCard === index}
-                      onClick={() => setActiveUsageCard(activeUsageCard === index ? null : index)}
-                    >
-                      <h3>{card.title}</h3>
-                      <p dangerouslySetInnerHTML={{ __html: card.description }} />
-                    </UsageCard>
-                  ))}
-                </UsageCards>
-              </ContentSection>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
               <ContentSection id="benefits">
                 <h2>{translations.benefitsTitle}</h2>
-                <BenefitsCards>
-                  {translations.benefitCards.map((card, index) => (
-                    <BenefitCard
-                      key={index}
-                      $active={activeBenefitCard === index}
-                      onClick={() => setActiveBenefitCard(activeBenefitCard === index ? null : index)}
-                    >
-                      <h3>{card.title}</h3>
-                      <p dangerouslySetInnerHTML={{ __html: card.description }} />
-                    </BenefitCard>
+                <BenefitsGrid>
+                  {benefits.map((benefit, index) => (
+                    <BenefitColumn key={index}>
+                      <img src={benefit.icon} alt={benefit.text} />
+                      <p>{benefit.text}</p>
+                    </BenefitColumn>
                   ))}
-                </BenefitsCards>
+                </BenefitsGrid>
               </ContentSection>
             </motion.div>
           </ProductContent>
@@ -331,7 +356,7 @@ export const BodyOil: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
             >
               <ProductImage>
                 <OptimizedImage
@@ -341,7 +366,28 @@ export const BodyOil: React.FC = () => {
               </ProductImage>
             </motion.div>
           </ProductImageContainer>
-        </ScualaneContainer>
+        </TwoColumnSection>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <ContentSection id="ingredients">
+            <h2>Ingredientes</h2>
+            <IngredientsGrid>
+              {ingredients.map((ingredient, index) => (
+                <IngredientColumn key={index}>
+                  <div className="ingredient-header">
+                    <img src={ingredient.icon} alt={ingredient.title} />
+                    <h4>{ingredient.title}</h4>
+                  </div>
+                  <p>{ingredient.description}</p>
+                </IngredientColumn>
+              ))}
+            </IngredientsGrid>
+          </ContentSection>
+        </motion.div>
       </Section>
     </>
   );
