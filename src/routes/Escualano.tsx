@@ -41,6 +41,7 @@ const ProductImageContainer = styled.div`
 `;
 
 const HeroSection = styled.div`
+  padding-top: 80px;
   margin-bottom: ${theme.space.xxxl};
   
   h1 {

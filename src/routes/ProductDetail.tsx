@@ -25,8 +25,15 @@ const ProductContainer = styled.div`
 `;
 
 const ProductImage = styled.div`
+  padding-top: 80px;
   position: sticky;
-  top: ${theme.space.xl};
+  top: 100px;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    position: relative;
+    top: 0;
+    order: 1;
+  }
   
   img {
     width: 100%;
@@ -37,6 +44,12 @@ const ProductImage = styled.div`
 `;
 
 const ProductInfo = styled.div`
+  padding-top: 80px;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    order: 2;
+  }
+  
   h1 {
     font-size: ${theme.fonts.sizes.xxxl};
     font-weight: ${theme.fonts.weights.semibold};

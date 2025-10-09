@@ -13,6 +13,7 @@ const NotFoundContainer = styled.div`
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
+  padding-top: 80px;
   
   h1 {
     font-size: ${theme.fonts.sizes.xxxxl};

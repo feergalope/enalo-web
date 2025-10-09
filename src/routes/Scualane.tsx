@@ -22,19 +22,26 @@ const ScualaneContainer = styled.div`
 
 const ProductContent = styled.div`
   /* Contenido del producto - 2/3 */
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    order: 2;
+  }
 `;
 
 const ProductImageContainer = styled.div`
+  padding-top: 80px;
   position: sticky;
-  top: ${theme.space.xl};
+  top: 100px;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     position: relative;
     top: 0;
+    order: 1;
   }
 `;
 
 const HeroSection = styled.div`
+  padding-top: 80px;
   margin-bottom: ${theme.space.xxxl};
   
   h1 {
