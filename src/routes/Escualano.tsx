@@ -22,6 +22,10 @@ const ScualaneContainer = styled.div`
 
 const ProductContent = styled.div`
   /* Contenido del producto - 2/3 */
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    order: 2;
+  }
 `;
 
 const ProductImageContainer = styled.div`
@@ -32,17 +36,12 @@ const ProductImageContainer = styled.div`
   @media (max-width: ${theme.breakpoints.tablet}) {
     position: relative;
     top: 0;
-    padding-top: 0;
+    order: 1;
   }
 `;
 
 const HeroSection = styled.div`
-  padding-top: 80px;
   margin-bottom: ${theme.space.xxxl};
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    padding-top: 0;
-  }
   
   h1 {
     font-size: ${theme.fonts.sizes.xxxl};
