@@ -31,8 +31,12 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto ${theme.space.md};
-  font-size: ${theme.fonts.sizes.xxl};
-  color: ${theme.colors.olive};
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 
 const CardTitle = styled.h3`
@@ -87,15 +91,15 @@ export const FeatureCards: React.FC = () => {
   const benefits = [
     {
       key: 'bioaffinity',
-      icon: '🧬',
+      icon: '/images/icons/bioafinidad.svg',
     },
     {
       key: 'repair',
-      icon: '⚡',
+      icon: '/images/icons/reparacion.svg',
     },
     {
       key: 'authenticity',
-      icon: '🫒',
+      icon: '/images/icons/autenticidad.svg',
     },
   ];
 
@@ -111,7 +115,7 @@ export const FeatureCards: React.FC = () => {
             transition={{ duration: 0.6, delay: index * 0.2 }}
           >
             <IconContainer>
-              {benefit.icon}
+              <img src={benefit.icon} alt={translations.benefits[benefit.key as keyof typeof translations.benefits].title} />
             </IconContainer>
             <CardTitle>
               {translations.benefits[benefit.key as keyof typeof translations.benefits].title}
