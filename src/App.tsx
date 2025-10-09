@@ -51,10 +51,10 @@ function App() {
           <MainContent>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/scualane" element={<Scualane />} />
+              <Route path="/enalo/scualane" element={<Scualane />} />
               <Route path="/enalo" element={<Enalo />} />
-              <Route path="/scualane-100" element={<Escualano />} />
-              <Route path="/body-oil" element={<BodyOil />} />
+              <Route path="/enalo/escualanodeoliva" element={<Escualano />} />
+              <Route path="/enalo/aceitecorporal" element={<BodyOil />} />
               <Route path="/about" element={<About />} />
               <Route path="/privacidad" element={<Privacy />} />
               <Route path="/terminos" element={<Terms />} />

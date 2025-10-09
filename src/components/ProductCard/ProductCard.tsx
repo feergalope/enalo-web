@@ -88,10 +88,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   // Determinar la ruta del botón basándose en el slug del producto
   const getButtonRoute = () => {
     if (product.slug === 'scualane-100') {
-      return '/scualane-100';
+      return '/enalo/escualanodeoliva';
     }
     if (product.slug === 'body-oil') {
-      return '/body-oil';
+      return '/enalo/aceitecorporal';
     }
     return '/enalo';
   };

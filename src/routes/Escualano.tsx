@@ -158,7 +158,7 @@ export const Escualano: React.FC = () => {
   useEffect(() => {
     setIsLoaded(true);
 
-    trackPageView('/escualano');
+    trackPageView('/enalo/escualanodeoliva');
     
     // Scroll to section if hash is present
     const hash = window.location.hash;

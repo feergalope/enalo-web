@@ -124,7 +124,7 @@ export const FeatureCards: React.FC = () => {
       </CardsContainer>
       
       <ButtonContainer>
-        <CTAButton to="/scualane-100">
+        <CTAButton to="/scualane">
           {translations.cta}
         </CTAButton>
       </ButtonContainer>
