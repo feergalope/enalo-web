@@ -396,7 +396,7 @@ const spanishTranslations: Translations = {
   "scualane-100": {
     title: "Escualano de Oliva",
     subtitle: "",
-    description: "",
+    description: "Hidratante y nutritivo, este aceite ligero se funde con la piel gracias a su afinidad natural con la barrera cutánea. Aporta suavidad inmediata, mejora la elasticidad y deja un acabado sedoso sin sensación grasa. Ideal para rostro, cuerpo y cabello.",
     usage: {
       title: "Cómo utilizar el Escualano de Oliva",
       face: {
@@ -680,7 +680,7 @@ const englishTranslations: Translations = {
   "scualane-100": {
     title: "Olive Squalane",
     subtitle: "",
-    description: "",
+    description: "Moisturizing and nourishing, this light oil melts into the skin thanks to its natural affinity with the skin barrier. It provides immediate softness, improves elasticity and leaves a silky finish without greasy sensation. Ideal for face, body and hair.",
     usage: {
       title: "How to use Olive Squalane",
       face: {

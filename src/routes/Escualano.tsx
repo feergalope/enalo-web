@@ -132,6 +132,7 @@ export const Escualano: React.FC = () => {
     seoTitle: t('scualane-100.seo.title'),
     seoDescription: t('scualane-100.seo.description'),
     title: t('scualane-100.title'),
+    description: t('scualane-100.description'),
     usageTitle: t('scualane-100.usage.title'),
     usageCards: [
       {
@@ -201,6 +202,16 @@ export const Escualano: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <ContentSection id="description">
+                <p>{translations.description}</p>
+              </ContentSection>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
               <ContentSection id="how-to-use">
                 <h2>{translations.usageTitle}</h2>
