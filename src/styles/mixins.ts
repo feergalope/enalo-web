@@ -13,11 +13,9 @@ export const container = css`
 
 export const sectionSpacing = css`
   padding: ${theme.space.xxxxl} 0;
-  padding-top: calc(${theme.space.xxxxl} + 80px);
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: ${theme.space.xxxl} 0;
-    padding-top: calc(${theme.space.xxxl} + 80px);
   }
 `;
 
