@@ -14,9 +14,10 @@ import productsData from '../data/products.json';
 
 const ProductsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
   gap: ${theme.space.xl};
   margin-top: ${theme.space.xxxl};
+  justify-content: center;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;

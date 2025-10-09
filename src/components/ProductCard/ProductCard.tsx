@@ -34,7 +34,7 @@ const CardContainer = styled(motion.div)`
 
 const ProductImageContainer = styled.div`
   width: 100%;
-  height: 200px;
+  aspect-ratio: 1 / 1;
   border-radius: ${theme.radius.md};
   margin-bottom: ${theme.space.lg};
   overflow: hidden;
