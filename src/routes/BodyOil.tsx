@@ -284,7 +284,7 @@ export const BodyOil: React.FC = () => {
   useEffect(() => {
     setIsLoaded(true);
 
-    trackPageView('/enalo/aceitecorporal');
+    trackPageView('/enalo/aceite-corporal');
     
     // Scroll to section if hash is present
     const hash = window.location.hash;
