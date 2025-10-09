@@ -394,7 +394,7 @@ const spanishTranslations: Translations = {
     }
   },
   "scualane-100": {
-    title: "Escualano de oliva 100%",
+    title: "Escualano de Oliva",
     subtitle: "",
     description: "",
     usage: {
@@ -422,8 +422,8 @@ const spanishTranslations: Translations = {
     },
     cta: "Ver productos",
     seo: {
-      title: "Escualano de oliva 100% - Enaló",
-      description: "Descubre cómo utilizar el escualano de oliva 100% para tu piel y cabello."
+      title: "Escualano de Oliva - Enaló",
+      description: "Descubre cómo utilizar el escualano de oliva para tu piel y cabello."
     }
   },
   bodyOil: {
@@ -678,7 +678,7 @@ const englishTranslations: Translations = {
     }
   },
   "scualane-100": {
-    title: "100% Olive squalane",
+    title: "Olive Squalane",
     subtitle: "",
     description: "",
     usage: {
@@ -706,8 +706,8 @@ const englishTranslations: Translations = {
     },
     cta: "View products",
     seo: {
-      title: "100% Olive squalane - Enaló",
-      description: "Discover how to use 100% olive squalane for your skin and hair."
+      title: "Olive Squalane - Enaló",
+      description: "Discover how to use olive squalane for your skin and hair."
     }
   },
   bodyOil: {

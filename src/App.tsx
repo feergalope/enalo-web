@@ -51,7 +51,7 @@ function App() {
           <MainContent>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/enalo/scualane" element={<Scualane />} />
+              <Route path="/scualane" element={<Scualane />} />
               <Route path="/enalo" element={<Enalo />} />
               <Route path="/enalo/escualanodeoliva" element={<Escualano />} />
               <Route path="/enalo/aceitecorporal" element={<BodyOil />} />
