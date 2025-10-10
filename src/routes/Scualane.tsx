@@ -29,7 +29,7 @@ const ProductContent = styled.div`
 `;
 
 const ProductImageContainer = styled.div`
-  padding-top: 80px;
+  padding-top: 50px;
   position: sticky;
   top: 100px;
   
@@ -41,7 +41,7 @@ const ProductImageContainer = styled.div`
 `;
 
 const HeroSection = styled.div`
-  padding-top: 80px;
+  padding-top: 50px;
   margin-bottom: ${theme.space.xxxl};
   
   h1 {

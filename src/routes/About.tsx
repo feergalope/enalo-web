@@ -13,12 +13,12 @@ const AboutContainer = styled.div`
 `;
 
 const HeroSection = styled.div`
-  padding-top: 80px;
+  padding-top: 50px;
   text-align: center;
   margin-bottom: ${theme.space.xxxl};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    padding-top: 80px;
+    padding-top: 50px;
   }
   
   h1 {

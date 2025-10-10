@@ -30,7 +30,7 @@ const ProductContent = styled.div`
 `;
 
 const IntroText = styled.div`
-  padding-top: 80px;
+  padding-top: 50px;
   margin-bottom: ${theme.space.xxxl};
   
   @media (max-width: ${theme.breakpoints.tablet}) {
@@ -71,7 +71,7 @@ const IntroText = styled.div`
 
 const ProductImageContainer = styled.div`
   width: 100%;
-  padding-top: 80px;
+  padding-top: 50px;
   position: sticky;
   top: 100px;
   align-self: start;

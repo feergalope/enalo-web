@@ -103,6 +103,6 @@ export const GlobalStyle = createGlobalStyle`
   
   /* Smooth scrolling for anchor links */
   html {
-    scroll-padding-top: 80px;
+    scroll-padding-top: 50px;
   }
 `;

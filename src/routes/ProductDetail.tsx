@@ -25,7 +25,7 @@ const ProductContainer = styled.div`
 `;
 
 const ProductImage = styled.div`
-  padding-top: 80px;
+  padding-top: 50px;
   position: sticky;
   top: 100px;
   
@@ -44,7 +44,7 @@ const ProductImage = styled.div`
 `;
 
 const ProductInfo = styled.div`
-  padding-top: 80px;
+  padding-top: 50px;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     order: 2;

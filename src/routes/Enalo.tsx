@@ -11,7 +11,7 @@ import productsData from '../data/products.json';
 
 const HeroSection = styled.div`
   background: linear-gradient(135deg, ${theme.colors.white} 0%, ${theme.colors.warmBeige} 100%);
-  padding: calc(80px + ${theme.space.xxxl}) ${theme.space.lg} ${theme.space.xxxl};
+  padding: calc(50px + ${theme.space.xxxl}) ${theme.space.lg} ${theme.space.xxxl};
   text-align: center;
 `;
 
