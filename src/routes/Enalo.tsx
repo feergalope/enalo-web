@@ -43,6 +43,27 @@ const ProductsGrid = styled.div`
   }
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
 export const Enalo: React.FC = () => {
   const { t } = useTranslations();
   
@@ -75,19 +96,20 @@ export const Enalo: React.FC = () => {
       </HeroSection>
       
       <Section>
-        <ProductsGrid>
-          {productsData.products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <ProductCard product={product} index={index} />
-            </motion.div>
-          ))}
-        </ProductsGrid>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          <ProductsGrid>
+            {productsData.products.map((product, index) => (
+              <motion.div key={product.id} variants={itemVariants}>
+                <ProductCard product={product} index={index} />
+              </motion.div>
+            ))}
+          </ProductsGrid>
+        </motion.div>
       </Section>
     </>
   );

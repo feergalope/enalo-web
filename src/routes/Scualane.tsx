@@ -153,6 +153,27 @@ const ProductImage = styled.div`
   }
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
 export const Scualane: React.FC = () => {
   const { t } = useTranslations();
   const [activeCard, setActiveCard] = useState<number | null>(null);
@@ -208,72 +229,62 @@ export const Scualane: React.FC = () => {
       
       <Section>
         <ScualaneContainer>
-          <ProductContent>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <HeroSection>
-                <h1>{translations.title}</h1>
-                <p dangerouslySetInnerHTML={{ __html: translations.subtitle }} />
-              </HeroSection>
-            </motion.div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <ProductContent>
+              <motion.div variants={itemVariants}>
+                <HeroSection>
+                  <h1>{translations.title}</h1>
+                  <p dangerouslySetInnerHTML={{ __html: translations.subtitle }} />
+                </HeroSection>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <ContentSection>
-                <h2>Descripción</h2>
-                <p dangerouslySetInnerHTML={{ __html: translations.description }} />
-              </ContentSection>
-            </motion.div>
+              <motion.div variants={itemVariants}>
+                <ContentSection>
+                  <h2>Descripción</h2>
+                  <p dangerouslySetInnerHTML={{ __html: translations.description }} />
+                </ContentSection>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <ContentSection>
-                <h2>{translations.usageTitle}</h2>
-                <UsageCards>
-                  {translations.usageCards.map((card, index) => (
-                    <UsageCard
-                      key={index}
-                      $active={activeCard === index}
-                      onClick={() => setActiveCard(activeCard === index ? null : index)}
-                    >
-                      <h3>{card.title}</h3>
-                      <p dangerouslySetInnerHTML={{ __html: card.description }} />
-                    </UsageCard>
-                  ))}
-                </UsageCards>
-              </ContentSection>
-            </motion.div>
+              <motion.div variants={itemVariants}>
+                <ContentSection>
+                  <h2>{translations.usageTitle}</h2>
+                  <UsageCards>
+                    {translations.usageCards.map((card, index) => (
+                      <UsageCard
+                        key={index}
+                        $active={activeCard === index}
+                        onClick={() => setActiveCard(activeCard === index ? null : index)}
+                      >
+                        <h3>{card.title}</h3>
+                        <p dangerouslySetInnerHTML={{ __html: card.description }} />
+                      </UsageCard>
+                    ))}
+                  </UsageCards>
+                </ContentSection>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <ContentSection>
-                <h2>{translations.keyBenefitsTitle}</h2>
-                <BenefitsList>
-                  {translations.benefits.map((benefit, index) => (
-                    <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
-                  ))}
-                </BenefitsList>
-              </ContentSection>
-            </motion.div>
-          </ProductContent>
+              <motion.div variants={itemVariants}>
+                <ContentSection>
+                  <h2>{translations.keyBenefitsTitle}</h2>
+                  <BenefitsList>
+                    {translations.benefits.map((benefit, index) => (
+                      <li key={index} dangerouslySetInnerHTML={{ __html: benefit }} />
+                    ))}
+                  </BenefitsList>
+                </ContentSection>
+              </motion.div>
+            </ProductContent>
+          </motion.div>
 
           <ProductImageContainer>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
               <ProductImage>
                 <OptimizedImage

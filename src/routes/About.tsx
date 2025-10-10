@@ -46,6 +46,27 @@ const ContentSection = styled.div`
   }
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
 export const About: React.FC = () => {
   const { t } = useTranslations();
   
@@ -70,23 +91,21 @@ export const About: React.FC = () => {
       
       <Section>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <HeroSection>
-            <h1>{translations.title}</h1>
-          </HeroSection>
-        </motion.div>
+          <motion.div variants={itemVariants}>
+            <HeroSection>
+              <h1>{translations.title}</h1>
+            </HeroSection>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <ContentSection>
-            <p dangerouslySetInnerHTML={{ __html: translations.description }} />
-          </ContentSection>
+          <motion.div variants={itemVariants}>
+            <ContentSection>
+              <p dangerouslySetInnerHTML={{ __html: translations.description }} />
+            </ContentSection>
+          </motion.div>
         </motion.div>
       </Section>
     </AboutContainer>

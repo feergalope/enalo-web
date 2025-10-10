@@ -26,6 +26,15 @@ const ProductsGrid = styled.div`
   }
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const sectionVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
 
 export const Home: React.FC = () => {
   const { t } = useTranslations();
@@ -50,10 +59,10 @@ export const Home: React.FC = () => {
       
       <Section background="softBeige">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
         >
           <h2>{translations.aboutTitle}</h2>
           <p>{translations.aboutSubtitle}</p>
@@ -63,10 +72,10 @@ export const Home: React.FC = () => {
       
       <Section background="beige">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
         >
           <h2>{translations.productsTitle}</h2>
           <p>{translations.productsSubtitle}</p>
@@ -84,10 +93,10 @@ export const Home: React.FC = () => {
       
       <Section>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
         >
           <h2>{translations.faqTitle}</h2>
           <FAQ />

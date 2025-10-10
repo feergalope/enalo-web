@@ -197,6 +197,27 @@ const BenefitsList = styled.ul`
   }
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
 export const Escualano: React.FC = () => {
   const { t } = useTranslations();
   
@@ -223,106 +244,96 @@ export const Escualano: React.FC = () => {
       
       <Section>
         <ScualaneContainer>
-          <ProductContent>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <HeroSection>
-                <h1>{translations.title}</h1>
-              </HeroSection>
-            </motion.div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <ProductContent>
+              <motion.div variants={itemVariants}>
+                <HeroSection>
+                  <h1>{translations.title}</h1>
+                </HeroSection>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <ContentSection>
-                <p>{translations.description}</p>
-              </ContentSection>
-            </motion.div>
+              <motion.div variants={itemVariants}>
+                <ContentSection>
+                  <p>{translations.description}</p>
+                </ContentSection>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <ContentSection>
-                <h2>Cómo utilizar</h2>
-                <UsageRows>
-                  <UsageRow>
-                    <UsageImage>
-                      <img src="/images/products/body-parts/face.svg" alt="Rostro" />
-                    </UsageImage>
-                    <UsageContent>
-                      <h3>Rostro</h3>
-                      <p>Aplica 2-3 gotas sobre la piel limpia antes de tu crema habitual. Gracias a su afinidad natural, potencia la absorción de los principios activos y proporciona hidratación inmediata sin dejar residuo graso.</p>
-                    </UsageContent>
-                  </UsageRow>
+              <motion.div variants={itemVariants}>
+                <ContentSection>
+                  <h2>Cómo utilizar</h2>
+                  <UsageRows>
+                    <UsageRow>
+                      <UsageImage>
+                        <img src="/images/products/body-parts/face.svg" alt="Rostro" />
+                      </UsageImage>
+                      <UsageContent>
+                        <h3>Rostro</h3>
+                        <p>Aplica 2-3 gotas sobre la piel limpia antes de tu crema habitual. Gracias a su afinidad natural, potencia la absorción de los principios activos y proporciona hidratación inmediata sin dejar residuo graso.</p>
+                      </UsageContent>
+                    </UsageRow>
 
-                  <UsageRow>
-                    <UsageImage>
-                      <img src="/images/products/body-parts/neck.svg" alt="Cuello y escote" />
-                    </UsageImage>
-                    <UsageContent>
-                      <h3>Cuello y escote</h3>
-                      <p>Extiende 3–4 gotas a diario, con un suave masaje ascendente desde el centro hacia los laterales. Esta zona es especialmente delicada: el uso regular ayuda a mantener su firmeza, elasticidad y suavidad.</p>
-                    </UsageContent>
-                  </UsageRow>
+                    <UsageRow>
+                      <UsageImage>
+                        <img src="/images/products/body-parts/neck.svg" alt="Cuello y escote" />
+                      </UsageImage>
+                      <UsageContent>
+                        <h3>Cuello y escote</h3>
+                        <p>Extiende 3–4 gotas a diario, con un suave masaje ascendente desde el centro hacia los laterales. Esta zona es especialmente delicada: el uso regular ayuda a mantener su firmeza, elasticidad y suavidad.</p>
+                      </UsageContent>
+                    </UsageRow>
 
-                  <UsageRow>
-                    <UsageImage>
-                      <img src="/images/products/body-parts/body.svg" alt="Cuerpo" />
-                    </UsageImage>
-                    <UsageContent>
-                      <h3>Cuerpo</h3>
-                      <p>Después de la ducha, con la piel húmeda, masajea 6–10 gotas por zona hasta su total absorción. El resultado es una piel hidratada, flexible y luminosa, sin sensación grasa.</p>
-                    </UsageContent>
-                  </UsageRow>
+                    <UsageRow>
+                      <UsageImage>
+                        <img src="/images/products/body-parts/body.svg" alt="Cuerpo" />
+                      </UsageImage>
+                      <UsageContent>
+                        <h3>Cuerpo</h3>
+                        <p>Después de la ducha, con la piel húmeda, masajea 6–10 gotas por zona hasta su total absorción. El resultado es una piel hidratada, flexible y luminosa, sin sensación grasa.</p>
+                      </UsageContent>
+                    </UsageRow>
 
-                  <UsageRow>
-                    <UsageImage>
-                      <img src="/images/products/body-parts/hair.svg" alt="Cabello" />
-                    </UsageImage>
-                    <UsageContent>
-                      <h3>Cabello</h3>
-                      <ul>
-                        <li><strong>Como sérum:</strong> 1–3 gotas en medios y puntas, en seco o húmedo.</li>
-                        <li><strong>Como tratamiento pre-lavado:</strong> 4–6 gotas, dejar 15–20 minutos y enjuagar.</li>
-                        <li><strong>Como protección ligera:</strong> 1–2 gotas antes de usar secador o plancha.</li>
-                      </ul>
-                      <p>Nutre la fibra capilar, controla el encrespamiento y aporta brillo sin apelmazar.</p>
-                    </UsageContent>
-                  </UsageRow>
-                </UsageRows>
-              </ContentSection>
-            </motion.div>
+                    <UsageRow>
+                      <UsageImage>
+                        <img src="/images/products/body-parts/hair.svg" alt="Cabello" />
+                      </UsageImage>
+                      <UsageContent>
+                        <h3>Cabello</h3>
+                        <ul>
+                          <li><strong>Como sérum:</strong> 1–3 gotas en medios y puntas, en seco o húmedo.</li>
+                          <li><strong>Como tratamiento pre-lavado:</strong> 4–6 gotas, dejar 15–20 minutos y enjuagar.</li>
+                          <li><strong>Como protección ligera:</strong> 1–2 gotas antes de usar secador o plancha.</li>
+                        </ul>
+                        <p>Nutre la fibra capilar, controla el encrespamiento y aporta brillo sin apelmazar.</p>
+                      </UsageContent>
+                    </UsageRow>
+                  </UsageRows>
+                </ContentSection>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <ContentSection>
-                <h2>Beneficios clave</h2>
-                <BenefitsList>
-                  <li>🌿 <strong>Hidrata en profundidad</strong> sin dejar sensación grasa</li>
-                  <li>💎 <strong>Refuerza la barrera cutánea</strong> y mejora la elasticidad</li>
-                  <li>✨ <strong>Suaviza y aporta luminosidad</strong> a la piel</li>
-                  <li>💇‍♀️ <strong>Nutre y protege el cabello</strong>, reduciendo el encrespamiento</li>
-                  <li>🌞 <strong>Ligero, puro y de origen vegetal mediterráneo</strong></li>
-                </BenefitsList>
-              </ContentSection>
-            </motion.div>
-          </ProductContent>
+              <motion.div variants={itemVariants}>
+                <ContentSection>
+                  <h2>Beneficios clave</h2>
+                  <BenefitsList>
+                    <li>🌿 <strong>Hidrata en profundidad</strong> sin dejar sensación grasa</li>
+                    <li>💎 <strong>Refuerza la barrera cutánea</strong> y mejora la elasticidad</li>
+                    <li>✨ <strong>Suaviza y aporta luminosidad</strong> a la piel</li>
+                    <li>💇‍♀️ <strong>Nutre y protege el cabello</strong>, reduciendo el encrespamiento</li>
+                    <li>🌞 <strong>Ligero, puro y de origen vegetal mediterráneo</strong></li>
+                  </BenefitsList>
+                </ContentSection>
+              </motion.div>
+            </ProductContent>
+          </motion.div>
 
           <ProductImageContainer>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
               <ProductImage>
                 <OptimizedImage

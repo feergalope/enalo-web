@@ -209,6 +209,27 @@ const ProductImage = styled.div`
   }
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
 export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
   
@@ -302,51 +323,49 @@ export const BodyOil: React.FC = () => {
       
       <Section>
         <TwoColumnSection>
-          <ProductContent>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <IntroText>
-                <h1>{translations.title}</h1>
-                <p>
-                  Un aceite corporal ligero y de rápida absorción que combina <strong>escualano de oliva</strong> con siete aceites vegetales nutritivos para <strong>hidratar, nutritivo y revitalizar</strong> la piel dejándola envuelta en un delicado aroma cítrico-mediterráneo.
-                </p>
-                <p>
-                  Ideal después de la <strong>exposición al sol</strong>, ayuda a calmar, reparar y devolver la luminosidad natural.
-                </p>
-                <h3>Modo de uso</h3>
-                <p>
-                  Se aplica sobre la piel limpia y húmeda, preferiblemente tras la ducha, para potenciar la hidratación y mejorar la elasticidad.
-                </p>
-              </IntroText>
-            </motion.div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <ProductContent>
+              <motion.div variants={itemVariants}>
+                <IntroText>
+                  <h1>{translations.title}</h1>
+                  <p>
+                    Un aceite corporal ligero y de rápida absorción que combina <strong>escualano de oliva</strong> con siete aceites vegetales nutritivos para <strong>hidratar, nutritivo y revitalizar</strong> la piel dejándola envuelta en un delicado aroma cítrico-mediterráneo.
+                  </p>
+                  <p>
+                    Ideal después de la <strong>exposición al sol</strong>, ayuda a calmar, reparar y devolver la luminosidad natural.
+                  </p>
+                  <h3>Modo de uso</h3>
+                  <p>
+                    Se aplica sobre la piel limpia y húmeda, preferiblemente tras la ducha, para potenciar la hidratación y mejorar la elasticidad.
+                  </p>
+                </IntroText>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <ContentSection>
-                <h2>{translations.benefitsTitle}</h2>
-                <BenefitsGrid>
-                  {benefits.map((benefit, index) => (
-                    <BenefitColumn key={index}>
-                      <img src={benefit.icon} alt={benefit.text} />
-                      <p>{benefit.text}</p>
-                    </BenefitColumn>
-                  ))}
-                </BenefitsGrid>
-              </ContentSection>
-            </motion.div>
-          </ProductContent>
+              <motion.div variants={itemVariants}>
+                <ContentSection>
+                  <h2>{translations.benefitsTitle}</h2>
+                  <BenefitsGrid>
+                    {benefits.map((benefit, index) => (
+                      <BenefitColumn key={index}>
+                        <img src={benefit.icon} alt={benefit.text} />
+                        <p>{benefit.text}</p>
+                      </BenefitColumn>
+                    ))}
+                  </BenefitsGrid>
+                </ContentSection>
+              </motion.div>
+            </ProductContent>
+          </motion.div>
 
           <ProductImageContainer>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
               <ProductImage>
                 <OptimizedImage
@@ -361,8 +380,9 @@ export const BodyOil: React.FC = () => {
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
         >
           <ContentSection>
             <h2>Ingredientes</h2>

@@ -67,6 +67,27 @@ const CTAButton = styled(Link)`
   ${focusRing}
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
 export const FeatureCards: React.FC = () => {
   const { t } = useTranslations();
   
@@ -106,27 +127,31 @@ export const FeatureCards: React.FC = () => {
 
   return (
     <>
-      <CardsContainer>
-        {benefits.map((benefit, index) => (
-          <FeatureCard
-            key={benefit.key}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-          >
-            <IconContainer>
-              <img src={benefit.icon} alt={translations.benefits[benefit.key as keyof typeof translations.benefits].title} />
-            </IconContainer>
-            <CardTitle>
-              {translations.benefits[benefit.key as keyof typeof translations.benefits].title}
-            </CardTitle>
-            <CardDescription>
-              {translations.benefits[benefit.key as keyof typeof translations.benefits].description}
-            </CardDescription>
-          </FeatureCard>
-        ))}
-      </CardsContainer>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
+        <CardsContainer>
+          {benefits.map((benefit) => (
+            <FeatureCard
+              key={benefit.key}
+              variants={cardVariants}
+            >
+              <IconContainer>
+                <img src={benefit.icon} alt={translations.benefits[benefit.key as keyof typeof translations.benefits].title} />
+              </IconContainer>
+              <CardTitle>
+                {translations.benefits[benefit.key as keyof typeof translations.benefits].title}
+              </CardTitle>
+              <CardDescription>
+                {translations.benefits[benefit.key as keyof typeof translations.benefits].description}
+              </CardDescription>
+            </FeatureCard>
+          ))}
+        </CardsContainer>
+      </motion.div>
       
       <ButtonContainer>
         <CTAButton to="/scualane">

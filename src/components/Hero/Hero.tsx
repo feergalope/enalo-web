@@ -111,6 +111,27 @@ const HeroImage = styled.div`
   }
 `;
 
+// Variants para optimizar animaciones y reducir capas en iOS
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const textVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8 }
+  }
+};
+
 export const Hero: React.FC = () => {
   const { t } = useTranslations();
   
@@ -128,39 +149,33 @@ export const Hero: React.FC = () => {
   return (
     <HeroContainer $backgroundUrl={images.background}>
       <HeroContent>
-        <HeroText>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {translations.title}
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {translations.subtitle}
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <PrimaryButton to="/scualane">
-              Saber más
-            </PrimaryButton>
-          </motion.div>
-        </HeroText>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <HeroText>
+            <motion.h1 variants={textVariants}>
+              {translations.title}
+            </motion.h1>
+            
+            <motion.p variants={textVariants}>
+              {translations.subtitle}
+            </motion.p>
+            
+            <motion.div variants={textVariants}>
+              <PrimaryButton to="/scualane">
+                Saber más
+              </PrimaryButton>
+            </motion.div>
+          </HeroText>
+        </motion.div>
         
         <HeroImage>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
             <OptimizedImage
               src={images.pipeta}
