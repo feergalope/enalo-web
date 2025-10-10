@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -48,7 +48,6 @@ const ContentSection = styled.div`
 
 export const About: React.FC = () => {
   const { t } = useTranslations();
-  const [isLoaded, setIsLoaded] = useState(false);
   
   // Inicializar directamente con las traducciones
   const translations = {
@@ -59,13 +58,8 @@ export const About: React.FC = () => {
   };
 
   useEffect(() => {
-    setIsLoaded(true);
     trackPageView('/about');
   }, []);
-
-  if (!isLoaded) {
-    return null;
-  }
 
   return (
     <AboutContainer>

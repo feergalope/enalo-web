@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -211,7 +211,6 @@ const ProductImage = styled.div`
 
 export const BodyOil: React.FC = () => {
   const { t } = useTranslations();
-  const [isLoaded, setIsLoaded] = useState(false);
   
   // Inicializar directamente con las traducciones
   const translations = {
@@ -291,8 +290,6 @@ export const BodyOil: React.FC = () => {
   const imageUrl = '/images/products/body-oil.png';
 
   useEffect(() => {
-    setIsLoaded(true);
-
     trackPageView('/enalo/aceite-corporal');
     
     // Scroll to section if hash is present
@@ -307,10 +304,6 @@ export const BodyOil: React.FC = () => {
       window.scrollTo(0, 0);
     }
   }, [t]);
-
-  if (!isLoaded) {
-    return null;
-  }
 
   return (
     <>

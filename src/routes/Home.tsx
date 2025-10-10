@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -29,7 +29,6 @@ const ProductsGrid = styled.div`
 
 export const Home: React.FC = () => {
   const { t } = useTranslations();
-  const [isLoaded, setIsLoaded] = useState(false);
   
   // Inicializar directamente con las traducciones
   const translations = {
@@ -41,13 +40,8 @@ export const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    setIsLoaded(true);
     trackPageView('/');
   }, []);
-
-  if (!isLoaded) {
-    return null;
-  }
 
   return (
     <>

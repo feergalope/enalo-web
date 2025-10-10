@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslations } from '../hooks/useTranslations';
@@ -199,7 +199,6 @@ const BenefitsList = styled.ul`
 
 export const Escualano: React.FC = () => {
   const { t } = useTranslations();
-  const [isLoaded, setIsLoaded] = useState(false);
   
   // Inicializar directamente con las traducciones
   const translations = {
@@ -212,8 +211,6 @@ export const Escualano: React.FC = () => {
   const imageUrl = '/images/products/squalane-100.png';
 
   useEffect(() => {
-    setIsLoaded(true);
-
     trackPageView('/enalo/escualanodeoliva');
     
     // Scroll to section if hash is present
@@ -228,10 +225,6 @@ export const Escualano: React.FC = () => {
       window.scrollTo(0, 0);
     }
   }, [t]);
-
-  if (!isLoaded) {
-    return null;
-  }
 
   return (
     <>

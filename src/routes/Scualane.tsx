@@ -156,7 +156,6 @@ const ProductImage = styled.div`
 export const Scualane: React.FC = () => {
   const { t } = useTranslations();
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   
   // Inicializar directamente con las traducciones
   const translations = {
@@ -197,8 +196,6 @@ export const Scualane: React.FC = () => {
   const imageUrl = '/images/squalane.png';
 
   useEffect(() => {
-    setIsLoaded(true);
-
     trackPageView('/scualane');
     
     // Scroll to section if hash is present
@@ -213,10 +210,6 @@ export const Scualane: React.FC = () => {
       window.scrollTo(0, 0);
     }
   }, [t]);
-
-  if (!isLoaded) {
-    return null;
-  }
 
   return (
     <>
