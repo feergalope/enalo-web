@@ -6,6 +6,7 @@ import { useTranslations } from '../../hooks/useTranslations';
 import { OptimizedImage } from '../OptimizedImage';
 import { container, buttonPrimary } from '../../styles/mixins';
 import { theme } from '../../styles/theme';
+import { getHeroImageUrl } from '../../lib/cacheBusting';
 
 const HeroContainer = styled.section<{ $backgroundUrl: string }>`
   background-image: url('${props => props.$backgroundUrl}');
@@ -121,8 +122,8 @@ export const Hero: React.FC = () => {
   };
   
   const images = {
-    background: `${import.meta.env.BASE_URL}images/hero/background.png`,
-    pipeta: `${import.meta.env.BASE_URL}images/hero/pipeta-aceite.png`
+    background: getHeroImageUrl('background.png'),
+    pipeta: getHeroImageUrl('pipeta-aceite.png')
   };
 
   return (

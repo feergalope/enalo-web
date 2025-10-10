@@ -7,6 +7,7 @@ import { Section } from '../components/Section/Section';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
+import { getProductImageUrl, getImageUrl } from '../lib/cacheBusting';
 
 const ScualaneContainer = styled.div`
   display: grid;
@@ -209,7 +210,7 @@ export const Escualano: React.FC = () => {
     description: t('scualane-100.description')
   };
   
-  const imageUrl = '/images/products/squalane-100.png';
+  const imageUrl = getProductImageUrl('squalane-100.png');
 
   useEffect(() => {
     setIsLoaded(true);
@@ -273,7 +274,7 @@ export const Escualano: React.FC = () => {
                 <UsageRows>
                   <UsageRow>
                     <UsageImage>
-                      <img src="/images/products/body-parts/face.svg" alt="Rostro" />
+                      <img src={getImageUrl('images/products/body-parts/face.svg')} alt="Rostro" />
                     </UsageImage>
                     <UsageContent>
                       <h3>Rostro</h3>
@@ -283,7 +284,7 @@ export const Escualano: React.FC = () => {
 
                   <UsageRow>
                     <UsageImage>
-                      <img src="/images/products/body-parts/neck.svg" alt="Cuello y escote" />
+                      <img src={getImageUrl('images/products/body-parts/neck.svg')} alt="Cuello y escote" />
                     </UsageImage>
                     <UsageContent>
                       <h3>Cuello y escote</h3>
@@ -293,7 +294,7 @@ export const Escualano: React.FC = () => {
 
                   <UsageRow>
                     <UsageImage>
-                      <img src="/images/products/body-parts/body.svg" alt="Cuerpo" />
+                      <img src={getImageUrl('images/products/body-parts/body.svg')} alt="Cuerpo" />
                     </UsageImage>
                     <UsageContent>
                       <h3>Cuerpo</h3>
@@ -303,7 +304,7 @@ export const Escualano: React.FC = () => {
 
                   <UsageRow>
                     <UsageImage>
-                      <img src="/images/products/body-parts/hair.svg" alt="Cabello" />
+                      <img src={getImageUrl('images/products/body-parts/hair.svg')} alt="Cabello" />
                     </UsageImage>
                     <UsageContent>
                       <h3>Cabello</h3>

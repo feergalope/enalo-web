@@ -7,6 +7,7 @@ import { Section } from '../components/Section/Section';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
+import { getProductImageUrl, getIconUrl, getImageUrl } from '../lib/cacheBusting';
 
 const TwoColumnSection = styled.div`
   display: grid;
@@ -223,72 +224,72 @@ export const BodyOil: React.FC = () => {
   
   const benefits = [
     {
-      icon: '/images/icons/products/pipette.svg',
+      icon: getIconUrl('products/pipette.svg'),
       text: 'Refuerza la barrera cutánea frente a la sequedad'
     },
     {
-      icon: '/images/icons/products/drop.svg',
+      icon: getIconUrl('products/drop.svg'),
       text: 'Hidratación inmediata y duradera'
     },
     {
-      icon: '/images/icons/products/sparkle.svg',
+      icon: getIconUrl('products/sparkle.svg'),
       text: 'Tacto sedoso y luminoso'
     },
     {
-      icon: '/images/icons/products/leaf.svg',
+      icon: getIconUrl('products/leaf.svg'),
       text: 'Ingredientes orgánicos y naturales'
     }
   ];
   
   const ingredients = [
     {
-      icon: '/images/products/ingredients/escualano.svg',
+      icon: getImageUrl('images/products/ingredients/escualano.svg'),
       title: 'Escualano de oliva',
       description: 'Activo biomimético afín a la piel que mejora la hidratación y refuerza la barrera cutánea.'
     },
     {
-      icon: '/images/products/ingredients/sesamo.svg',
+      icon: getImageUrl('images/products/ingredients/sesamo.svg'),
       title: 'Sésamo',
       description: 'Potente antioxidante que protege los lípidos cutáneos y refuerza la barrera natural.'
     },
     {
-      icon: '/images/products/ingredients/arroz.svg',
+      icon: getImageUrl('images/products/ingredients/arroz.svg'),
       title: 'Arroz',
       description: 'Rico en orizanol, mejora la microcirculación y combate el envejecimiento cutáneo.'
     },
     {
-      icon: '/images/products/ingredients/uva.svg',
+      icon: getImageUrl('images/products/ingredients/uva.svg'),
       title: 'Pepita de uva',
       description: 'Estimula la regeneración celular y mejora la firmeza gracias a su ácido linoleico.'
     },
     {
-      icon: '/images/products/ingredients/macadamia.svg',
+      icon: getImageUrl('images/products/ingredients/macadamia.svg'),
       title: 'Macadamia',
       description: 'Aporta ácido palmitoleico, esencial para equilibrar los lípidos de la piel.'
     },
     {
-      icon: '/images/products/ingredients/aguacate.svg',
+      icon: getImageUrl('images/products/ingredients/aguacate.svg'),
       title: 'Aguacate',
       description: 'Favorece la síntesis de colágeno y la reparación tisular.'
     },
     {
-      icon: '/images/products/ingredients/almendras.svg',
+      icon: getImageUrl('images/products/ingredients/almendras.svg'),
       title: 'Almendras dulces',
       description: 'Mantiene la integridad del manto hidrolipídico y mejora la elasticidad.'
     },
     {
-      icon: '/images/products/ingredients/cartamo.svg',
+      icon: getImageUrl('images/products/ingredients/cartamo.svg'),
       title: 'Aceite de cártamo',
       description: 'Favorece la regeneración celular, mejora la elasticidad y ayuda a mantener la hidratación y luminosidad de la piel gracias a su alto contenido en omega-6.'
     },
     {
-      icon: '/images/products/ingredients/naranja.svg',
+      icon: getImageUrl('images/products/ingredients/naranja.svg'),
       title: 'Aceite esencial de naranja',
       description: 'Antioxidante y revitalizante, potencia la luminosidad cutánea.'
     }
   ];
   
-  const imageUrl = '/images/products/body-oil.png';
+  const imageUrl = getProductImageUrl('body-oil.png');
 
   useEffect(() => {
     setIsLoaded(true);

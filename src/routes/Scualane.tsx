@@ -7,6 +7,7 @@ import { Section } from '../components/Section/Section';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
+import { getImageUrl } from '../lib/cacheBusting';
 
 const ScualaneContainer = styled.div`
   display: grid;
@@ -196,7 +197,7 @@ export const Scualane: React.FC = () => {
     ]
   };
   
-  const imageUrl = '/images/squalane.png';
+  const imageUrl = getImageUrl('images/squalane.png');
 
   useEffect(() => {
     setIsLoaded(true);

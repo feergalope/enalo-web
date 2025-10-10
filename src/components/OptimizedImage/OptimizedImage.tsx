@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { addCacheBusting } from '../../lib/cacheBusting';
 
 const ImageWrapper = styled.div<{ $isLoaded: boolean }>`
   position: relative;
@@ -23,20 +24,25 @@ interface OptimizedImageProps {
   alt: string;
   className?: string;
   priority?: boolean; // Para imágenes críticas como el hero
+  disableCacheBusting?: boolean; // Opción para deshabilitar cache busting si es necesario
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
   src, 
   alt, 
   className,
-  priority = false
+  priority = false,
+  disableCacheBusting = false
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Aplicar cache busting automáticamente a menos que se deshabilite
+  const imageSrc = disableCacheBusting ? src : addCacheBusting(src);
 
   return (
     <ImageWrapper $isLoaded={isLoaded} className={className}>
       <StyledImage
-        src={src}
+        src={imageSrc}
         alt={alt}
         $isLoaded={isLoaded}
         loading={priority ? 'eager' : 'lazy'}
