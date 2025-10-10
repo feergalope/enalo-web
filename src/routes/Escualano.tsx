@@ -200,31 +200,18 @@ const BenefitsList = styled.ul`
 export const Escualano: React.FC = () => {
   const { t } = useTranslations();
   
-  // Inicializar directamente con las traducciones
-  const translations = {
-    seoTitle: t('scualane-100.seo.title'),
-    seoDescription: t('scualane-100.seo.description'),
-    title: t('scualane-100.title'),
-    description: t('scualane-100.description')
-  };
-  
   const imageUrl = '/images/products/squalane-100.png';
 
   useEffect(() => {
     trackPageView('/enalo/escualanodeoliva');
-    
-    // Scroll to section if hash is present
-    const hash = window.location.hash;
-    if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // Scroll to top if no hash
-      window.scrollTo(0, 0);
-    }
-  }, [t]);
+    // Inicializar directamente con las traducciones
+    const translations = {
+      seoTitle: t('scualane-100.seo.title'),
+      seoDescription: t('scualane-100.seo.description'),
+      title: t('scualane-100.title'),
+      description: t('scualane-100.description')
+    };
+  }, []);
 
   return (
     <>
@@ -251,7 +238,7 @@ export const Escualano: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <ContentSection id="description">
+              <ContentSection>
                 <p>{translations.description}</p>
               </ContentSection>
             </motion.div>
@@ -261,7 +248,7 @@ export const Escualano: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <ContentSection id="how-to-use">
+              <ContentSection>
                 <h2>Cómo utilizar</h2>
                 <UsageRows>
                   <UsageRow>
@@ -317,7 +304,7 @@ export const Escualano: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <ContentSection id="benefits">
+              <ContentSection>
                 <h2>Beneficios clave</h2>
                 <BenefitsList>
                   <li>🌿 <strong>Hidrata en profundidad</strong> sin dejar sensación grasa</li>

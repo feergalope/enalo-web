@@ -291,19 +291,7 @@ export const BodyOil: React.FC = () => {
 
   useEffect(() => {
     trackPageView('/enalo/aceite-corporal');
-    
-    // Scroll to section if hash is present
-    const hash = window.location.hash;
-    if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // Scroll to top if no hash
-      window.scrollTo(0, 0);
-    }
-  }, [t]);
+  }, []);
 
   return (
     <>
@@ -340,7 +328,7 @@ export const BodyOil: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <ContentSection id="benefits">
+              <ContentSection>
                 <h2>{translations.benefitsTitle}</h2>
                 <BenefitsGrid>
                   {benefits.map((benefit, index) => (
@@ -376,7 +364,7 @@ export const BodyOil: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <ContentSection id="ingredients">
+          <ContentSection>
             <h2>Ingredientes</h2>
             <IngredientsGrid>
               {ingredients.map((ingredient, index) => (

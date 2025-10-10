@@ -48,7 +48,7 @@ export const Home: React.FC = () => {
       <SEO />
       <Hero />
       
-      <Section id="beneficios" background="softBeige">
+      <Section background="softBeige">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

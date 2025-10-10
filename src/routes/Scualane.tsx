@@ -197,19 +197,7 @@ export const Scualane: React.FC = () => {
 
   useEffect(() => {
     trackPageView('/scualane');
-    
-    // Scroll to section if hash is present
-    const hash = window.location.hash;
-    if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // Scroll to top if no hash
-      window.scrollTo(0, 0);
-    }
-  }, [t]);
+  }, []);
 
   return (
     <>
@@ -237,7 +225,7 @@ export const Scualane: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <ContentSection id="description">
+              <ContentSection>
                 <h2>Descripción</h2>
                 <p dangerouslySetInnerHTML={{ __html: translations.description }} />
               </ContentSection>
@@ -248,7 +236,7 @@ export const Scualane: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <ContentSection id="how-to-use">
+              <ContentSection>
                 <h2>{translations.usageTitle}</h2>
                 <UsageCards>
                   {translations.usageCards.map((card, index) => (
@@ -270,7 +258,7 @@ export const Scualane: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <ContentSection id="benefits">
+              <ContentSection>
                 <h2>{translations.keyBenefitsTitle}</h2>
                 <BenefitsList>
                   {translations.benefits.map((benefit, index) => (
