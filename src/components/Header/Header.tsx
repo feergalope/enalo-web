@@ -132,7 +132,7 @@ const MobileMenuButton = styled.button`
 
 const MobileMenu = styled(motion.div)`
   position: fixed;
-  top: 0;
+  top: 80px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -150,30 +150,10 @@ const MobileMenuContent = styled(motion.div)`
   top: 0;
   left: 0;
   width: 280px;
-  height: 100vh;
+  height: 100%;
   background: ${theme.colors.white};
   padding: ${theme.space.xl};
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-`;
-
-const MobileMenuHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: ${theme.space.xl};
-  padding-bottom: ${theme.space.lg};
-  border-bottom: 1px solid ${theme.colors.mutedLine};
-`;
-
-const MobileMenuClose = styled.button`
-  background: none;
-  border: none;
-  color: ${theme.colors.textPrimary};
-  font-size: ${theme.fonts.sizes.xl};
-  cursor: pointer;
-  padding: ${theme.space.sm};
-  
-  ${focusRing}
 `;
 
 const MobileNav = styled.nav`
@@ -196,13 +176,6 @@ const MobileNavLink = styled(Link)<{ $active: boolean }>`
   }
   
   ${focusRing}
-`;
-
-const MobileMenuFooter = styled.div`
-  position: absolute;
-  bottom: ${theme.space.xl};
-  left: ${theme.space.xl};
-  right: ${theme.space.xl};
 `;
 
 export const Header: React.FC = () => {
@@ -308,16 +281,6 @@ export const Header: React.FC = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
             >
-              <MobileMenuHeader>
-                <Logo to="/" onClick={closeMobileMenu}>
-                  <LogoTop>ENALÓ</LogoTop>
-                  <LogoBottom>macarenalorenzo</LogoBottom>
-                </Logo>
-                <MobileMenuClose onClick={closeMobileMenu} aria-label="Cerrar menú">
-                  ✕
-                </MobileMenuClose>
-              </MobileMenuHeader>
-              
               <MobileNav>
                 {navItems.map((item) => (
                   <MobileNavLink
@@ -330,10 +293,6 @@ export const Header: React.FC = () => {
                   </MobileNavLink>
                 ))}
               </MobileNav>
-              
-              <MobileMenuFooter>
-                <LanguageToggle />
-              </MobileMenuFooter>
             </MobileMenuContent>
           </MobileMenu>
         )}
