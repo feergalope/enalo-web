@@ -96,7 +96,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       return '/enalo/escualanodeoliva';
     }
     if (product.slug === 'body-oil') {
-      return '/enalo/aceitecorporal';
+      return '/enalo/aceite-corporal';
     }
     return '/enalo';
   };

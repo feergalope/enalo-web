@@ -54,7 +54,7 @@ function App() {
               <Route path="/scualane" element={<Scualane />} />
               <Route path="/enalo" element={<Enalo />} />
               <Route path="/enalo/escualanodeoliva" element={<Escualano />} />
-              <Route path="/enalo/aceitecorporal" element={<BodyOil />} />
+              <Route path="/enalo/aceite-corporal" element={<BodyOil />} />
               <Route path="/about" element={<About />} />
               <Route path="/privacidad" element={<Privacy />} />
               <Route path="/terminos" element={<Terms />} />
