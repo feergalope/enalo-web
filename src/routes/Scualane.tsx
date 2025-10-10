@@ -286,6 +286,11 @@ export const Scualane: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
+              style={{ 
+                transform: 'translateZ(0)', 
+                WebkitBackfaceVisibility: 'hidden', 
+                willChange: 'opacity' 
+              }}
             >
               <OptimizedImage
                 src={imageUrl}

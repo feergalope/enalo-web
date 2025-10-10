@@ -173,6 +173,11 @@ export const ProductDetail: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            style={{ 
+              transform: 'translateZ(0)', 
+              WebkitBackfaceVisibility: 'hidden', 
+              willChange: 'opacity' 
+            }}
           >
             <OptimizedImage src={product.image} alt={product.name[language]} priority={true} />
           </ProductImage>
