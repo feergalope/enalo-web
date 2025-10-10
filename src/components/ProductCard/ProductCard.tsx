@@ -6,6 +6,7 @@ import { useTranslations } from '../../hooks/useTranslations';
 import { OptimizedImage } from '../OptimizedImage';
 import { theme } from '../../styles/theme';
 import { card, buttonSecondary, focusRing } from '../../styles/mixins';
+import { productImages } from '../../data/productImages';
 
 interface ProductCardProps {
   product: {
@@ -106,7 +107,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
     >
       <ProductImageContainer>
         <StyledOptimizedImage
-          src={product.image}
+          src={productImages[product.image] || product.image}
           alt={product.name[language]}
           priority={true}
         />

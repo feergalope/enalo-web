@@ -11,6 +11,7 @@ import { theme } from '../styles/theme';
 import { buttonPrimary, focusRing } from '../styles/mixins';
 import { trackPageView } from '../lib/analytics';
 import productsData from '../data/products.json';
+import { productImages } from '../data/productImages';
 
 const ProductContainer = styled.div`
   display: grid;
@@ -179,7 +180,7 @@ export const ProductDetail: React.FC = () => {
               willChange: 'opacity' 
             }}
           >
-            <OptimizedImage src={product.image} alt={product.name[language]} priority={true} />
+            <OptimizedImage src={productImages[product.image] || product.image} alt={product.name[language]} priority={true} />
           </ProductImage>
         </ProductContainer>
       </Section>

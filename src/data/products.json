@@ -33,7 +33,7 @@
         "es": "Aplicar 2-3 gotas en rostro, cuello y escote. Masajear suavemente hasta absorción completa.",
         "en": "Apply 2-3 drops to face, neck and décolleté. Massage gently until fully absorbed."
       },
-      "image": "/images/products/squalane-100.png"
+      "image": "squalane-100"
     },
     {
       "id": "body-oil",
@@ -68,7 +68,7 @@
         "es": "Aplicar sobre piel limpia y húmeda tras la ducha. Masajear con movimientos circulares ascendentes.",
         "en": "Apply to clean, damp skin after showering. Massage with upward circular movements."
       },
-      "image": "/images/products/body-oil.png"
+      "image": "body-oil"
     }
   ]
 }
