@@ -36,7 +36,6 @@ const ProductsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: ${theme.space.xl};
-  margin-top: ${theme.space.xxxl};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
