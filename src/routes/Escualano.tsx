@@ -200,17 +200,18 @@ const BenefitsList = styled.ul`
 export const Escualano: React.FC = () => {
   const { t } = useTranslations();
   
+  // Inicializar directamente con las traducciones
+  const translations = {
+    seoTitle: t('scualane-100.seo.title'),
+    seoDescription: t('scualane-100.seo.description'),
+    title: t('scualane-100.title'),
+    description: t('scualane-100.description')
+  };
+  
   const imageUrl = '/images/products/squalane-100.png';
 
   useEffect(() => {
     trackPageView('/enalo/escualanodeoliva');
-    // Inicializar directamente con las traducciones
-    const translations = {
-      seoTitle: t('scualane-100.seo.title'),
-      seoDescription: t('scualane-100.seo.description'),
-      title: t('scualane-100.title'),
-      description: t('scualane-100.description')
-    };
   }, []);
 
   return (
@@ -236,7 +237,7 @@ export const Escualano: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6 }}
             >
               <ContentSection>
                 <p>{translations.description}</p>
@@ -246,7 +247,7 @@ export const Escualano: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6 }}
             >
               <ContentSection>
                 <h2>Cómo utilizar</h2>
@@ -302,7 +303,7 @@ export const Escualano: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{ duration: 0.6 }}
             >
               <ContentSection>
                 <h2>Beneficios clave</h2>
@@ -321,7 +322,7 @@ export const Escualano: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.6 }}
             >
               <ProductImage>
                 <OptimizedImage
