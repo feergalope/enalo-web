@@ -20,6 +20,7 @@ const ProductsGrid = styled.div`
   justify-content: center;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
+    margin-top: ${theme.space.sm};
     grid-template-columns: 1fr;
     gap: ${theme.space.lg};
   }

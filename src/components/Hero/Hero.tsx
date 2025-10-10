@@ -20,6 +20,11 @@ const HeroContainer = styled.section<{ $backgroundUrl: string }>`
   overflow: hidden;
   padding: ${theme.space.xl} 0;
   margin-top: 80px;
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    padding: ${theme.space.xl};
+    min-height: calc(100vh - 60px);
+  }
 `;
 
 const HeroContent = styled.div`
@@ -37,9 +42,7 @@ const HeroContent = styled.div`
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
-    gap: ${theme.space.xl};
     text-align: center;
-    padding-right: ${theme.space.lg};
   }
 `;
 
@@ -51,9 +54,9 @@ const HeroText = styled.div`
   height: 100%;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.space.lg};
+    padding: ${theme.space.md} 0;
     height: auto;
-    min-height: 300px;
+    min-height: auto;
   }
   
   h1 {
@@ -96,13 +99,13 @@ const HeroImage = styled.div`
   }
   
   @media (max-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.space.xl};
+    padding-bottom: ${theme.space.md};
     
     img {
       height: auto;
       width: 100%;
       object-fit: contain;
-      border-radius: 0;
+      border-radius: 15px;
     }
   }
 `;
