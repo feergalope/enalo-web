@@ -380,11 +380,11 @@ const spanishTranslations: Translations = {
     keyBenefits: {
       title: "Beneficios clave",
       benefits: [
-        "🌿 <strong>Hidrata en profundidad</strong> sin dejar sensación grasa",
-        "💎 <strong>Refuerza la barrera cutánea</strong> y mejora la elasticidad",
-        "✨ <strong>Suaviza y aporta luminosidad</strong> a la piel",
-        "��‍♀️ <strong>Nutre y protege el cabello</strong>, reduciendo el encrespamiento",
-        "🌞 <strong>Ligero, puro y de origen vegetal mediterráneo</strong>"
+        "<strong>Hidrata en profundidad</strong> sin dejar sensación grasa",
+        "<strong>Refuerza la barrera cutánea</strong> y mejora la elasticidad",
+        "<strong>Suaviza y aporta luminosidad</strong> a la piel",
+        "<strong>Nutre y protege el cabello</strong>, reduciendo el encrespamiento",
+        "<strong>Ligero, puro y de origen vegetal mediterráneo</strong>"
       ]
     },
     cta: "Ver productos",
@@ -664,11 +664,11 @@ const englishTranslations: Translations = {
     keyBenefits: {
       title: "Key benefits",
       benefits: [
-        "🌿 <strong>Deep hydration</strong> without greasy sensation",
-        "💎 <strong>Strengthens the skin barrier</strong> and improves elasticity",
-        "✨ <strong>Softens and adds luminosity</strong> to the skin",
-        "💇‍♀️ <strong>Nourishes and protects hair</strong>, reducing frizz",
-        "🌞 <strong>Light, pure and of Mediterranean vegetable origin</strong>"
+        "<strong>Deep hydration</strong> without greasy sensation",
+        "<strong>Strengthens the skin barrier</strong> and improves elasticity",
+        "<strong>Softens and adds luminosity</strong> to the skin",
+        "<strong>Nourishes and protects hair</strong>, reducing frizz",
+        "<strong>Light, pure and of Mediterranean vegetable origin</strong>"
       ]
     },
     cta: "View products",
