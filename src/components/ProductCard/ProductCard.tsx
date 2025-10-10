@@ -45,9 +45,6 @@ const ProductImageContainer = styled.div`
   justify-content: center;
   position: relative;
   
-  &:hover img {
-    transform: scale(1.05);
-  }
 `;
 
 const StyledOptimizedImage = styled(OptimizedImage)`
@@ -56,7 +53,6 @@ const StyledOptimizedImage = styled(OptimizedImage)`
   
   img {
     object-fit: cover;
-    transition: transform ${theme.transitions.normal};
   }
 `;
 

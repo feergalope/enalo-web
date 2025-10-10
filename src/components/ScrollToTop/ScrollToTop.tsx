@@ -25,7 +25,6 @@ const ScrollButton = styled(motion.button)`
   
   &:hover {
     background: ${theme.colors.sage};
-    transform: translateY(-2px);
     box-shadow: ${theme.shadows.lg};
   }
   

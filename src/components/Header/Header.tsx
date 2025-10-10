@@ -92,11 +92,10 @@ const NavLink = styled(Link)<{ $active: boolean }>`
     position: absolute;
     bottom: -4px;
     left: 0;
-    right: 0;
+    width: ${props => props.$active ? '100%' : '0'};
     height: 2px;
     background: ${theme.colors.olive};
-    transform: ${props => props.$active ? 'scaleX(1)' : 'scaleX(0)'};
-    transition: transform ${theme.transitions.fast};
+    transition: width ${theme.transitions.fast};
   }
   
   ${focusRing}

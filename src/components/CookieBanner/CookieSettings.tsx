@@ -198,11 +198,6 @@ const SaveButton = styled.button`
   
   &:hover {
     background: ${theme.colors.sage};
-    transform: translateY(-1px);
-  }
-  
-  &:active {
-    transform: translateY(0);
   }
   
   ${focusRing}
@@ -229,11 +224,6 @@ const CancelButton = styled.button`
   &:hover {
     background: ${theme.colors.olive};
     color: ${theme.colors.white};
-    transform: translateY(-1px);
-  }
-  
-  &:active {
-    transform: translateY(0);
   }
   
   ${focusRing}

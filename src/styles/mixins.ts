@@ -24,11 +24,10 @@ export const card = css`
   border-radius: ${theme.radius.lg};
   box-shadow: ${theme.shadows.sm};
   padding: ${theme.space.xl};
-  transition: all ${theme.transitions.normal};
+  transition: box-shadow ${theme.transitions.normal};
   
   &:hover {
     box-shadow: ${theme.shadows.md};
-    transform: translateY(-2px);
   }
 `;
 
@@ -39,15 +38,10 @@ export const buttonPrimary = css`
   border-radius: ${theme.radius.md};
   font-weight: ${theme.fonts.weights.medium};
   font-size: ${theme.fonts.sizes.md};
-  transition: all ${theme.transitions.fast};
+  transition: background ${theme.transitions.fast};
   
   &:hover {
     background: ${theme.colors.sage};
-    transform: translateY(-1px);
-  }
-  
-  &:active {
-    transform: translateY(0);
   }
 `;
 
@@ -64,11 +58,6 @@ export const buttonSecondary = css`
   &:hover {
     background: ${theme.colors.olive};
     color: ${theme.colors.white};
-    transform: translateY(-1px);
-  }
-  
-  &:active {
-    transform: translateY(0);
   }
 `;
 

@@ -97,11 +97,9 @@ const UsageCard = styled.div<{ $active: boolean }>`
   padding: ${theme.space.lg};
   cursor: pointer;
   transition: all ${theme.transitions.normal};
-  transform: ${props => props.$active ? 'scale(1.02)' : 'scale(1)'};
   
   &:hover {
     border-color: ${theme.colors.olive};
-    transform: scale(1.01);
   }
   
   h3 {
