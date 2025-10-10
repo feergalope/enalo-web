@@ -17,8 +17,8 @@ const HeroSection = styled.div`
   text-align: center;
   margin-bottom: ${theme.space.xxxl};
   
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    padding-top: 0;
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding-top: 80px;
   }
   
   h1 {
