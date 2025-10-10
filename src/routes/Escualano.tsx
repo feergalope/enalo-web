@@ -344,6 +344,7 @@ export const Escualano: React.FC = () => {
                 <OptimizedImage
                   src={imageUrl}
                   alt="Escualano de Oliva"
+                  priority={true}
                 />
               </ProductImage>
             </motion.div>

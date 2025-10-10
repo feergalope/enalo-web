@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslations } from '../../hooks/useTranslations';
+import { OptimizedImage } from '../OptimizedImage';
 import { theme } from '../../styles/theme';
 import { card, buttonSecondary, focusRing } from '../../styles/mixins';
 
@@ -43,16 +44,19 @@ const ProductImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  
+  &:hover img {
+    transform: scale(1.05);
+  }
 `;
 
-const ProductImage = styled.img`
+const StyledOptimizedImage = styled(OptimizedImage)`
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform ${theme.transitions.normal};
   
-  &:hover {
-    transform: scale(1.05);
+  img {
+    object-fit: cover;
+    transition: transform ${theme.transitions.normal};
   }
 `;
 
@@ -104,9 +108,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       transition={{ duration: 0.6, delay: index * 0.2 }}
     >
       <ProductImageContainer>
-        <ProductImage
+        <StyledOptimizedImage
           src={product.image}
           alt={product.name[language]}
+          priority={true}
         />
       </ProductImageContainer>
       

@@ -166,7 +166,7 @@ export const ProductDetail: React.FC = () => {
             </ProductInfo>
             
             <ProductImage>
-              <OptimizedImage src={product.image} alt={product.name[language]} />
+              <OptimizedImage src={product.image} alt={product.name[language]} priority={true} />
             </ProductImage>
           </ProductContainer>
         </motion.div>

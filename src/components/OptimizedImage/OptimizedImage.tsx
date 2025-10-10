@@ -1,32 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const StyledImage = styled.img`
+const ImageWrapper = styled.div<{ $isLoaded: boolean }>`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: ${props => props.$isLoaded ? 'transparent' : '#f5f5f5'};
+  transition: background-color 0.3s ease;
+`;
+
+const StyledImage = styled.img<{ $isLoaded: boolean }>`
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
+  opacity: ${props => props.$isLoaded ? 1 : 0};
+  transition: opacity 0.3s ease;
 `;
 
 interface OptimizedImageProps {
   src: string;
   alt: string;
   className?: string;
+  priority?: boolean; // Para imágenes críticas como el hero
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
   src, 
   alt, 
-  className 
+  className,
+  priority = false
 }) => {
-  // Simplificado: mostrar la imagen directamente sin esperar a la carga
-  // Esto funciona igual que en el Hero y no causa problemas de renderizado
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
-    <StyledImage
-      src={src}
-      alt={alt}
-      className={className}
-      loading="eager"
-    />
+    <ImageWrapper $isLoaded={isLoaded} className={className}>
+      <StyledImage
+        src={src}
+        alt={alt}
+        $isLoaded={isLoaded}
+        loading={priority ? 'eager' : 'lazy'}
+        onLoad={() => setIsLoaded(true)}
+        onError={(e) => {
+          console.error(`Error loading image: ${src}`);
+          setIsLoaded(true); // Mostrar aunque haya error
+        }}
+      />
+    </ImageWrapper>
   );
 };

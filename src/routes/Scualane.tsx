@@ -297,6 +297,7 @@ export const Scualane: React.FC = () => {
                 <OptimizedImage
                   src={imageUrl}
                   alt={translations.title}
+                  priority={true}
                 />
               </ProductImage>
             </motion.div>

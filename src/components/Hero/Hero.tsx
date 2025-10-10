@@ -164,6 +164,7 @@ export const Hero: React.FC = () => {
             <OptimizedImage
               src={images.pipeta}
               alt={translations.title}
+              priority={true}
             />
           </motion.div>
         </HeroImage>
