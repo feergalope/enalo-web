@@ -139,12 +139,12 @@ export const ProductDetail: React.FC = () => {
       />
       
       <Section>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <ProductContainer>
+        <ProductContainer>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <ProductInfo>
               <h1>{product.name[language]}</h1>
               <p className="subtitle">{product.description[language]}</p>
@@ -166,12 +166,17 @@ export const ProductDetail: React.FC = () => {
                 </BackButton>
               </ButtonGroup>
             </ProductInfo>
-            
-            <ProductImage>
-              <OptimizedImage src={product.image} alt={product.name[language]} priority={true} />
-            </ProductImage>
-          </ProductContainer>
-        </motion.div>
+          </motion.div>
+          
+          <ProductImage
+            as={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <OptimizedImage src={product.image} alt={product.name[language]} priority={true} />
+          </ProductImage>
+        </ProductContainer>
       </Section>
     </>
   );

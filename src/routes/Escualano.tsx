@@ -330,19 +330,18 @@ export const Escualano: React.FC = () => {
           </motion.div>
 
           <ProductImageContainer>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+            <ProductImage
+              as={motion.div}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <ProductImage>
-                <OptimizedImage
-                  src={imageUrl}
-                  alt="Escualano de Oliva"
-                  priority={true}
-                />
-              </ProductImage>
-            </motion.div>
+              <OptimizedImage
+                src={imageUrl}
+                alt="Escualano de Oliva"
+                priority={true}
+              />
+            </ProductImage>
           </ProductImageContainer>
         </ScualaneContainer>
       </Section>
