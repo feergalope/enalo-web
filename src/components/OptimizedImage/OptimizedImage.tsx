@@ -41,8 +41,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         $isLoaded={isLoaded}
         loading={priority ? 'eager' : 'lazy'}
         onLoad={() => setIsLoaded(true)}
-        onError={(e) => {
-          console.error(`Error loading image: ${src}`);
+        onError={() => {
           setIsLoaded(true); // Mostrar aunque haya error
         }}
       />

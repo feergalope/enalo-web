@@ -21,7 +21,7 @@ export const useAppLoading = () => {
       try {
         await checkFonts();
       } catch (error) {
-        console.warn('Error loading fonts:', error);
+        // Error loading fonts
       }
     };
 

@@ -6,9 +6,9 @@ import { TranslationProvider } from './components/TranslationProvider';
 // Registrar Service Worker para mejor cacheo en iOS
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('SW registered'))
-      .catch(err => console.log('SW registration failed'));
+    navigator.serviceWorker.register('/sw.js').catch(() => {
+      // Service Worker registration failed
+    });
   });
 }
 
