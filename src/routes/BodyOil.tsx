@@ -147,7 +147,7 @@ const BenefitColumn = styled.div`
 
 const IngredientsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: ${theme.space.xl};
   margin: ${theme.space.xl} 0;
   
@@ -241,6 +241,11 @@ export const BodyOil: React.FC = () => {
   ];
   
   const ingredients = [
+    {
+      icon: '/images/products/ingredients/escualano.svg',
+      title: 'Escualano de oliva',
+      description: 'Activo biomimético afín a la piel que mejora la hidratación y refuerza la barrera cutánea.'
+    },
     {
       icon: '/images/products/ingredients/sesamo.svg',
       title: 'Sésamo',
