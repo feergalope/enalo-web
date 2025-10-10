@@ -72,6 +72,7 @@ const HeroText = styled.div`
     color: ${theme.colors.textSecondary};
     margin-bottom: ${theme.space.xl};
     line-height: 1.6;
+    text-align: justify;
   }
 `;
 

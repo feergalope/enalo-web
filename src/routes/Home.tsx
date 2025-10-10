@@ -61,6 +61,7 @@ const ValueText = styled.p`
   font-size: ${theme.fonts.sizes.sm};
   font-weight: ${theme.fonts.weights.medium};
   margin: 0;
+  text-align: justify;
 `;
 
 const BadgesContainer = styled.div`

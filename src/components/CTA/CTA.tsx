@@ -28,6 +28,7 @@ const CTASubtitle = styled.p`
   margin-bottom: ${theme.space.xxxl};
   max-width: 600px;
   margin-left: auto;
+  text-align: justify;
   margin-right: auto;
   
   @media (max-width: ${theme.breakpoints.mobile}) {

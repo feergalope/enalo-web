@@ -84,6 +84,7 @@ const IngredientsSection = styled.div`
   p {
     color: ${theme.colors.textSecondary};
     line-height: 1.6;
+    text-align: justify;
   }
 `;
 
@@ -100,6 +101,7 @@ const UsageSection = styled.div`
   p {
     color: ${theme.colors.textSecondary};
     line-height: 1.6;
+    text-align: justify;
   }
 `;
 

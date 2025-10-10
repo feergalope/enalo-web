@@ -73,6 +73,7 @@ const ProductDescription = styled.p`
   line-height: 1.6;
   margin-bottom: ${theme.space.xl};
   flex: 1;
+  text-align: justify;
 `;
 
 const LearnMoreButton = styled(Link)`

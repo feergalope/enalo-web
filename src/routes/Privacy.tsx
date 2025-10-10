@@ -30,6 +30,7 @@ const LegalContainer = styled.div`
     color: ${theme.colors.textSecondary};
     line-height: 1.7;
     margin-bottom: ${theme.space.lg};
+    text-align: justify;
   }
   
   ul {

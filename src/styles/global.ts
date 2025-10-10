@@ -60,6 +60,7 @@ export const GlobalStyle = createGlobalStyle`
   
   p {
     margin-bottom: ${theme.space.md};
+    text-align: justify;
   }
   
   a {

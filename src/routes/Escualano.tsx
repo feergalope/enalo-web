@@ -55,6 +55,7 @@ const HeroSection = styled.div`
     font-size: ${theme.fonts.sizes.lg};
     color: ${theme.colors.textSecondary};
     line-height: 1.6;
+    text-align: justify;
   }
 `;
 
@@ -73,6 +74,7 @@ const ContentSection = styled.div`
     color: ${theme.colors.textSecondary};
     line-height: 1.7;
     margin-bottom: ${theme.space.lg};
+    text-align: justify;
   }
   
   strong {
@@ -125,6 +127,7 @@ const UsageContent = styled.div`
     color: ${theme.colors.textSecondary};
     line-height: 1.6;
     margin: 0;
+    text-align: justify;
   }
   
   ul {

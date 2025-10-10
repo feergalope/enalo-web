@@ -56,6 +56,7 @@ const IntroText = styled.div`
     color: ${theme.colors.textSecondary};
     line-height: 1.7;
     margin: 0 0 ${theme.space.lg} 0;
+    text-align: justify;
     
     &:last-child {
       margin-bottom: 0;
@@ -98,6 +99,7 @@ const ContentSection = styled.div`
     color: ${theme.colors.textSecondary};
     line-height: 1.7;
     margin-bottom: ${theme.space.lg};
+    text-align: justify;
   }
   
   strong {
@@ -139,6 +141,7 @@ const BenefitColumn = styled.div`
     line-height: 1.6;
     margin: 0;
     font-weight: ${theme.fonts.weights.medium};
+    text-align: center;
   }
 `;
 
@@ -190,6 +193,7 @@ const IngredientColumn = styled.div`
     line-height: 1.5;
     margin: 0;
     padding-left: 0;
+    text-align: justify;
   }
 `;
 

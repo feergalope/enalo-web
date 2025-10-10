@@ -36,8 +36,8 @@ const ContentSection = styled.div`
     font-size: ${theme.fonts.sizes.lg};
     color: ${theme.colors.textSecondary};
     line-height: 1.7;
+    text-align: justify;
     margin-bottom: ${theme.space.lg};
-    text-align: center;
   }
   
   strong {

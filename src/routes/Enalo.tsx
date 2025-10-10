@@ -28,6 +28,7 @@ const HeroSubtitle = styled.p`
   line-height: 1.6;
   max-width: 600px;
   margin: 0 auto;
+  text-align: justify;
   font-size: ${theme.fonts.sizes.md};
 `;
 

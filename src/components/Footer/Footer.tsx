@@ -54,6 +54,7 @@ const BrandDescription = styled.p`
   line-height: 1.5;
   margin: 0;
   margin-bottom: ${theme.space.sm};
+  text-align: justify;
 `;
 
 const ContactInfo = styled.div`

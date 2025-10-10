@@ -62,6 +62,7 @@ const Header = styled.div`
     font-size: ${theme.fonts.sizes.md};
     line-height: 1.6;
     margin: 0;
+    text-align: justify;
     
     @media (max-width: ${theme.breakpoints.mobile}) {
       font-size: ${theme.fonts.sizes.sm};
@@ -112,6 +113,7 @@ const CategoryInfo = styled.div`
     color: ${theme.colors.textSecondary};
     font-size: ${theme.fonts.sizes.sm};
     margin: 0;
+    text-align: justify;
     
     @media (max-width: ${theme.breakpoints.mobile}) {
       font-size: ${theme.fonts.sizes.xs};

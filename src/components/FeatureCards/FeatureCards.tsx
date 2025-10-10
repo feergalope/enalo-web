@@ -51,6 +51,7 @@ const CardDescription = styled.p`
   font-size: ${theme.fonts.sizes.sm};
   line-height: 1.5;
   margin: 0 0 ${theme.space.lg} 0;
+  text-align: justify;
 `;
 
 const ButtonContainer = styled.div`

@@ -61,6 +61,7 @@ const AnswerText = styled.p`
   line-height: 1.6;
   margin: 0 0 ${theme.space.xl} 0;
   padding-right: ${theme.space.xl};
+  text-align: justify;
 `;
 
 export const FAQ: React.FC = () => {
