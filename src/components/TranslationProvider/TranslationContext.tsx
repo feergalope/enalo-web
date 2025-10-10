@@ -1,60 +1,52 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react';
 import { translations, defaultLanguage, type Language, type Translations } from '../../data/translations';
 
 const STORAGE_KEY = 'mlLanguage';
+
+// Función helper para leer localStorage de forma segura
+const getStoredLanguage = (): Language => {
+  // Solo intentar leer en el cliente
+  if (typeof window === 'undefined') {
+    return defaultLanguage;
+  }
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY) as Language;
+    return (stored && translations[stored]) ? stored : defaultLanguage;
+  } catch {
+    // localStorage no disponible (modo privado iOS, etc.)
+    return defaultLanguage;
+  }
+};
 
 interface TranslationContextType {
   language: Language;
   changeLanguage: (newLanguage: Language) => void;
   t: (key: string, fallback?: string) => string;
   getTranslations: () => Translations;
-  isReady: boolean;
 }
 
 const TranslationContext = createContext<TranslationContextType | undefined>(undefined);
 
 export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(defaultLanguage);
-  const [isReady, setIsReady] = useState(false);
-
-  // Cargar idioma guardado al inicializar
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      setIsReady(true);
-      return;
-    }
-    
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY) as Language;
-      if (stored && translations[stored]) {
-        setLanguage(stored);
-      }
-    } catch (error) {
-      // Error silencioso, usar idioma por defecto
-    } finally {
-      // Marcar como listo después de intentar cargar el idioma
-      setIsReady(true);
-    }
-  }, []);
+  // Inicializar con el idioma guardado o el por defecto
+  const [language, setLanguage] = useState<Language>(getStoredLanguage);
 
   // Función para cambiar idioma
   const changeLanguage = useCallback((newLanguage: Language) => {
     if (translations[newLanguage]) {
       setLanguage(newLanguage);
+      // Intentar guardar, pero no fallar si no se puede
       try {
         localStorage.setItem(STORAGE_KEY, newLanguage);
-      } catch (error) {
-        // Error silencioso
+      } catch {
+        // localStorage no disponible, continuar de todas formas
       }
     }
   }, []);
 
-  // Función para obtener traducción
+  // Función para obtener traducción - completamente síncrona
   const t = useCallback((key: string, fallback?: string): string => {
-    if (!isReady) {
-      return fallback || key;
-    }
-
     try {
       const keys = key.split('.');
       let value: any = translations[language];
@@ -91,20 +83,19 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ childre
     } catch (error) {
       return fallback || key;
     }
-  }, [language, isReady]);
+  }, [language]);
 
   // Obtener traducciones completas del idioma actual
   const getTranslations = useCallback((): Translations => {
     return translations[language];
   }, [language]);
 
-  const value = {
+  const value = useMemo(() => ({
     language,
     changeLanguage,
     t,
-    getTranslations,
-    isReady
-  };
+    getTranslations
+  }), [language, changeLanguage, t, getTranslations]);
 
   return (
     <TranslationContext.Provider value={value}>

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useTranslations } from '../../hooks/useTranslations';
 import { theme } from '../../styles/theme';
 import { card, buttonSecondary, focusRing } from '../../styles/mixins';
-import { getIconUrl } from '../../lib/cacheBusting';
 
 const CardsContainer = styled.div`
   display: grid;
@@ -93,15 +92,15 @@ export const FeatureCards: React.FC = () => {
   const benefits = [
     {
       key: 'bioaffinity',
-      icon: getIconUrl('bioafinidad.svg'),
+      icon: '/images/icons/bioafinidad.svg',
     },
     {
       key: 'repair',
-      icon: getIconUrl('reparacion.svg'),
+      icon: '/images/icons/reparacion.svg',
     },
     {
       key: 'authenticity',
-      icon: getIconUrl('autenticidad.svg'),
+      icon: '/images/icons/autenticidad.svg',
     },
   ];
 

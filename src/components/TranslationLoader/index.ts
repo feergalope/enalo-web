@@ -1,1 +1,0 @@
-export { TranslationLoader } from './TranslationLoader';

@@ -5,9 +5,6 @@ import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
 import { CookieBanner } from './components/CookieBanner/CookieBanner';
-import { AppLoader } from './components/AppLoader';
-import { TranslationLoader } from './components/TranslationLoader';
-import { useAppLoading } from './hooks/useAppLoading';
 import { useTranslations } from './hooks/useTranslations';
 import { Home } from './routes/Home';
 import { Enalo } from './routes/Enalo';
@@ -33,38 +30,30 @@ const MainContent = styled.main`
 `;
 
 function App() {
-  const { isLoading } = useAppLoading();
-  const { isReady: translationsReady, language } = useTranslations();
-
-  // Mostrar loader si la app está cargando o las traducciones no están listas
-  const showLoader = isLoading || !translationsReady;
+  const { language } = useTranslations();
 
   return (
     <Router>
       <GlobalStyle />
-      <AppLoader isVisible={isLoading} />
-      <TranslationLoader isVisible={!translationsReady} />
       <ScrollToTop />
-      {!showLoader && (
-        <AppContainer key={language}>
-          <Header />
-          <MainContent>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/scualane" element={<Scualane />} />
-              <Route path="/enalo" element={<Enalo />} />
-              <Route path="/enalo/escualanodeoliva" element={<Escualano />} />
-              <Route path="/enalo/aceite-corporal" element={<BodyOil />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/privacidad" element={<Privacy />} />
-              <Route path="/terminos" element={<Terms />} />
-              <Route path="/cookies" element={<Cookies />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </MainContent>
-          <Footer />
-        </AppContainer>
-      )}
+      <AppContainer key={language}>
+        <Header />
+        <MainContent>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/scualane" element={<Scualane />} />
+            <Route path="/enalo" element={<Enalo />} />
+            <Route path="/enalo/escualanodeoliva" element={<Escualano />} />
+            <Route path="/enalo/aceite-corporal" element={<BodyOil />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/privacidad" element={<Privacy />} />
+            <Route path="/terminos" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </MainContent>
+        <Footer />
+      </AppContainer>
       <CookieBanner />
     </Router>
   );
