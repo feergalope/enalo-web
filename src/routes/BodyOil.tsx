@@ -8,6 +8,15 @@ import { OptimizedImage } from '../components/OptimizedImage';
 import { theme } from '../styles/theme';
 import { trackPageView } from '../lib/analytics';
 import bodyOilImage from '../assets/images/products/body-oil.png';
+import escualanoIcon from '../assets/images/products/ingredients/escualano.svg';
+import sesamoIcon from '../assets/images/products/ingredients/sesamo.svg';
+import arrozIcon from '../assets/images/products/ingredients/arroz.svg';
+import uvaIcon from '../assets/images/products/ingredients/uva.svg';
+import macadamiaIcon from '../assets/images/products/ingredients/macadamia.svg';
+import aguacateIcon from '../assets/images/products/ingredients/aguacate.svg';
+import almendrasIcon from '../assets/images/products/ingredients/almendras.svg';
+import cartamoIcon from '../assets/images/products/ingredients/cartamo.svg';
+import naranjaIcon from '../assets/images/products/ingredients/naranja.svg';
 
 const TwoColumnSection = styled.div`
   display: grid;
@@ -263,47 +272,47 @@ export const BodyOil: React.FC = () => {
   
   const ingredients = [
     {
-      icon: '/ingredients/escualano.svg',
+      icon: escualanoIcon,
       title: 'Escualano de oliva',
       description: 'Activo biomimético afín a la piel que mejora la hidratación y refuerza la barrera cutánea.'
     },
     {
-      icon: '/ingredients/sesamo.svg',
+      icon: sesamoIcon,
       title: 'Sésamo',
       description: 'Potente antioxidante que protege los lípidos cutáneos y refuerza la barrera natural.'
     },
     {
-      icon: '/ingredients/arroz.svg',
+      icon: arrozIcon,
       title: 'Arroz',
       description: 'Rico en orizanol, mejora la microcirculación y combate el envejecimiento cutáneo.'
     },
     {
-      icon: '/ingredients/uva.svg',
+      icon: uvaIcon,
       title: 'Pepita de uva',
       description: 'Estimula la regeneración celular y mejora la firmeza gracias a su ácido linoleico.'
     },
     {
-      icon: '/ingredients/macadamia.svg',
+      icon: macadamiaIcon,
       title: 'Macadamia',
       description: 'Aporta ácido palmitoleico, esencial para equilibrar los lípidos de la piel.'
     },
     {
-      icon: '/ingredients/aguacate.svg',
+      icon: aguacateIcon,
       title: 'Aguacate',
       description: 'Favorece la síntesis de colágeno y la reparación tisular.'
     },
     {
-      icon: '/ingredients/almendras.svg',
+      icon: almendrasIcon,
       title: 'Almendras dulces',
       description: 'Mantiene la integridad del manto hidrolipídico y mejora la elasticidad.'
     },
     {
-      icon: '/ingredients/cartamo.svg',
+      icon: cartamoIcon,
       title: 'Aceite de cártamo',
       description: 'Favorece la regeneración celular, mejora la elasticidad y ayuda a mantener la hidratación y luminosidad de la piel gracias a su alto contenido en omega-6.'
     },
     {
-      icon: '/ingredients/naranja.svg',
+      icon: naranjaIcon,
       title: 'Aceite esencial de naranja',
       description: 'Antioxidante y revitalizante, potencia la luminosidad cutánea.'
     }
