@@ -263,7 +263,7 @@ export const BodyOil: React.FC = () => {
       description: 'Favorece la síntesis de colágeno y la reparación tisular.'
     },
     {
-      icon: '/images/products/ingredients/almendras_dulces.svg',
+      icon: '/images/products/ingredients/almendras.svg',
       title: 'Almendras dulces',
       description: 'Mantiene la integridad del manto hidrolipídico y mejora la elasticidad.'
     },
