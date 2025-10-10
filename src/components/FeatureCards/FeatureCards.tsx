@@ -113,15 +113,15 @@ export const FeatureCards: React.FC = () => {
   const benefits = [
     {
       key: 'bioaffinity',
-      icon: '/images/icons/bioafinidad.svg',
+      icon: '/icons/bioafinidad.svg',
     },
     {
       key: 'repair',
-      icon: '/images/icons/reparacion.svg',
+      icon: '/icons/reparacion.svg',
     },
     {
       key: 'authenticity',
-      icon: '/images/icons/autenticidad.svg',
+      icon: '/icons/autenticidad.svg',
     },
   ];
 

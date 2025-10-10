@@ -243,19 +243,19 @@ export const BodyOil: React.FC = () => {
   
   const benefits = [
     {
-      icon: '/images/icons/products/pipette.svg',
+      icon: '/icons/products/pipette.svg',
       text: 'Refuerza la barrera cutánea frente a la sequedad'
     },
     {
-      icon: '/images/icons/products/drop.svg',
+      icon: '/icons/products/drop.svg',
       text: 'Hidratación inmediata y duradera'
     },
     {
-      icon: '/images/icons/products/sparkle.svg',
+      icon: '/icons/products/sparkle.svg',
       text: 'Tacto sedoso y luminoso'
     },
     {
-      icon: '/images/icons/products/leaf.svg',
+      icon: '/icons/products/leaf.svg',
       text: 'Ingredientes orgánicos y naturales'
     }
   ];
