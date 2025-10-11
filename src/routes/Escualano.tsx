@@ -47,7 +47,7 @@ const ProductImageContainer = styled.div`
 
 const HeroSection = styled.div`
   padding-top: 50px;
-  margin-bottom: ${theme.space.xxxl};
+  margin-bottom: ${theme.space.xl};
   
   h1 {
     font-size: ${theme.fonts.sizes.xxxl};

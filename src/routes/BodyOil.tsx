@@ -36,6 +36,7 @@ const ProductContent = styled.div`
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     order: 2;
+    padding-top: 50px;
   }
 `;
 
@@ -348,13 +349,17 @@ export const BodyOil: React.FC = () => {
                   <p>
                     Ideal después de la <strong>exposición al sol</strong>, ayuda a calmar, reparar y devolver la luminosidad natural.
                   </p>
+                </IntroText>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <ContentSection>
                   <h3>Modo de uso</h3>
                   <p>
                     Se aplica sobre la piel limpia y húmeda, preferiblemente tras la ducha, para potenciar la hidratación y mejorar la elasticidad.
                   </p>
-                </IntroText>
+                </ContentSection>
               </motion.div>
-
               <motion.div variants={itemVariants}>
                 <ContentSection>
                   <h2>{translations.benefitsTitle}</h2>
