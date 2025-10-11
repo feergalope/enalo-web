@@ -4,6 +4,7 @@ import { GlobalStyle } from './styles/global';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
+import { ScrollToTopOnRouteChange } from './components/ScrollToTop/ScrollToTopOnRouteChange';
 import { CookieBanner } from './components/CookieBanner/CookieBanner';
 import { useTranslations } from './hooks/useTranslations';
 import { Home } from './routes/Home';
@@ -35,6 +36,7 @@ function App() {
   return (
     <Router>
       <GlobalStyle />
+      <ScrollToTopOnRouteChange />
       <ScrollToTop />
       <AppContainer key={language}>
         <Header />
