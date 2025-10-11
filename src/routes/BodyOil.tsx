@@ -33,10 +33,11 @@ const TwoColumnSection = styled.div`
 
 const ProductContent = styled.div`
   /* Contenido del producto - 2/3 */
+  order: 1;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     order: 2;
-    padding-top: 50px;
+    padding-top: ${theme.space.xl};
   }
 `;
 
@@ -86,6 +87,7 @@ const ProductImageContainer = styled.div`
   position: sticky;
   top: 100px;
   align-self: start;
+  order: 2;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     position: relative;
@@ -334,12 +336,12 @@ export const BodyOil: React.FC = () => {
       
       <Section>
         <TwoColumnSection>
-          <motion.div
+          <ProductContent
+            as={motion.div}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <ProductContent>
               <motion.div variants={itemVariants}>
                 <IntroText>
                   <h1>{translations.title}</h1>
@@ -373,8 +375,7 @@ export const BodyOil: React.FC = () => {
                   </BenefitsGrid>
                 </ContentSection>
               </motion.div>
-            </ProductContent>
-          </motion.div>
+          </ProductContent>
 
           <ProductImageContainer>
             <ProductImage

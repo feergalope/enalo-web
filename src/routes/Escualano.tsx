@@ -27,9 +27,11 @@ const ScualaneContainer = styled.div`
 
 const ProductContent = styled.div`
   /* Contenido del producto - 2/3 */
+  order: 1;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     order: 2;
+    padding-top: ${theme.space.xl};
   }
 `;
 
@@ -37,17 +39,23 @@ const ProductImageContainer = styled.div`
   padding-top: 50px;
   position: sticky;
   top: 100px;
+  order: 2;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     position: relative;
     top: 0;
     order: 1;
+    padding-top: 0;
   }
 `;
 
 const HeroSection = styled.div`
   padding-top: 50px;
   margin-bottom: ${theme.space.xl};
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    padding-top: 0;
+  }
   
   h1 {
     font-size: ${theme.fonts.sizes.xxxl};
@@ -249,12 +257,12 @@ export const Escualano: React.FC = () => {
       
       <Section>
         <ScualaneContainer>
-          <motion.div
+          <ProductContent
+            as={motion.div}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <ProductContent>
               <motion.div variants={itemVariants}>
                 <HeroSection>
                   <h1>{translations.title}</h1>
@@ -331,8 +339,7 @@ export const Escualano: React.FC = () => {
                   </BenefitsList>
                 </ContentSection>
               </motion.div>
-            </ProductContent>
-          </motion.div>
+          </ProductContent>
 
           <ProductImageContainer>
             <ProductImage
